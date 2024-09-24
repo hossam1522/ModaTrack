@@ -10,7 +10,7 @@ Soy un vendedor de ropa y actualmente enfrento grandes dificultades para gestion
 
 - Ineficiencia en la reposición de productos: Actualmente, no tengo un sistema que me avise cuándo reponer el stock, lo que genera retrasos en los pedidos y problemas con el abastecimiento de productos clave en temporada alta.
 
-- Falta de datos para la toma de decisiones: No tengo estadísticas claras de qué productos se venden más, lo que dificulta planificar qué ropa debo priorizar en mis pedidos y cuáles no vale la pena seguir vendiendo. Esto me lleva a invertir dinero en productos poco rentables, y a perder oportunidades de ventas en productos más populares.
+- Falta de datos para la toma de decisiones: No tengo estadísticas claras de qué productos se venden más o con cuáles se obtiene mayor beneficio, lo que dificulta planificar qué ropa debo priorizar en mis pedidos y cuáles no vale la pena seguir vendiendo. Esto me lleva a invertir dinero en productos poco rentables, y a perder oportunidades de ventas en productos más populares o rentables.
 
 - Cambio de temporada: No tengo una forma eficiente de gestionar el cambio de ropa según la temporada. Esto provoca que mantenga prendas fuera de temporada en stock, lo que ocupa espacio y puede resultar en pérdidas si no se venden a tiempo.
 
