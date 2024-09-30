@@ -12,10 +12,13 @@ Soy un vendedor de ropa y actualmente enfrento grandes dificultades para gestion
 
 - No tengo una forma eficiente de gestionar el cambio de ropa según la temporada. Esto provoca que mantenga prendas fuera de temporada en stock, lo que ocupa espacio y puede resultar en pérdidas si no se venden a tiempo.
 
+## Planificación del proyecto
+
+- [Milestones](docs/milestones.md)
+- [User Stories](docs/user_stories.md)
+- [User Journeys](docs/user_journeys.md)
+
 ### Documentación adicional
 
 - [Licencia](LICENSE)
 - [Documentación adicional](documentacion_adicional)
-- [Milestones](docs/milestones.md)
-- [User Stories](docs/user_stories.md)
-- [User Journeys](docs/user_journeys.md)
