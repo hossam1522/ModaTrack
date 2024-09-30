@@ -16,3 +16,6 @@ Soy un vendedor de ropa y actualmente enfrento grandes dificultades para gestion
 
 - [Licencia](LICENSE)
 - [Documentación adicional](documentacion_adicional)
+- [Milestones](docs/milestones.md)
+- [User Stories](docs/user_stories.md)
+- [User Journeys](docs/user_journeys.md)
