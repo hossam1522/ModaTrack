@@ -6,7 +6,7 @@ Cuando un cliente me pide algo en específico, sea un modelo concreto o la talla
 
 Además, cuando hago una venta, voy apuntando manualmente qué productos se han vendido y cuántos, para así tener un registro de las ventas realizadas. El problema es que, al haber tantos productos y tantas ventas, no tengo una idea clara de cómo se ha ido actualizando el stock con las ventas realizadas ya que no tengo la mejor memoria del mundo y es difícil tener en cuenta todos esos factores a lo largo del tiempo. Encima mirarlo manualmente conlleva un tiempo que no tengo, además de que suelo cometer errores.
 
-Por último, cuando llega un cambio de temporada, tengo que estar pendiente de cambiar la ropa de la tienda, ya que la ropa de verano no se vende en invierno y viceversa. Es importante tener claro qué productos debo quitar y cuáles debo poner, pero a veces se me pasa por alto ya sea porque el tiempo está raro o porque simplemente se me olvida. Repitp, no tengo la mejor memoria del mundo.
+Por último, cuando llega un cambio de temporada, tengo que estar pendiente de cambiar la ropa de la tienda, ya que la ropa de verano no se vende en invierno y viceversa. Es importante tener claro qué productos debo quitar y cuáles debo poner, pero a veces se me pasa por alto ya sea porque el tiempo está raro o porque simplemente se me olvida. Repito, no tengo la mejor memoria del mundo.
 
 ### Encargado de compras
 

@@ -5,21 +5,34 @@
 + **Objetivo**: Analizar las historias de usuario y definir los requerimientos del sistema y los elementos del dominio.
 + **Entregable**: Código que representa el modelo del problema.
 + **Viabilidad**: Cuando sea aprobado por los revisores.
++ **HUs asociadas**: [HU001], [HU002], [HU003], [HU004], [HU005]
 
 ### [M1] Milestone 1: Auditoría completa del inventario
 
-+ **Objetivo**: Implementar un sistema que permita llevar un registro completo del inventario de la tienda, estableciendo un rango de stock mínimo y máximo para cada producto, aparte de otros datos relevantes. Implementar un sistema de alertas que notifique al usuario cuando un producto está por debajo del stock mínimo.
++ **Objetivo**: Implementar un sistema que permita llevar un registro completo del inventario de la tienda, estableciendo un rango de stock mínimo y máximo para cada producto, aparte de otros datos relevantes.
 + **Entregable**: Código que permite llevar un registro completo del inventario.
 + **Viabilidad**: Cuando se superen los respectivos tests de aceptación.
++ **HUs asociadas**: [HU001], [HU003]
 
-### [M2] Milestone 2: Priorización de productos
+### [M2] Milestone 2: Sistema de alertas
+
++ **Objetivo**: Implementar un sistema de alertas que notifique al usuario de diversas cosas como, por ejemplo, cuándo un producto está por debajo del stock mínimo, o cuándo un producto lleva mucho tiempo sin venderse.
++ **Entregable**: Código que permite enviar alertas al usuario.
++ **Viabilidad**: Cuando se superen los respectivos tests de aceptación.
++ **HUs asociadas**: [HU002]
+
+### [M3] Milestone 3: Priorización de productos
 
 + **Objetivo**: Implementar un sistema que permita priorizar los productos en base a su rentabilidad (beneficio obtenido por venta) y popularidad (número de ventas), y que sugiera al usuario qué productos debería priorizar en sus pedidos.
 + **Entregable**: Código que permite priorizar los productos.
 + **Viabilidad**: Cuando se superen los respectivos tests de aceptación.
++ **HUs asociadas**: [HU004]
 
-### [M3] Milestone 3: Gestión de temporada
+## Milestones adicionales
+
+### [M4] Milestone 4: Gestión de temporada
 
 + **Objetivo**: Implementar un sistema que permita gestionar el cambio de ropa según la temporada, sugiriendo al usuario qué productos debería sacar de stock y cuáles debería incorporar.
 + **Entregable**: Código que permite gestionar el cambio de ropa según la temporada.
 + **Viabilidad**: Cuando se superen los respectivos tests de aceptación.
++ **HUs asociadas**: [HU005]
