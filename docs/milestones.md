@@ -2,7 +2,7 @@
 
 ### [M0] Milestone 0: Modelado del problema
 
-+ **Objetivo**: Analizar las historias de usuario y definir los requerimientos clave del dominio del problema que se van a abordar en el desarrollo del PMV. Se estructurarán los
++ **Objetivo**: Analizar las historias de usuario y definir los elementos clave del dominio del problema que se van a abordar en el desarrollo del PMV. Se estructurarán los
 conceptos clave de acuerdo a las necesidades del negocio, usando Domain-Driven Design (DDD) como metodología.
 + **Entregable**: Modelado inicial del dominio del problema, con los conceptos clave y sus relaciones, definiendo las entidades y agregados necesarios para el desarrollo del PMV,
 basado en las historias de usuario.
