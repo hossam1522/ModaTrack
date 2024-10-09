@@ -12,35 +12,34 @@ Las historias de usuario deben estar correctamente alineadas con los conceptos c
 
 ### [M1] Milestone 1: Auditoría completa del inventario
 
-+ **Objetivo**: Implementar un sistema que permita llevar un registro completo del inventario de la tienda, estableciendo un rango de stock mínimo y máximo para cada producto,
-aparte de otros datos relevantes como el precio de compra, el precio de venta, cantidad de stock disponible por talla, etc. Y que permita llevar el registro teniendo en cuenta
-las ventas realizadas.
-+ **Entregable**: Código que permite llevar un registro completo del inventario.
-+ **Viabilidad**: Cuando se superen los respectivos tests de aceptación.
++ **Objetivo**: Lograr un control eficiente del inventario, de manera que se pueda conocer en tiempo real el estado de los productos disponibles, permitiendo tomar decisiones
+informadas sobre stock mínimo y máximo, precios de venta y compra, y cualquier otra información relevante relacionada con el inventario.
++ **Entregable**: Un sistema que permite visualizar y gestionar el estado del inventario, incluyendo la capacidad de ajustarse a las ventas realizadas.
++ **Viabilidad**: Se considerará viable cuando el sistema cumpla con los criterios de aceptación definidos y permita gestionar el inventario de manera eficiente y precisa.
 + **HUs asociadas**: [HU001], [HU002]
 
 ### [M2] Milestone 2: Sistema de alertas
 
-+ **Objetivo**: Implementar un sistema de alertas que notifique al usuario de diversas cosas como, por ejemplo, cuándo un producto está por debajo del stock mínimo, o cuándo
-un producto lleva mucho tiempo sin venderse.
-+ **Entregable**: Código que permite enviar alertas al usuario.
-+ **Viabilidad**: Cuando se superen los respectivos tests de aceptación.
++ **Objetivo**: Garantizar que el usuario reciba notificaciones oportunas sobre eventos importantes relacionados con el inventario, como cuando un producto está por
+debajo del stock mínimo o ha estado sin venderse durante un periodo prolongado, permitiendo así tomar decisiones correctivas.
++ **Entregable**: Un mecanismo que notifique al usuario sobre eventos críticos relacionados con el estado del inventario.
++ **Viabilidad**: Será viable cuando el sistema informe adecuadamente al usuario de estos eventos y pase los criterios de aceptación definidos.
 + **HUs asociadas**: [HU003]
 
 ### [M3] Milestone 3: Priorización de productos
 
-+ **Objetivo**: Implementar un sistema que permita priorizar los productos en base a su rentabilidad (beneficio obtenido por venta) y popularidad (número de ventas), y que
-sugiera al usuario qué productos debería priorizar en sus pedidos.
-+ **Entregable**: Código que permite priorizar los productos.
-+ **Viabilidad**: Cuando se superen los respectivos tests de aceptación.
++ **Objetivo**: Proveer al usuario información que le permita optimizar la gestión de los productos, destacando aquellos que tienen mayor rentabilidad o
+popularidad, para facilitar la toma de decisiones estratégicas sobre qué productos priorizar en los pedidos.
++ **Entregable**: Un sistema que brinde recomendaciones sobre los productos más rentables o populares, permitiendo priorizar su adquisición.
++ **Viabilidad**: Será considerado viable cuando el sistema proporcione recomendaciones útiles y pase los tests de aceptación.
 + **HUs asociadas**: [HU004]
 
 ## Milestones adicionales
 
 ### [M4] Milestone 4: Gestión de temporada
 
-+ **Objetivo**: Implementar un sistema que permita gestionar el cambio de ropa según la temporada, sugiriendo al usuario qué productos debería sacar de stock y cuáles
-debería incorporar.
-+ **Entregable**: Código que permite gestionar el cambio de ropa según la temporada.
-+ **Viabilidad**: Cuando se superen los respectivos tests de aceptación.
++ **Objetivo**: Asegurar que el inventario se adapte de manera eficiente a las diferentes temporadas, ofreciendo sugerencias sobre qué productos deberían ser
+incorporados o retirados del stock en función de la demanda estacional.
++ **Entregable**: Un sistema que asista en la gestión del inventario según la estacionalidad de los productos.
++ **Viabilidad**: Se considerará viable cuando el sistema permita gestionar eficientemente los productos de temporada y supere los tests de aceptación.
 + **HUs asociadas**: [HU005]
