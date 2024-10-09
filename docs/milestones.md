@@ -10,7 +10,7 @@ basado en las historias de usuario asociadas a este milestone.
 Las historias de usuario deben estar correctamente alineadas con los conceptos clave del dominio del problema.
 + **HUs asociadas**: [HU001], [HU002]
 
-### [M1] Milestone 1: Auditoría completa del inventario
+### [M1] Milestone 1: Auditoría del inventario
 
 + **Objetivo**: Lograr un control eficiente del inventario, de manera que se pueda conocer en tiempo real el estado de los productos disponibles, permitiendo tomar decisiones
 informadas sobre stock mínimo y máximo, precios de venta y compra, y cualquier otra información relevante relacionada con el inventario.
