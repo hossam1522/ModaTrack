@@ -1,8 +1,8 @@
 package models
 
 type Ropa struct {
-	id              int
-	nombre          string
-	cantidadEnStock int
-	precio          float64
+	Id              int
+	Nombre          string
+	CantidadEnStock int
+	Precio          float64
 }
