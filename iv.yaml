@@ -1,6 +1,6 @@
 lenguaje: Go
 entidad: 
   - internal/models/ropa.go
-  - internal/models/productoVendido.go
+  - internal/models/vendido.go
   - internal/models/venta.go
   - internal/models/stock.go
