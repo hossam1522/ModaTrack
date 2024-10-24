@@ -1,5 +1,5 @@
 package models
 
 type Stock struct {
-	Productos map[int]*Ropa
+	productos map[int]*Ropa
 }
