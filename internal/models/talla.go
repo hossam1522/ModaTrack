@@ -9,7 +9,3 @@ const (
 	L  Talla = "L"
 	XL Talla = "XL"
 )
-
-hossam1522#14 Creación struct Talla
-
-Planteado un struct talla
