@@ -4,3 +4,4 @@ entidad:
   - internal/models/vendido.go
   - internal/models/venta.go
   - internal/models/talla.go
+  - internal/models/stock.go
