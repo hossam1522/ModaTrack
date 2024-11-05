@@ -4,10 +4,10 @@ import "time"
 
 type Venta struct {
 	fecha         time.Time
-	itemsVendidos []ProductoVendido
+	itemsVendidos map[Ropa]int
 }
 
-func NuevaVenta(itemsVendidos []ProductoVendido) Venta {
+func NuevaVenta(itemsVendidos map[Ropa]int) Venta {
 	return Venta{
 		fecha:         time.Now(),
 		itemsVendidos: itemsVendidos,
