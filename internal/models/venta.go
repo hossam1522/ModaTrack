@@ -15,14 +15,14 @@ func NuevaVenta(itemsVendidos map[Ropa]int, fecha ...time.Time) Venta {
 	if len(fecha) > 0 {
 		fechaVenta = fecha[0]
 		if fechaVenta.Before(fechaLimite) {
-			fechaVenta = fechaLimite
+			panic("la fecha de la venta no puede ser anterior a la fecha límite de dos años")
 		}
 	} else {
 		fechaVenta = fechaActual
 	}
 
 	return Venta{
-		Fecha:         fechaVenta,
-		ItemsVendidos: itemsVendidos,
+		fecha:         fechaVenta,
+		itemsVendidos: itemsVendidos,
 	}
 }
