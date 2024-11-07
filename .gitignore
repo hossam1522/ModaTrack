@@ -1,0 +1,46 @@
+# Binaries for programs and plugins
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Output of the 'go get' command, which installs binaries in ./bin/
+bin/
+
+# Test binary, build by 'go test -c'
+*.test
+
+# Output of the 'go build' and 'go install' commands
+# This will ignore all the output files of these commands.
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.a
+*.out
+
+# Directories
+build/
+temp/
+tmp/
+
+# Vendor directory generated with 'go mod vendor'
+/vendor/
+
+# Go modules
+/go.sum
+/go.mod
+
+# IDE/editor specific files
+.idea/
+*.vscode/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+
+# Go workspace file
+go.work
+go.work.sum
