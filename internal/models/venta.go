@@ -7,9 +7,22 @@ type Venta struct {
 	itemsVendidos map[Ropa]int
 }
 
-func NuevaVenta(itemsVendidos map[Ropa]int) Venta {
+func NuevaVenta(itemsVendidos map[Ropa]int, fecha ...time.Time) Venta {
+	fechaActual := time.Now()
+	fechaLimite := fechaActual.AddDate(-2, 0, 0)
+
+	var fechaVenta time.Time
+	if len(fecha) > 0 {
+		fechaVenta = fecha[0]
+		if fechaVenta.Before(fechaLimite) {
+			fechaVenta = fechaLimite
+		}
+	} else {
+		fechaVenta = fechaActual
+	}
+
 	return Venta{
-		fecha:         time.Now(),
-		itemsVendidos: itemsVendidos,
+		Fecha:         fechaVenta,
+		ItemsVendidos: itemsVendidos,
 	}
 }
