@@ -17,6 +17,7 @@ Soy un vendedor de ropa y actualmente enfrento grandes dificultades para gestion
 - [Milestones](docs/milestones.md)
 - [User Stories](docs/user_stories.md)
 - [User Journeys](docs/user_journeys.md)
+- [Gestor de dependencias](docs/gestor_dependencias.md)
 
 ### Documentación adicional
 
