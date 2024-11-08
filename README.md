@@ -31,6 +31,7 @@ Soy un vendedor de ropa y actualmente enfrento grandes dificultades para gestion
   - `task update`: Actualiza las dependencias del proyecto.
   - `task test`: Ejecuta los tests del proyecto.
   - `task default`: Muestra la lista de tareas disponibles.
+  - `task check`: Verifica la sintaxis de los archivos del proyecto.
   
   Para poder utilizar Task, es necesario tenerlo instalado. Basta con ejecutar el siguiente comando:
   ```bash

@@ -1,5 +1,8 @@
 version: '3'
 
+vars:
+  SOURCE_DIR: ./internal
+
 tasks:
   install:
     desc: Instalación de las dependencias
@@ -18,6 +21,12 @@ tasks:
     cmds:
       - echo "Ejecutando las pruebas..."
       - go test -v ./...
+
+  check:
+    desc: Verificación de la sintaxis
+    cmds:
+      - echo "Verificando la sintaxis..."
+      - gofmt -e {{.SOURCE_DIR}} > /dev/null
 
   default:
     desc: Muestra la lista de tareas disponibles
