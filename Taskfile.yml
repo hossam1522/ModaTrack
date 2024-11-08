@@ -1,0 +1,25 @@
+version: '3'
+
+tasks:
+  install:
+    desc: Instalación de las dependencias
+    cmds:
+      - echo "Instalando las dependencias..."
+      - go mod download
+
+  update:
+    desc: Actualización de las dependencias
+    cmds:
+      - echo "Actualizando las dependencias..."
+      - go get -u
+
+  test:
+    desc: Ejecución de las pruebas
+    cmds:
+      - echo "Ejecutando las pruebas..."
+      - go test -v ./...
+
+  default:
+    desc: Muestra la lista de tareas disponibles
+    cmds:
+      - task --list
