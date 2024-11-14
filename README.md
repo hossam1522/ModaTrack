@@ -17,6 +17,26 @@ Soy un vendedor de ropa y actualmente enfrento grandes dificultades para gestion
 - [Milestones](docs/milestones.md)
 - [User Stories](docs/user_stories.md)
 - [User Journeys](docs/user_journeys.md)
+- [Gestor de dependencias](docs/gestor_dependencias.md)
+- [Gestor de tareas](docs/gestor_tareas.md)
+
+## Herramientas utilizadas
+
+- Lenguaje de programación: Go
+
+- Gestor de dependencias: Go Modules. Para más información, ver [Gestor de dependencias](docs/gestor_dependencias.md).
+
+- Gestor de tareas: Task. Para más información, ver [Gestor de tareas](docs/gestor_tareas.md).
+  - `task install`: Instala las dependencias del proyecto.
+  - `task update`: Actualiza las dependencias del proyecto.
+  - `task test`: Ejecuta los tests del proyecto.
+  - `task default`: Muestra la lista de tareas disponibles.
+  - `task check`: Verifica la sintaxis de los archivos del proyecto.
+  
+  Para poder utilizar Task, es necesario tenerlo instalado. Basta con ejecutar el siguiente comando:
+  ```bash
+  go install github.com/go-task/task/v3/cmd/task@latest
+  ```
 
 ### Documentación adicional
 
