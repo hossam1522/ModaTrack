@@ -6,7 +6,6 @@ Para elegir correctamente un gestor de tareas para este proyecto, los siguientes
 - Las mejores prácticas y herramientas recomendadas para Go.
 - Reducción de la deuda técnica a la hora de mantener y escalar el proyecto.
 - Facilidad de uso y mantenimiento.
-- Posibilidad de extender a otros lenguajes de programación en el futuro si fuera necesario.
 
 Teniendo en cuenta estos criterios establecidos, se nos presentan, principalmente, dos opciones para la elección del gestor de tareas: `Make` y `Task`. 
 
@@ -18,7 +17,6 @@ Compararemos `Make` y `Task` para determinar cuál es la mejor opción para este
 - **Mejores prácticas y herramientas recomendadas para Go**: Ambas herramientas son ampliamente utilizadas en proyectos de Go, por lo que cumplen con este criterio.
 - **Reducción de la deuda técnica**: Aunque generalmente se considera que `Make` es más propenso a errores de sintaxis y menos flexible que `Task`, realmente si se siguen las buenas prácticas y se mantienen los archivos de configuración limpios y organizados, no debería haber una gran diferencia en este aspecto, menos todavía en un proyecto como este.
 - **Facilidad de uso y mantenimiento**: En este punto, tal y como indica su propia documentación oficial, `Task` busca ser una alternativa más simple y fácil de usar que otros gestores de tareas, tales como `Make`. Aunque el proyecto no sea lo suficimiente complejo como para que la sintaxis de `Make` sea un problema, `Task` es el ganador en este aspecto.
-- **Posibilidad de extender a otros lenguajes de programación en el futuro**: En este aspecto, ambos gestores de tareas son igualmente válidos, ya que ambos son compatibles con múltiples lenguajes de programación.
 
 ## Elección del gestor de tareas
 
