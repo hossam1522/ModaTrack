@@ -1,7 +1,5 @@
 # Gestor de tareas
 
-La elección de un gestor de tareas es una decisión importante en cualquier proyecto de software, ya que puede tener un gran impacto en la eficiencia y mantenibilidad del proyecto. Un gestor de tareas es una herramienta que permite automatizar tareas comunes en el desarrollo de software, como la instalación de dependencias, la ejecución de tests, la compilación del código, entre otras.
-
 Para elegir correctamente un gestor de tareas para este proyecto, los siguientes aspectos deben ser considerados:
 
 - Lenguaje de programación del proyecto. En este caso, Go es el lenguaje de programación usado, así que habrá que tener en cuenta las opciones disponibles para este lenguaje.
