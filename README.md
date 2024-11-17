@@ -20,6 +20,7 @@ Soy un vendedor de ropa y actualmente enfrento grandes dificultades para gestion
 - [Gestor de dependencias](docs/gestor_dependencias.md)
 - [Gestor de tareas](docs/gestor_tareas.md)
 - [Herramienta para testear](docs/herramienta_test.md)
+- [Metodología para creación de tests](docs/metodologia_tests.md)
 
 ## Herramientas utilizadas
 
