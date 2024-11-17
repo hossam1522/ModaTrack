@@ -19,6 +19,7 @@ Soy un vendedor de ropa y actualmente enfrento grandes dificultades para gestion
 - [User Journeys](docs/user_journeys.md)
 - [Gestor de dependencias](docs/gestor_dependencias.md)
 - [Gestor de tareas](docs/gestor_tareas.md)
+- [Herramienta para testear](docs/herramienta_test.md)
 
 ## Herramientas utilizadas
 
