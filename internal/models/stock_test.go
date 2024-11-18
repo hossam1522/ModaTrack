@@ -21,8 +21,16 @@ func TestStockConPrenda(t *testing.T) {
 	if err != nil {
 		t.Error("Se esperaba una prenda")
 	}
-	if ropa.nombre != "camisa" {
-		t.Error("La prenda no es la esperada")
+	// Verificar el tipo de retorno
+	switch prenda := ropa.(type) {
+	case Ropa:
+		if prenda.nombre != "camisa" {
+			t.Error("La prenda no es la esperada")
+		}
+	case []Ropa:
+		t.Error("Se esperaba una sola prenda, pero se devolvió un slice")
+	default:
+		t.Error("El resultado tiene un tipo inesperado")
 	}
 }
 
@@ -51,19 +59,22 @@ func TestStockConPrendaDuplicada(t *testing.T) {
 
 	ropas, _ := stock.GetRopa("camisa")
 
-	if _, ok := interface{}(ropas).([]Ropa); !ok {
+	// Asegurar que es un slice
+	prendas, ok := ropas.([]Ropa)
+	if !ok {
 		t.Errorf("Se esperaba un slice de Ropa, pero se obtuvo %T", ropas)
 	}
 
-	if len(ropas) != 2 {
-		t.Error("Se esperaban dos prendas")
+	// Validaciones
+	if len(prendas) != 2 {
+		t.Errorf("Se esperaban 2 prendas, pero se obtuvieron %d", len(prendas))
 	}
 
-	if ropas[0].talla != M || ropas[1].talla != L {
+	if prendas[0].talla != M || prendas[1].talla != L {
 		t.Error("Las tallas no son las esperadas")
 	}
 
-	if ropas[0].nombre != "camisa" || ropas[1].nombre != "camisa" {
+	if prendas[0].nombre != "camisa" || prendas[1].nombre != "camisa" {
 		t.Error("Los nombres no son los esperados")
 	}
 }
