@@ -6,6 +6,8 @@ type Stock struct {
 	inventario map[Ropa]int
 }
 
+var ErrPrendaNoEncontrada = errors.New("no se ha encontrado la prenda")
+
 func NewStock() *Stock {
 	return &Stock{inventario: make(map[Ropa]int)}
 }
@@ -22,7 +24,7 @@ func (s *Stock) GetRopa(nombre string) (interface{}, error) {
 
 	switch len(prendas) {
 	case 0:
-		return Ropa{}, errors.New("no se ha encontrado la prenda")
+		return Ropa{}, ErrPrendaNoEncontrada
 	case 1:
 		return prendas[0], nil
 	default:
@@ -37,5 +39,5 @@ func (s *Stock) GetRopaTalla(nombre string, talla Talla) (Ropa, error) {
 			return ropa, nil
 		}
 	}
-	return Ropa{}, errors.New("no se ha encontrado la prenda")
+	return Ropa{}, ErrPrendaNoEncontrada
 }
