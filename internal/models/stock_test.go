@@ -13,6 +13,16 @@ func TestStockVacio(t *testing.T) {
 	}
 }
 
+// Comprobar que no puedo obtener una prenda con una talla que no existe
+func TestStockVacioTalla(t *testing.T) {
+	stock := NewStock()
+	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: L}] = 1
+	_, err := stock.GetRopaTalla("camisa", M)
+	if err == nil {
+		t.Error("Se esperaba un error")
+	}
+}
+
 // Comprobar que puedo obtener una prenda que existe
 func TestStockConPrenda(t *testing.T) {
 	stock := NewStock()
