@@ -5,10 +5,23 @@ import (
 )
 
 // Comprobar que no puedo obtener una prenda que no existe
-func TestStock(t *testing.T) {
+func TestStockVacio(t *testing.T) {
 	stock := NewStock()
 	_, err := stock.GetRopa("camisa")
 	if err == nil {
 		t.Error("Se esperaba un error")
+	}
+}
+
+// Comprobar que puedo obtener una prenda que existe
+func TestStockConPrenda(t *testing.T) {
+	stock := NewStock()
+	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: M}] = 1
+	ropa, err := stock.GetRopa("camisa")
+	if err != nil {
+		t.Error("Se esperaba una prenda")
+	}
+	if ropa.nombre != "camisa" {
+		t.Error("La prenda no es la esperada")
 	}
 }
