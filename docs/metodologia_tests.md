@@ -14,3 +14,15 @@ Los pasos a seguir para la creación de tests siguiendo la metodología TDD son 
 Siguiendo esta metodología, se asegura que el código que se escribe está correctamente probado y cumple con los requisitos establecidos en los tests. Además, se fomenta la creación de código de calidad y se reduce la probabilidad de introducir errores en el código.
 
 Más información sobre la metodología TDD se puede encontrar en el siguiente [enlace](https://softwarecrafters.io/javascript/tdd-test-driven-development).
+
+# Principio para creación de tests
+
+Para la creación de tests, se ha decidido seguir el principio FIRST, que establece las siguientes características que deben cumplir los tests:
+
+- **Fast (Rápido)**: Los tests deben ser rápidos de ejecutar, de forma que se puedan ejecutar con frecuencia y no ralenticen el desarrollo.
+- **Isolated (Aislado)**: Los tests deben ser independientes unos de otros, de forma que no dependan de otros tests para poder ejecutarse.
+- **Repeatable (Repetible)**: Los tests deben ser repetibles, de forma que siempre den el mismo resultado al ejecutarse.
+- **Self-validating (Autovalidado)**: Los tests deben ser autovalidados, de forma que se pueda determinar si han pasado o no sin necesidad de inspección manual.
+- **Timely (Oportuno)**: Los tests deben ser oportunos, de forma que se escriban antes de implementar el código que se quiere probar.
+
+Siguiendo este principio, se asegura que los tests son efectivos y fiables, y que cumplen con su función de verificar que el código funciona correctamente.
