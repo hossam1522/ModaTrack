@@ -29,7 +29,7 @@ func TestVentaFechaActual(t *testing.T) {
 }
 
 // Test para comprobar que se pueden introducir ventas
-// anterores con fechas pasadas
+// anteriores con fechas pasadas
 func TestVentaFechaPasada(t *testing.T) {
 	ropa := map[Ropa]int{
 		{nombre: "camisa", precio: 10, talla: M}: 1,
@@ -38,5 +38,18 @@ func TestVentaFechaPasada(t *testing.T) {
 	venta := NuevaVenta(ropa, fecha)
 	if venta.fecha != fecha {
 		t.Errorf("La fecha no es la esperada: %v", venta.fecha)
+	}
+}
+
+// Test para comprobar que no se pueden introducir ventas
+// anterores a dos años
+func TestVentaFechaAnteriorDosAños(t *testing.T) {
+	ropa := map[Ropa]int{
+		{nombre: "camisa", precio: 10, talla: M}: 1,
+	}
+	fecha := time.Now().AddDate(-2, 0, 0)
+	_, err := NuevaVenta(ropa, fecha)
+	if err == nil {
+		t.Errorf("No se esperaba que la venta fuera exitosa")
 	}
 }
