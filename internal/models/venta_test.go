@@ -10,7 +10,7 @@ func TestVenta(t *testing.T) {
 	ropa := map[Ropa]int{
 		{nombre: "camisa", precio: 10, talla: M}: 1,
 	}
-	venta := NuevaVenta(ropa)
+	venta, _ := NuevaVenta(ropa)
 	if len(venta.itemsVendidos) != 1 {
 		t.Error("Se esperaba un item vendido")
 	}
@@ -21,7 +21,7 @@ func TestVentaFechaActual(t *testing.T) {
 	ropa := map[Ropa]int{
 		{nombre: "camisa", precio: 10, talla: M}: 1,
 	}
-	venta := NuevaVenta(ropa)
+	venta, _ := NuevaVenta(ropa)
 	// Si la diferencia es de más de un segundo, se considera incorrecto
 	if time.Until(venta.fecha) > time.Second {
 		t.Error("La fecha no es la actual")
@@ -35,7 +35,7 @@ func TestVentaFechaPasada(t *testing.T) {
 		{nombre: "camisa", precio: 10, talla: M}: 1,
 	}
 	fecha := time.Now().AddDate(-1, 0, 0)
-	venta := NuevaVenta(ropa, fecha)
+	venta, _ := NuevaVenta(ropa, fecha)
 	if venta.fecha != fecha {
 		t.Errorf("La fecha no es la esperada: %v", venta.fecha)
 	}
