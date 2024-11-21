@@ -8,7 +8,7 @@ import (
 // Test para comprobar que el stock se reduce al realizar una venta
 func TestVentaStock(t *testing.T) {
 	stock := NewStock()
-	ropa := NewRopa("camisa", 10, M)
+	ropa := Ropa{"camisa", 10, M}
 	stock.inventario[ropa] = 1
 	_, err := NuevaVenta(map[Ropa]int{ropa: 1}, stock)
 	if stock.inventario[ropa] != 0 {
@@ -22,7 +22,7 @@ func TestVentaStock(t *testing.T) {
 // Test para comprobar que no se puede realizar una venta con stock vacío
 func TestVentaStockVacio(t *testing.T) {
 	stock := NewStock()
-	_, err := NuevaVenta(map[Ropa]int{NewRopa("camisa", 10, M): 1}, stock)
+	_, err := NuevaVenta(map[Ropa]int{{"camisa", 10, M}: 1}, stock)
 	if err == nil {
 		t.Error("Se esperaba un error")
 	}
@@ -30,7 +30,7 @@ func TestVentaStockVacio(t *testing.T) {
 
 func TestVentaStockInsuficiente(t *testing.T) {
 	stock := NewStock()
-	ropa := NewRopa("camisa", 10, M)
+	ropa := Ropa{"camisa", 10, M}
 	stock.inventario[ropa] = 0
 	_, err := NuevaVenta(map[Ropa]int{ropa: 1}, stock)
 	if err == nil {
@@ -41,7 +41,7 @@ func TestVentaStockInsuficiente(t *testing.T) {
 // Test para comprobar que la fecha es correcta si no se especifica
 func TestVentaFechaActual(t *testing.T) {
 	stock := NewStock()
-	ropa := NewRopa("camisa", 10, M)
+	ropa := Ropa{"camisa", 10, M}
 	stock.inventario[ropa] = 1
 	venta, _ := NuevaVenta(map[Ropa]int{ropa: 1}, stock)
 	// Si la diferencia es de más de un segundo, se considera incorrecto
@@ -54,7 +54,7 @@ func TestVentaFechaActual(t *testing.T) {
 // anteriores con fechas pasadas
 func TestVentaFechaPasada(t *testing.T) {
 	stock := NewStock()
-	ropa := NewRopa("camisa", 10, M)
+	ropa := Ropa{"camisa", 10, M}
 	stock.inventario[ropa] = 1
 	fecha := time.Now().AddDate(-1, 0, 0)
 	venta, _ := NuevaVenta(map[Ropa]int{ropa: 1}, stock, fecha)
@@ -67,7 +67,7 @@ func TestVentaFechaPasada(t *testing.T) {
 // anterores a dos años
 func TestVentaFechaAnteriorDosAños(t *testing.T) {
 	stock := NewStock()
-	ropa := NewRopa("camisa", 10, M)
+	ropa := Ropa{"camisa", 10, M}
 	stock.inventario[ropa] = 1
 	fecha := time.Now().AddDate(-2, 0, 0)
 	_, err := NuevaVenta(map[Ropa]int{ropa: 1}, stock, fecha)
