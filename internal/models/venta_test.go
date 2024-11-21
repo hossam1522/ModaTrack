@@ -19,6 +19,16 @@ func TestVentaStock(t *testing.T) {
 	}
 }
 
+// Test para comprobar que no se puede realizar una venta con stock vacío
+func TestVentaStockVacio(t *testing.T) {
+	stock := NewStock()
+	_, err := NuevaVenta(map[Ropa]int{NewRopa("camisa",
+		10, M): 1}, stock)
+	if err == nil {
+		t.Error("Se esperaba un error")
+	}
+}
+
 // Test para añadir una venta sin fecha
 func TestVenta(t *testing.T) {
 	ropa := map[Ropa]int{
