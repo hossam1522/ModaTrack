@@ -5,6 +5,20 @@ import (
 	"time"
 )
 
+// Test para comprobar que el stock se reduce al realizar una venta
+func TestVentaStock(t *testing.T) {
+	stock := NewStock()
+	ropa := NewRopa("camisa", 10, M)
+	stock.inventario[ropa] = 1
+	_, err := NuevaVenta(map[Ropa]int{ropa: 1}, stock)
+	if stock.inventario[ropa] != 0 {
+		t.Error("El stock no se ha reducido")
+	}
+	if err != nil {
+		t.Error("No se esperaba un error")
+	}
+}
+
 // Test para añadir una venta sin fecha
 func TestVenta(t *testing.T) {
 	ropa := map[Ropa]int{
@@ -51,19 +65,5 @@ func TestVentaFechaAnteriorDosAños(t *testing.T) {
 	_, err := NuevaVenta(ropa, &Stock{}, fecha)
 	if err == nil {
 		t.Errorf("No se esperaba que la venta fuera exitosa")
-	}
-}
-
-// Test para comprobar que el stock se reduce al realizar una venta
-func TestVentaStock(t *testing.T) {
-	stock := NewStock()
-	ropa := NewRopa("camisa", 10, M)
-	stock.inventario[ropa] = 1
-	_, err := NuevaVenta(map[Ropa]int{ropa: 1}, stock)
-	if stock.inventario[ropa] != 0 {
-		t.Error("El stock no se ha reducido")
-	}
-	if err != nil {
-		t.Error("No se esperaba un error")
 	}
 }
