@@ -5,6 +5,10 @@ import (
 	"time"
 )
 
+var ErrFechaAnteriorDosAños = errors.New("la fecha no puede ser anterior a dos años")
+var ErrNoStock = errors.New("no hay stock disponible")
+var ErrStockVacio = errors.New("el stock está vacío, no puedes vender")
+
 type Venta struct {
 	fecha         time.Time
 	itemsVendidos map[Ropa]int
@@ -18,7 +22,7 @@ func NuevaVenta(itemsVendidos map[Ropa]int, inventario *Stock, fecha ...time.Tim
 	if len(fecha) > 0 {
 		fechaVenta = fecha[0]
 		if fechaVenta.Before(fechaLimite) {
-			return Venta{}, errors.New("la fecha no puede ser anterior a dos años")
+			return Venta{}, ErrFechaAnteriorDosAños
 		}
 	} else {
 		fechaVenta = fechaActual
@@ -39,9 +43,9 @@ func NuevaVenta(itemsVendidos map[Ropa]int, inventario *Stock, fecha ...time.Tim
 			}
 		}
 
-		return Venta{}, errors.New("no hay stock disponible")
+		return Venta{}, ErrNoStock
 	}
 
-	return Venta{}, errors.New("stock vacío, no puedes vender")
+	return Venta{}, ErrStockVacio
 
 }
