@@ -8,6 +8,7 @@ import (
 var ErrFechaAnteriorDosAños = errors.New("la fecha no puede ser anterior a dos años")
 var ErrNoStock = errors.New("no hay stock disponible")
 var ErrStockVacio = errors.New("el stock está vacío, no puedes vender")
+var ErrInsuficientesPrendas = errors.New("no hay suficientes prendas en el inventario")
 
 type Venta struct {
 	fecha         time.Time
@@ -28,23 +29,23 @@ func NuevaVenta(itemsVendidos map[Ropa]int, inventario *Stock, fecha ...time.Tim
 		fechaVenta = fechaActual
 	}
 
-	if inventario != nil {
-		for item, cantidad := range itemsVendidos {
-			if inventario.Existe(item) {
-				err := inventario.Restar(item, cantidad)
-				if err != nil {
-					return Venta{}, err
-				}
-				return Venta{
-					fecha:         fechaVenta,
-					itemsVendidos: itemsVendidos,
-				}, nil
-			}
-		}
-
-		return Venta{}, ErrNoStock
+	if inventario == nil {
+		return Venta{}, ErrStockVacio
 	}
 
-	return Venta{}, ErrStockVacio
+	for item, cantidadSolicitada := range itemsVendidos {
+		stockDisponible := inventario.inventario[item]
+		if stockDisponible == 0 {
+			return Venta{}, ErrNoStock
+		}
+		if stockDisponible < cantidadSolicitada {
+			return Venta{}, ErrInsuficientesPrendas
+		}
+		inventario.inventario[item] -= cantidadSolicitada
+	}
 
+	return Venta{
+		fecha:         fechaVenta,
+		itemsVendidos: itemsVendidos,
+	}, nil
 }

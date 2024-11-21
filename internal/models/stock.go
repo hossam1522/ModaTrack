@@ -7,7 +7,6 @@ type Stock struct {
 }
 
 var ErrPrendaNoEncontrada = errors.New("no existe ninguna prenda en el inventario con esas características")
-var ErrInsuficientesPrendas = errors.New("no hay suficientes prendas en el inventario")
 
 func NewStock() *Stock {
 	return &Stock{inventario: make(map[Ropa]int)}
@@ -39,18 +38,6 @@ func (s *Stock) GetRopaTalla(nombre string, talla Talla) (Ropa, error) {
 		}
 	}
 	return Ropa{}, ErrPrendaNoEncontrada
-}
-
-func (s *Stock) Existe(prenda Ropa) bool {
-	return s.inventario[prenda] > 0
-}
-
-func (s *Stock) Restar(prenda Ropa, cantidad int) error {
-	if s.inventario[prenda] >= cantidad {
-		s.inventario[prenda] -= cantidad
-		return nil
-	}
-	return ErrInsuficientesPrendas
 }
 
 func (s *Stock) GetStock(nombre string, talla ...Talla) int {
