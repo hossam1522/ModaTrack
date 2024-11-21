@@ -41,3 +41,17 @@ func (s *Stock) GetRopaTalla(nombre string, talla Talla) (Ropa, error) {
 	}
 	return Ropa{}, ErrPrendaNoEncontrada
 }
+
+// Método para comprobar si existe una prenda
+func (s *Stock) Existe(prenda Ropa) bool {
+	return s.inventario[prenda] > 0
+}
+
+// Método para quitar una cantidad de prendas del inventario
+func (s *Stock) Restar(prenda Ropa, cantidad int) error {
+	if s.inventario[prenda] >= cantidad {
+		s.inventario[prenda] -= cantidad
+		return nil
+	}
+	return errors.New("no hay suficientes prendas en el inventario")
+}
