@@ -25,7 +25,7 @@ func (s *Stock) GetRopa(nombre string) (interface{}, error) {
 
 	switch len(prendas) {
 	case 0:
-		return Ropa{}, ErrPrendaNoEncontrada
+		return nil, ErrPrendaNoEncontrada
 	case 1:
 		return prendas[0], nil
 	default:
