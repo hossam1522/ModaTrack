@@ -1,28 +1,26 @@
 # Herramientas para testear
 
-Para elegir correctamente las herramientas para poder realizar pruebas para comprobar el correcto funcionamiento del proyecto, los siguientes aspectos deben ser considerados:
+Go ya incluye un paquete de testing en su librería estándar. Este paquete se llama `testing`, y es bastante completo e incluye prácticamente todas las funcionalidades necesarias para realizar tests básicos en Go. De hecho, al ser la herramienta estándar, es la más recomendada por la comunidad de Go para hacer tests.
 
-- Lenguaje de programación del proyecto. En este caso, Go es el lenguaje de programación usado, así que habrá que tener en cuenta las opciones disponibles para este lenguaje.
-- Las mejores prácticas y herramientas recomendadas para Go.
-- Reducción de la deuda técnica a la hora de mantener y escalar el proyecto.
-- Facilidad de uso y mantenimiento.
-- Facilidad para creación de mocks (implementaciones simuladas de objetos que simulan el comportamiento de los objetos reales) para testear el código.
+Además, otra cosa bastante buena a considerar de `testing` es que no añade dependencias adicionales al proyecto, lo cual puede ser una ventaja a la hora de mantenerlo, ya que hace que la deuda técnica no exista en comparación con otras herramientas de testeo, las cuales sí o sí añaden dependencias.
 
-Se nos presentan varias opciones para la elección de las herramientas de testeo, entre las que se encuentran `testing`, `testify`, `ginkgo`, `goconvey`, entre otros. Analizaremos principalmente estos cuatro mencionados, ya que se encuentran entre los más recomendados por la comunidad de Go.
+Además, es un paquete que está bien documentado y no tiene apenas complejidad, por lo que es fácil de usar y mantener, convirtiéndolo en una buena opción para cualquier tipo de proyecto.
 
-Teniendo en cuenta los criterios mencionados anteriormente, se procederá a hacer un análisis punto por punto para ver cuál de las herramientas de testeo es la más adecuada para este proyecto:
+Basándonos en criterios de facilidad de uso y mantenimiento, evitación de la deuda técnica y recomendaciones de la comunidad, `testing` parece ser, en principio, la mejor opción para testear en Go. Aún así, existen otras librerías o paquetes que pueden ser útiles para testear, como pueden ser `testify`, `ginkgo` o `goconvey`. A continuación, se hará un pequeño análisis de ellas:
 
-- **Lenguaje de programación del proyecto**: Todas las herramientas mencionadas son compatibles con Go, por lo que no hay problemas en este aspecto.
+### Testify
 
-- **Mejores prácticas y herramientas recomendadas para Go**: La comunidad de Go recomienda principalmente `testing`, ya que es la herramienta estándar de Go para realizar tests. `testify` también es una buena opción, probablemente la más famosa después de `testing`, ya que añade funcionalidades adicionales a `testing` que pueden ser útiles. `ginkgo` y `goconvey` son menos recomendadas, pero siguen siendo opciones válidas.
+`testify` es un conjunto de paquetes que proporcionan una variedad de funciones útiles para escribir tests en Go. Algunas de las funcionalidades que proporciona son assertions, mocks, suites, etc. Es una herramienta bastante completa y que puede ser útil en proyectos más complejos que necesiten de estas funcionalidades. Es una herramienta bastante popular y recomendada por la comunidad de Go. Más información en su [repositorio](https://github.com/stretchr/testify).
 
-- **Reducción de la deuda técnica**: La herramienta que gana en este aspecto es `testing`, ya que es la herramienta estándar de Go y no añade dependencias adicionales al proyecto, lo cual supone una ventaja a la hora de mantenerlo. Las demás herramientas añaden dependencias adicionales, lo cual puede aumentar la deuda técnica. Otra cuestión a considerar es la activad de los proyectos. En este apartado, todos los proyectos están activos excepto `goconvey`, que no ha sido actualizado en los últimos 9 meses a la hora de la realización de este documento.
+### Ginkgo
 
-- **Facilidad de uso y mantenimiento**: En un proyecto como el actual, este apartado no debería ser un problema ya que el proyecto no es lo suficientemente complejo como para que la facilidad de uso y mantenimiento de las herramientas de testeo sea un problema. De todas formas, al no tener dependencias externas, se puede considerar que `testing` es la herramienta más fácil de usar y mantener. 
+`ginkgo` es un framework de testing BDD (Behavior-Driven Development) para Go. Es una herramienta bastante completa que utiliza un lenguaje específico de dominio (DSL) que facilita la organización de las pruebas en bloques anidados, además de más funcionalidades que podemos investigar en su [repositorio](https://github.com/onsi/ginkgo). Es una herramienta bastante potente y completa, así que es una opción a tener en cuenta.
 
-- **Facilidad para creación de mocks**: `testing` no tiene una forma nativa de crear mocks, lo cual puede ser un problema si se necesita crear mocks para testear el código, aunque existen maneras de hacerlo sin necesidad de una librería específica, como viene explicado en el siguiente [artículo](https://medium.com/safetycultureengineering/flexible-mocking-for-testing-in-go-f952869e34f5). Las demás herramientas mencionadas facilitan la creación de mocks, lo cual puede ser una ventaja en este aspecto.
+### Goconvey
+
+`goconvey` es una herramienta de testing la cual que proporciona una interfaz web para visualizar los resultados de los tests. Es una herramienta bastante completa y fácil de usar, ya que no requiere de conocimientos avanzados para poder utilizarla además de que se integra con el propio `go test`. Aunque es una herramienta bastante buena, no ha sido actualizada en los últimos 9 meses a la hora de la realización de este documento, como se puede ver en su [repositorio](https://github.com/smartystreets/goconvey), por lo que puede que no sea la mejor opción en cuanto a deuda técnica y mantenimiento se refiere. 
 
 
 ## Elección de la herramienta de testeo
 
-Siguiendo los criterios establecidos y después de haber realizado un análisis punto por punto, exceptuando `goconvey` por el tema del aumento de la deuda técnica y la falta de actualizaciones, todas las opciones pueden ser perfectamente válidas para este proyecto. Sin embargo, en la mayoría de aspectos, siempre ha habido una herramienta que ha destacado sobre las demás, y esa ha sido `testing`. Por lo tanto, se ha decidido usar `testing` como herramienta de testeo para este proyecto por todas las razones explicadas anteriormente.
+Todas las opciones mencionadas tienen sus ventajas y desventajas. De todas formas, como se ha dicho al principio, si seguimos criterios de facilidad de uso y mantenimiento, evitación de la deuda técnica y recomendaciones de la comunidad, `testing` parece ser la mejor opción para testear en Go, ya que aunque las demás opciones añadan funcionalidades interesantes, para este caso no se va a necesitar de ellas y solo estarían añadiendo complejidad y deuda técnica al proyecto. Por lo tanto, la elección final es `testing`.
