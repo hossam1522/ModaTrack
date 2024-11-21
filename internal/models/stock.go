@@ -6,7 +6,7 @@ type Stock struct {
 	inventario map[Ropa]int
 }
 
-var ErrPrendaNoEncontrada = errors.New("no se ha encontrado la prenda")
+var ErrPrendaNoEncontrada = errors.New("no existe ninguna prenda en el inventario con esas características")
 var ErrInsuficientesPrendas = errors.New("no hay suficientes prendas en el inventario")
 
 func NewStock() *Stock {
