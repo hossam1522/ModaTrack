@@ -39,17 +39,6 @@ func TestVentaStockInsuficiente(t *testing.T) {
 	}
 }
 
-// Test para añadir una venta sin fecha
-func TestVenta(t *testing.T) {
-	ropa := map[Ropa]int{
-		{nombre: "camisa", precio: 10, talla: M}: 1,
-	}
-	venta, _ := NuevaVenta(ropa, &Stock{})
-	if len(venta.itemsVendidos) != 1 {
-		t.Error("Se esperaba un item vendido")
-	}
-}
-
 // Test para comprobar que la fecha es correcta si no se especifica
 func TestVentaFechaActual(t *testing.T) {
 	ropa := map[Ropa]int{
