@@ -82,3 +82,18 @@ func TestStockConPrendaDuplicada(t *testing.T) {
 		t.Error("Los nombres no son los esperados")
 	}
 }
+
+// Test para saber cuánto stock hay de una prenda
+func TestCantidadStockPrenda(t *testing.T) {
+	stock := NewStock()
+	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: M}] = 5
+	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: L}] = 10
+	stock.inventario[Ropa{nombre: "pantalones", precio: 20, talla: M}] = 3
+	stock.inventario[Ropa{nombre: "pantalones", precio: 20, talla: L}] = 7
+
+	// Obtener la cantidad de camisas
+	camisas, _ := stock.GetStock("camisa")
+	if camisas != 15 {
+		t.Errorf("Se esperaban 15 camisas, pero se obtuvieron %d", camisas)
+	}
+}
