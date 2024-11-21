@@ -4,7 +4,6 @@ import (
 	"testing"
 )
 
-// Comprobar que no puedo obtener una prenda que no existe
 func TestStockVacio(t *testing.T) {
 	stock := NewStock()
 	_, err := stock.GetRopa("camisa")
@@ -13,7 +12,6 @@ func TestStockVacio(t *testing.T) {
 	}
 }
 
-// Comprobar que no puedo obtener una prenda con una talla que no existe
 func TestStockVacioTalla(t *testing.T) {
 	stock := NewStock()
 	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: L}] = 1
@@ -23,7 +21,6 @@ func TestStockVacioTalla(t *testing.T) {
 	}
 }
 
-// Comprobar que puedo obtener una prenda que existe
 func TestStockConPrenda(t *testing.T) {
 	stock := NewStock()
 	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: M}] = 1
@@ -31,7 +28,7 @@ func TestStockConPrenda(t *testing.T) {
 	if err != nil {
 		t.Error("Se esperaba una prenda")
 	}
-	// Verificar el tipo de retorno
+
 	switch prenda := ropa.(type) {
 	case Ropa:
 		if prenda.nombre != "camisa" {
@@ -44,7 +41,6 @@ func TestStockConPrenda(t *testing.T) {
 	}
 }
 
-// Comprobar que puedo buscar una prenda por nombre y talla
 func TestStockConPrendaTalla(t *testing.T) {
 	stock := NewStock()
 	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: M}] = 1
@@ -60,8 +56,6 @@ func TestStockConPrendaTalla(t *testing.T) {
 	}
 }
 
-// ¿Qué pasa si hay más de una prenda con el mismo nombre?
-// Debería devolver un vector con todas las prendas
 func TestStockConPrendaDuplicada(t *testing.T) {
 	stock := NewStock()
 	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: M}] = 1

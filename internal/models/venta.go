@@ -28,7 +28,6 @@ func NuevaVenta(itemsVendidos map[Ropa]int, inventario *Stock, fecha ...time.Tim
 		fechaVenta = fechaActual
 	}
 
-	// Si stock está vacío, no hacer nada. Si no lo está, actualizar
 	if inventario != nil {
 		for item, cantidad := range itemsVendidos {
 			if inventario.Existe(item) {

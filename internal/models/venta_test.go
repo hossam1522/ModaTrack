@@ -5,7 +5,6 @@ import (
 	"time"
 )
 
-// Test para comprobar que el stock se reduce al realizar una venta
 func TestVentaStock(t *testing.T) {
 	stock := NewStock()
 	ropa := Ropa{"camisa", 10, M}
@@ -19,7 +18,6 @@ func TestVentaStock(t *testing.T) {
 	}
 }
 
-// Test para comprobar que no se puede realizar una venta con stock vacío
 func TestVentaStockVacio(t *testing.T) {
 	stock := NewStock()
 	_, err := NuevaVenta(map[Ropa]int{{"camisa", 10, M}: 1}, stock)
@@ -38,20 +36,16 @@ func TestVentaStockInsuficiente(t *testing.T) {
 	}
 }
 
-// Test para comprobar que la fecha es correcta si no se especifica
 func TestVentaFechaActual(t *testing.T) {
 	stock := NewStock()
 	ropa := Ropa{"camisa", 10, M}
 	stock.inventario[ropa] = 1
 	venta, _ := NuevaVenta(map[Ropa]int{ropa: 1}, stock)
-	// Si la diferencia es de más de un segundo, se considera incorrecto
 	if time.Until(venta.fecha) > time.Second {
 		t.Error("La fecha no es la actual")
 	}
 }
 
-// Test para comprobar que se pueden introducir ventas
-// anteriores con fechas pasadas
 func TestVentaFechaPasada(t *testing.T) {
 	stock := NewStock()
 	ropa := Ropa{"camisa", 10, M}
@@ -63,8 +57,6 @@ func TestVentaFechaPasada(t *testing.T) {
 	}
 }
 
-// Test para comprobar que no se pueden introducir ventas
-// anterores a dos años
 func TestVentaFechaAnteriorDosAños(t *testing.T) {
 	stock := NewStock()
 	ropa := Ropa{"camisa", 10, M}

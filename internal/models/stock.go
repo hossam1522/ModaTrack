@@ -13,7 +13,6 @@ func NewStock() *Stock {
 	return &Stock{inventario: make(map[Ropa]int)}
 }
 
-// Método para buscar una prenda por nombre
 func (s *Stock) GetRopa(nombre string) (interface{}, error) {
 	var prendas []Ropa
 
@@ -33,7 +32,6 @@ func (s *Stock) GetRopa(nombre string) (interface{}, error) {
 	}
 }
 
-// Método para buscar una prenda por nombre y talla
 func (s *Stock) GetRopaTalla(nombre string, talla Talla) (Ropa, error) {
 	for ropa := range s.inventario {
 		if ropa.nombre == nombre && ropa.talla == talla {
@@ -43,12 +41,10 @@ func (s *Stock) GetRopaTalla(nombre string, talla Talla) (Ropa, error) {
 	return Ropa{}, ErrPrendaNoEncontrada
 }
 
-// Método para comprobar si existe una prenda
 func (s *Stock) Existe(prenda Ropa) bool {
 	return s.inventario[prenda] > 0
 }
 
-// Método para quitar una cantidad de prendas del inventario
 func (s *Stock) Restar(prenda Ropa, cantidad int) error {
 	if s.inventario[prenda] >= cantidad {
 		s.inventario[prenda] -= cantidad
