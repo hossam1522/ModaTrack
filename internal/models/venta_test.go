@@ -53,3 +53,16 @@ func TestVentaFechaAnteriorDosAños(t *testing.T) {
 		t.Errorf("No se esperaba que la venta fuera exitosa")
 	}
 }
+
+// Test para comprobar que el stock se reduce al realizar una venta
+func TestVentaStock(t *testing.T) {
+	stock := NewStock()
+	ropa := map[Ropa]int{
+		{nombre: "camisa", precio: 10, talla: M}: 1,
+	}
+	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: M}] = 1
+	venta, _ := NuevaVenta(ropa)
+	if stock.inventario["camisa"] != 0 {
+		t.Errorf("El stock no se ha reducido correctamente")
+	}
+}
