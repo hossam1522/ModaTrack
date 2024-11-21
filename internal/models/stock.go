@@ -52,3 +52,13 @@ func (s *Stock) Restar(prenda Ropa, cantidad int) error {
 	}
 	return ErrInsuficientesPrendas
 }
+
+func (s *Stock) GetStock(nombre string) int {
+	var stock int
+	for ropa, cantidad := range s.inventario {
+		if ropa.nombre == nombre {
+			stock += cantidad
+		}
+	}
+	return stock
+}
