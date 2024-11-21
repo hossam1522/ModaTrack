@@ -95,3 +95,21 @@ func TestCantidadStockPrenda(t *testing.T) {
 		t.Errorf("Se esperaban 15 camisas, pero se obtuvieron %d", camisas)
 	}
 }
+
+func TestCantidadStockPrendaTalla(t *testing.T) {
+	stock := NewStock()
+	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: M}] = 5
+	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: L}] = 10
+	stock.inventario[Ropa{nombre: "pantalones", precio: 20, talla: M}] = 3
+	stock.inventario[Ropa{nombre: "pantalones", precio: 20, talla: L}] = 7
+
+	camisaM := stock.GetStock("camisa", M)
+	if camisaM != 5 {
+		t.Errorf("Se esperaban 5 camisas talla M, pero se obtuvieron %d", camisaM)
+	}
+
+	camisaL := stock.GetStock("camisa", L)
+	if camisaL != 10 {
+		t.Errorf("Se esperaban 10 camisas talla L, pero se obtuvieron %d", camisaL)
+	}
+}
