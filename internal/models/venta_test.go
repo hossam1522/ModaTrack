@@ -67,3 +67,16 @@ func TestVentaFechaAnteriorDosAños(t *testing.T) {
 		t.Errorf("No se esperaba que la venta fuera exitosa")
 	}
 }
+
+// Test para comprobar cuál ha sido el producto más vendido
+func TestMasVendido(t *testing.T) {
+	vectorVentas := []Venta{
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", 10, M}: 1}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", 10, M}: 2}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"pantalón", 20, M}: 1}},
+	}
+	productoMasVendido, _ := MasVendido(vectorVentas)
+	if productoMasVendido.nombre != "camisa" {
+		t.Errorf("El producto más vendido no es el esperado: %s", productoMasVendido.nombre)
+	}
+}
