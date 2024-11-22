@@ -106,3 +106,17 @@ func TestCantidadRopaVendidaTalla(t *testing.T) {
 		t.Errorf("La cantidad de ropas vendidas no es la esperada: %d", total)
 	}
 }
+
+func TestTallaMasVendida(t *testing.T) {
+	vectorVentas := []Venta{
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", 10, M}: 8}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", 10, M}: 3}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", 10, L}: 5}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"pantalón", 20, L}: 15}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"pantalón", 20, M}: 7}},
+	}
+	talla := TallaMasVendida(vectorVentas)
+	if talla != L {
+		t.Errorf("La talla más vendida no es la esperada: %v", talla)
+	}
+}
