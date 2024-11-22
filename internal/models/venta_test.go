@@ -7,7 +7,7 @@ import (
 
 func TestVentaStock(t *testing.T) {
 	stock := NewStock()
-	ropa := Ropa{"camisa", 10, M}
+	ropa := Ropa{"camisa", M}
 	stock.inventario[ropa] = 1
 	_, err := NuevaVenta(map[Ropa]int{ropa: 1}, stock)
 	if stock.inventario[ropa] != 0 {
@@ -20,7 +20,7 @@ func TestVentaStock(t *testing.T) {
 
 func TestVentaStockVacio(t *testing.T) {
 	stock := NewStock()
-	_, err := NuevaVenta(map[Ropa]int{{"camisa", 10, M}: 1}, stock)
+	_, err := NuevaVenta(map[Ropa]int{{"camisa", M}: 1}, stock)
 	if err == nil {
 		t.Error("Se esperaba un error")
 	}
@@ -28,7 +28,7 @@ func TestVentaStockVacio(t *testing.T) {
 
 func TestVentaStockInsuficiente(t *testing.T) {
 	stock := NewStock()
-	ropa := Ropa{"camisa", 10, M}
+	ropa := Ropa{"camisa", M}
 	stock.inventario[ropa] = 0
 	_, err := NuevaVenta(map[Ropa]int{ropa: 1}, stock)
 	if err == nil {
@@ -38,7 +38,7 @@ func TestVentaStockInsuficiente(t *testing.T) {
 
 func TestVentaFechaActual(t *testing.T) {
 	stock := NewStock()
-	ropa := Ropa{"camisa", 10, M}
+	ropa := Ropa{"camisa", M}
 	stock.inventario[ropa] = 1
 	venta, _ := NuevaVenta(map[Ropa]int{ropa: 1}, stock)
 	if time.Until(venta.fecha) > time.Second {
@@ -48,7 +48,7 @@ func TestVentaFechaActual(t *testing.T) {
 
 func TestVentaFechaPasada(t *testing.T) {
 	stock := NewStock()
-	ropa := Ropa{"camisa", 10, M}
+	ropa := Ropa{"camisa", M}
 	stock.inventario[ropa] = 1
 	fecha := time.Now().AddDate(-1, 0, 0)
 	venta, _ := NuevaVenta(map[Ropa]int{ropa: 1}, stock, fecha)
@@ -59,7 +59,7 @@ func TestVentaFechaPasada(t *testing.T) {
 
 func TestVentaFechaAnteriorDosAños(t *testing.T) {
 	stock := NewStock()
-	ropa := Ropa{"camisa", 10, M}
+	ropa := Ropa{"camisa", M}
 	stock.inventario[ropa] = 1
 	fecha := time.Now().AddDate(-2, 0, 0)
 	_, err := NuevaVenta(map[Ropa]int{ropa: 1}, stock, fecha)
@@ -70,9 +70,9 @@ func TestVentaFechaAnteriorDosAños(t *testing.T) {
 
 func TestMasVendido(t *testing.T) {
 	vectorVentas := []Venta{
-		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", 10, M}: 1}},
-		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", 10, M}: 2}},
-		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"pantalón", 20, M}: 1}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", M}: 1}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", M}: 2}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"pantalón", M}: 1}},
 	}
 	productoMasVendido, _ := MasVendido(vectorVentas)
 	if productoMasVendido.nombre != "camisa" {
@@ -82,10 +82,10 @@ func TestMasVendido(t *testing.T) {
 
 func TestCantidadRopaVendida(t *testing.T) {
 	vectorVentas := []Venta{
-		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", 10, M}: 8}},
-		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", 10, M}: 3}},
-		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"pantalón", 20, M}: 15}},
-		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"pantalón", 20, M}: 2}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", M}: 8}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", M}: 3}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"pantalón", M}: 15}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"pantalón", M}: 2}},
 	}
 	total := TotalVendido(vectorVentas, "camisa")
 	if total != 11 {
@@ -95,11 +95,11 @@ func TestCantidadRopaVendida(t *testing.T) {
 
 func TestCantidadRopaVendidaTalla(t *testing.T) {
 	vectorVentas := []Venta{
-		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", 10, M}: 8}},
-		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", 10, M}: 3}},
-		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", 10, L}: 5}},
-		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"pantalón", 20, M}: 15}},
-		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"pantalón", 20, M}: 2}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", M}: 8}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", M}: 3}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", L}: 5}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"pantalón", M}: 15}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"pantalón", M}: 2}},
 	}
 	total := TotalVendido(vectorVentas, "camisa", M)
 	if total != 11 {
@@ -109,11 +109,11 @@ func TestCantidadRopaVendidaTalla(t *testing.T) {
 
 func TestTallaMasVendida(t *testing.T) {
 	vectorVentas := []Venta{
-		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", 10, M}: 8}},
-		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", 10, M}: 3}},
-		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", 10, L}: 5}},
-		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"pantalón", 20, L}: 15}},
-		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"pantalón", 20, M}: 7}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", M}: 8}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", M}: 3}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"camisa", L}: 5}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"pantalón", L}: 15}},
+		{fecha: time.Now(), itemsVendidos: map[Ropa]int{{"pantalón", M}: 7}},
 	}
 	talla := TallaMasVendida(vectorVentas)
 	if talla != L {

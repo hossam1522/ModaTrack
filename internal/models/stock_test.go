@@ -14,7 +14,7 @@ func TestStockVacio(t *testing.T) {
 
 func TestStockVacioTalla(t *testing.T) {
 	stock := NewStock()
-	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: L}] = 1
+	stock.inventario[Ropa{nombre: "camisa", talla: L}] = 1
 	_, err := stock.GetRopaTalla("camisa", M)
 	if err == nil {
 		t.Error("Se esperaba un error")
@@ -23,7 +23,7 @@ func TestStockVacioTalla(t *testing.T) {
 
 func TestStockConPrenda(t *testing.T) {
 	stock := NewStock()
-	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: M}] = 1
+	stock.inventario[Ropa{nombre: "camisa", talla: M}] = 1
 	ropa, err := stock.GetRopa("camisa")
 	if err != nil {
 		t.Error("Se esperaba un elemento")
@@ -35,7 +35,7 @@ func TestStockConPrenda(t *testing.T) {
 
 func TestStockConPrendaTalla(t *testing.T) {
 	stock := NewStock()
-	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: M}] = 1
+	stock.inventario[Ropa{nombre: "camisa", talla: M}] = 1
 	ropa, err := stock.GetRopaTalla("camisa", M)
 	if err != nil {
 		t.Error("Se esperaba una prenda")
@@ -50,8 +50,8 @@ func TestStockConPrendaTalla(t *testing.T) {
 
 func TestStockConPrendaDuplicada(t *testing.T) {
 	stock := NewStock()
-	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: M}] = 1
-	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: L}] = 1
+	stock.inventario[Ropa{nombre: "camisa", talla: M}] = 1
+	stock.inventario[Ropa{nombre: "camisa", talla: L}] = 1
 
 	ropas, _ := stock.GetRopa("camisa")
 
@@ -70,10 +70,10 @@ func TestStockConPrendaDuplicada(t *testing.T) {
 
 func TestCantidadStockPrenda(t *testing.T) {
 	stock := NewStock()
-	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: M}] = 5
-	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: L}] = 10
-	stock.inventario[Ropa{nombre: "pantalones", precio: 20, talla: M}] = 3
-	stock.inventario[Ropa{nombre: "pantalones", precio: 20, talla: L}] = 7
+	stock.inventario[Ropa{nombre: "camisa", talla: M}] = 5
+	stock.inventario[Ropa{nombre: "camisa", talla: L}] = 10
+	stock.inventario[Ropa{nombre: "pantalones", talla: M}] = 3
+	stock.inventario[Ropa{nombre: "pantalones", talla: L}] = 7
 
 	camisas := stock.GetStock("camisa")
 	if camisas != 15 {
@@ -83,10 +83,10 @@ func TestCantidadStockPrenda(t *testing.T) {
 
 func TestCantidadStockPrendaTalla(t *testing.T) {
 	stock := NewStock()
-	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: M}] = 5
-	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: L}] = 10
-	stock.inventario[Ropa{nombre: "pantalones", precio: 20, talla: M}] = 3
-	stock.inventario[Ropa{nombre: "pantalones", precio: 20, talla: L}] = 7
+	stock.inventario[Ropa{nombre: "camisa", talla: M}] = 5
+	stock.inventario[Ropa{nombre: "camisa", talla: L}] = 10
+	stock.inventario[Ropa{nombre: "pantalones", talla: M}] = 3
+	stock.inventario[Ropa{nombre: "pantalones", talla: L}] = 7
 
 	camisaM := stock.GetStock("camisa", M)
 	if camisaM != 5 {
@@ -101,11 +101,11 @@ func TestCantidadStockPrendaTalla(t *testing.T) {
 
 func TestCantidadStockPrendaVariasTallas(t *testing.T) {
 	stock := NewStock()
-	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: M}] = 5
-	stock.inventario[Ropa{nombre: "camisa", precio: 10, talla: L}] = 10
-	stock.inventario[Ropa{nombre: "pantalones", precio: 20, talla: M}] = 3
-	stock.inventario[Ropa{nombre: "pantalones", precio: 20, talla: L}] = 7
-	stock.inventario[Ropa{nombre: "pantalones", precio: 20, talla: XL}] = 2
+	stock.inventario[Ropa{nombre: "camisa", talla: M}] = 5
+	stock.inventario[Ropa{nombre: "camisa", talla: L}] = 10
+	stock.inventario[Ropa{nombre: "pantalones", talla: M}] = 3
+	stock.inventario[Ropa{nombre: "pantalones", talla: L}] = 7
+	stock.inventario[Ropa{nombre: "pantalones", talla: XL}] = 2
 
 	pantalones := stock.GetStock("pantalones", L, XL)
 	if pantalones != 9 {
