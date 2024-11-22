@@ -85,3 +85,21 @@ func TotalVendido(ventas []Venta, nombre string, talla ...Talla) int {
 	}
 	return cantidadVendida
 }
+
+func TallaMasVendida(ventas []Venta) Talla {
+	tallasVendidas := make(map[Talla]int)
+	for _, venta := range ventas {
+		for prenda, cantidad := range venta.itemsVendidos {
+			tallasVendidas[prenda.talla] += cantidad
+		}
+	}
+	var tallaMasVendida Talla
+	var cantidadMasVendida int
+	for talla, cantidad := range tallasVendidas {
+		if cantidad > cantidadMasVendida {
+			tallaMasVendida = talla
+			cantidadMasVendida = cantidad
+		}
+	}
+	return tallaMasVendida
+}
