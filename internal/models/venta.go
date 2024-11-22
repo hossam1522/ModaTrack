@@ -49,3 +49,24 @@ func NuevaVenta(itemsVendidos map[Ropa]int, inventario *Stock, fecha ...time.Tim
 		itemsVendidos: itemsVendidos,
 	}, nil
 }
+
+func MasVendido(ventas []Venta) (Ropa, int) {
+	ventasPorPrenda := make(map[Ropa]int)
+
+	for _, venta := range ventas {
+		for prenda, cantidad := range venta.itemsVendidos {
+			ventasPorPrenda[prenda] += cantidad
+		}
+	}
+
+	var prendaMasVendida Ropa
+	var cantidadMasVendida int
+	for prenda, cantidad := range ventasPorPrenda {
+		if cantidad > cantidadMasVendida {
+			prendaMasVendida = prenda
+			cantidadMasVendida = cantidad
+		}
+	}
+
+	return prendaMasVendida, cantidadMasVendida
+}
