@@ -12,7 +12,7 @@ func NewStock() *Stock {
 	return &Stock{inventario: make(map[Ropa]int)}
 }
 
-func (s *Stock) GetRopa(nombre string) (interface{}, error) {
+func (s *Stock) GetRopa(nombre string) ([]Ropa, error) {
 	var prendas []Ropa
 
 	for ropa := range s.inventario {
@@ -21,14 +21,11 @@ func (s *Stock) GetRopa(nombre string) (interface{}, error) {
 		}
 	}
 
-	switch len(prendas) {
-	case 0:
+	if len(prendas) == 0 {
 		return nil, ErrPrendaNoEncontrada
-	case 1:
-		return prendas[0], nil
-	default:
-		return prendas, nil
 	}
+
+	return prendas, nil
 }
 
 func (s *Stock) GetRopaTalla(nombre string, talla Talla) (Ropa, error) {
