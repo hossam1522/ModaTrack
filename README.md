@@ -19,6 +19,8 @@ Soy un vendedor de ropa y actualmente enfrento grandes dificultades para gestion
 - [User Journeys](docs/user_journeys.md)
 - [Gestor de dependencias](docs/gestor_dependencias.md)
 - [Gestor de tareas](docs/gestor_tareas.md)
+- [Herramienta para testear](docs/herramienta_test.md)
+- [Metodología para creación de tests](docs/metodologia_tests.md)
 
 ## Herramientas utilizadas
 
@@ -37,6 +39,16 @@ Soy un vendedor de ropa y actualmente enfrento grandes dificultades para gestion
   ```bash
   go install github.com/go-task/task/v3/cmd/task@latest
   ```
+
+## Desarrollo del proyecto
+
+Para el desarrollo del proyecto, se ha seguido la metodología TDD, que consiste en escribir los tests antes de escribir el código. Esto permite asegurarse de que el código se comporta como se espera y que no se introduce ningún bug. Se ha seguido el principio FIRST, para que los tests no
+supongan ser un problema en vez de algo que ayude a desarrollar el proyecto correctamente. Para
+más información, ver [Metodología para creación de tests](docs/metodologia_tests)
+
+Las principales estructuras testeadas han sido aquellas relacionadas con las ventas
+y el stock, ya que son las que más impacto tienen en el negocio y realmente la base de 
+todo el sistema. Como se ha mencionado antes, para ejecutar los tests, se utiliza la herramienta Task, mediante el comando `task test`.
 
 ### Documentación adicional
 
