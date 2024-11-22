@@ -40,14 +40,19 @@ func (s *Stock) GetRopaTalla(nombre string, talla Talla) (Ropa, error) {
 	return Ropa{}, ErrPrendaNoEncontrada
 }
 
-func (s *Stock) GetStock(nombre string, talla ...Talla) int {
+func (s *Stock) GetStock(nombre string, tallas ...Talla) int {
 	var stock int = 0
 	for ropa, cantidad := range s.inventario {
 		if ropa.nombre == nombre {
-			if len(talla) == 0 {
+			if len(tallas) == 0 {
 				stock += cantidad
-			} else if ropa.talla == talla[0] {
-				stock += cantidad
+			} else {
+				for _, talla := range tallas {
+					if ropa.talla == talla {
+						stock += cantidad
+						break
+					}
+				}
 			}
 		}
 	}
