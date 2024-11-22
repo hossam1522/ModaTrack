@@ -70,3 +70,15 @@ func MasVendido(ventas []Venta) (Ropa, int) {
 
 	return prendaMasVendida, cantidadMasVendida
 }
+
+func TotalVendido(ventas []Venta, nombre string) int {
+	var cantidadVendida int
+	for _, venta := range ventas {
+		for prenda, cantidad := range venta.itemsVendidos {
+			if prenda.nombre == nombre {
+				cantidadVendida += cantidad
+			}
+		}
+	}
+	return cantidadVendida
+}
