@@ -59,6 +59,12 @@ Para construir el contenedor de pruebas y ejecutar los tests en un entorno aisla
 docker build -t hossam1522/modatrack . && docker run -u 1001 -t -v "$(pwd):/app/test" hossam1522/modatrack
 ```
 
+En caso de no querer usar el Dockerfile local, se puede utilizar la imagen ya construida en [Docker Hub](https://hub.docker.com/repository/docker/hossam1522/modatrack), mediante el siguiente comando:
+
+```bash
+docker run -u 1001 -t -v "$(pwd):/app/test" hossam1522/modatrack
+```
+
 ### Documentación adicional
 
 - [Licencia](LICENSE)
