@@ -2,6 +2,9 @@ name: dockerhub
 
 on:
   push:
+    paths:
+      - 'Dockerfile'
+      - 'go.mod'
 
 jobs:
   docker:
