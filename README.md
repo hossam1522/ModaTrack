@@ -21,6 +21,7 @@ Soy un vendedor de ropa y actualmente enfrento grandes dificultades para gestion
 - [Gestor de tareas](docs/gestor_tareas.md)
 - [Herramienta para testear](docs/herramienta_test.md)
 - [Metodología para creación de tests](docs/metodologia_tests.md)
+- [Elección de la imagen base del contenedor de pruebas](docs/eleccion_imagen_contenedor.md)
 
 ## Herramientas utilizadas
 
@@ -49,6 +50,14 @@ más información, ver [Metodología para creación de tests](docs/metodologia_t
 Las principales estructuras testeadas han sido aquellas relacionadas con las ventas
 y el stock, ya que son las que más impacto tienen en el negocio y realmente la base de 
 todo el sistema. Como se ha mencionado antes, para ejecutar los tests, se utiliza la herramienta Task, mediante el comando `task test`.
+
+## Contenedor de pruebas
+
+Para construir el contenedor de pruebas y ejecutar los tests en un entorno aislado, se ha elegido la imagen base **golang:alpine**. Para más información, ver [Elección de la imagen base del contenedor de pruebas](docs/eleccion_imagen_contenedor.md). Para probar la implementación, basta con ejecutar el siguiente comando:
+
+```bash
+docker build -t hossam1522/modatrack . && docker run -u 1001 -t -v "$(pwd):/app/test" hossam1522/modatrack
+```
 
 ### Documentación adicional
 
