@@ -1,14 +1,15 @@
-FROM golang:1.23-alpine3.20
+FROM golang:1.23.3-alpine
 
 WORKDIR /app
 
-RUN addgroup -S -g 1001 test && \
-    adduser -S -u 1001 -G test test && \
-    chown -R test:test /app
+RUN adduser -D test
 
 USER test
 
-RUN go install github.com/go-task/task/v3/cmd/task@latest
+ENV GOCACHE=/home/test/app/.cache/go-build
+
+RUN go install github.com/go-task/task/v3/cmd/task@latest && \
+    chmod -R 777 /home/test/app/.cache
 
 COPY go.mod Taskfile.yml ./
 
