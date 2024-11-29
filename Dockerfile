@@ -14,7 +14,7 @@ USER test
     
 ENV PATH=$PATH:/usr/local/go/bin
 ENV GOPATH=/home/test/go
-ENV GOCACHE=/home/test/app/.cache/go-build
+ENV GOCACHE=/home/test/.cache/go-build
 ENV PATH=$PATH:$GOPATH/bin
 
 WORKDIR /app/test
@@ -22,6 +22,6 @@ WORKDIR /app/test
 COPY Taskfile.yml ./
 
 RUN go install github.com/go-task/task/v3/cmd/task@latest && \
-    chmod -R 777 /home/test
+    chmod -R 747 /home/test/.cache/go-build
 
 ENTRYPOINT ["task", "test"]
