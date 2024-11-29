@@ -3,8 +3,7 @@
 Para elegir correctamente la imagen base del contenedor de pruebas, tendremos en cuenta ciertos criterios, tales como:
 
 - **Tamaño de la imagen**: Es importante que la imagen base sea lo más pequeña posible, ya que esto reducirá el espacio en disco necesario para almacenarla, además de que realmente no necesitamos todas las funcionalidades que trae una imagen completa.
-- **Seguridad**: La imagen base debe ser segura, es decir, debe ser oficial y estar actualizada. De esta forma, nos aseguramos de que no haya vulnerabilidades en la imagen que puedan ser exploradas por un atacante.
-- **Rendimiento**: La imagen base debe tener un buen rendimiento, es decir, debe ser rápida y eficiente. 
+- **Estabilidad**: La imagen base debe ser estable y segura, es decir, debe ser "oficial" y estar actualizada. De esta forma, nos aseguramos de que no haya vulnerabilidades en la imagen que puedan ser exploradas por un atacante.
 - **Simplicidad**: La imagen base debe ser simple, es decir, debe ser fácil de usar y configurar para nuestros propósitos, con la menor cantidad de pasos posibles.
 
 En base a estos criterios, podemos elegir una imagen base que cumpla con nuestras necesidades. Algunas de las imágenes más destacables para este proyecto son:
@@ -22,6 +21,6 @@ En base a estos criterios, podemos elegir una imagen base que cumpla con nuestra
 
 ## Elección de la imagen base
 
-Como se ha visto, existen varias imágenes a considerar para nuestro contenedor de pruebas, además de otras muchas que también son opciones interesantes pero no se han mencionado. En base a los criterios establecidos, todas las imágenes mencionadas cumplen bien los requisitos de seguridad y rendimiento. En cambio, para un proyecto que, de momento, no requiere apenas dependencias, y teniendo en cuenta la búsqueda de simplicidad, las imágenes **golang:alpine** y **debian:stable-slim** son las más adecuadas. Entre ambas, se ha decidido elegir **debian:stable-slim** para simplemente instalar lo mínimo necesario para ejecutar Go con una imagen que, de base, es hasta más ligera que **golang:alpine**.
+Como se ha visto, existen varias imágenes a considerar para nuestro contenedor de pruebas, además de otras muchas que también son opciones interesantes pero no se han mencionado. En base a los criterios establecidos, todas las imágenes mencionadas cumplen bien el requisito de estabilidad. En cambio, para un proyecto que, de momento, no requiere apenas dependencias, y teniendo en cuenta la búsqueda de simplicidad, las imágenes **golang:alpine** y **debian:stable-slim** son las más adecuadas. Entre ambas, se ha decidido elegir **debian:stable-slim** para simplemente instalar lo mínimo necesario para ejecutar Go con una imagen que, de base, es hasta más ligera que **golang:alpine**.
 
 Además, mencionar que la versión de Go a utilizar en el contenedor de pruebas será la última versión estable publicada, ya que es importante mantener el proyecto actualizado y con las últimas características y correcciones de seguridad. Esta versión, a la fecha de redacción de este documento, es la 1.23.3, según la [documentación oficial](https://go.dev/dl/).
