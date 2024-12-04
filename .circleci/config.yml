@@ -14,6 +14,14 @@ jobs:
           command: |
             go mod edit -go << parameters.go-version >>
       - run:
+          name: Actualizar versión de Go
+          command: |
+            wget -q https://go.dev/dl/go<< parameters.go-version >>.linux-amd64.tar.gz
+            rm -rf /usr/local/go
+            tar -C /usr/local -xzf go<< parameters.go-version >>.linux-amd64.tar.gz
+            rm go<< parameters.go-version >>.linux-amd64.tar.gz
+          sudo: true
+      - run:
           name: Ejecutar tests
           command: task test
 
