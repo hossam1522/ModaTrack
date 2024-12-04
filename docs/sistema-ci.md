@@ -16,9 +16,9 @@ Siguiendo esos criterios, se nos presentan varias opciones interesantes:
 
 - **TravisCI**: Es una herramienta de integración continua que funciona como un SaaS. Aunque es interesante y ofrece un periodo de prueba gratuito, este solo dura 14 días, por lo que no nos vale para este proyecto.
 
-- **Buildkite**: Esta herramienta de integración y entrega continua se destaca por su capacidad de escalar y su flexibilidad. Tiene una interfaz intuitiva y permite configurar pipelines dinámicos, además de poder integrarse con Docker.
+- **Buildkite**: Esta herramienta de integración y entrega continua se destaca por su capacidad de escalar y su flexibilidad. Tiene una interfaz intuitiva y permite configurar pipelines dinámicos, además de poder integrarse con Docker. Es un poco confusa a la hora de configurar los pipelines.
 
-- **CirrusCI**: 
+- **CirrusCI**: Se integra de manera fluida con GitHub y, al igual que CircleCI y Semaphore, permite la configuración como código. Al igual que las demás, se pueden hacer ejecuciones en contenedores. Este no se probará, ya que el plan gratuito requiere un repositorio público, lo cual no es posible en este caso.
 
 - **Codefresh**
 
