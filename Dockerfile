@@ -1,7 +1,7 @@
 FROM debian:stable-slim
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl wget ca-certificates && \ 
+    apt-get install -y --no-install-recommends wget ca-certificates && \ 
     rm -rf /var/lib/apt/lists/* && \
     useradd -m test
 
@@ -22,3 +22,5 @@ COPY Taskfile.yml ./
 
 RUN go install github.com/go-task/task/v3/cmd/task@latest && \
     chmod -R 747 /home/test/.cache/go-build
+
+ENTRYPOINT ["task", "test"]
