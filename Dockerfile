@@ -22,3 +22,5 @@ COPY Taskfile.yml ./
 
 RUN go install github.com/go-task/task/v3/cmd/task@latest && \
     chmod -R 747 /home/test/.cache/go-build
+
+ENTRYPOINT ["task", "test"]
