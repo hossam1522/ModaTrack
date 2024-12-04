@@ -12,14 +12,7 @@ jobs:
       - run:
           name: Actualizar versión de Go en go.mod
           command: |
-            sed -i 's/^go .*/go << parameters.go-version >>/' go.mod
-      - run:
-          name: Actualizar versión de Go
-          command: |
-            wget -q https://go.dev/dl/go<< parameters.go-version >>.linux-amd64.tar.gz
-            rm -rf /usr/local/go
-            tar -C /usr/local -xzf go<< parameters.go-version >>.linux-amd64.tar.gz
-            rm go<< parameters.go-version >>.linux-amd64.tar.gz
+            go mod edit -go=parameters.go-version
       - run:
           name: Ejecutar tests
           command: task test
