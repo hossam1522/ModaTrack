@@ -12,7 +12,7 @@ jobs:
       - run:
           name: Actualizar versión de Go en go.mod
           command: |
-            go mod edit -go parameters.go-version
+            go mod edit -go << parameters.go-version >>
       - run:
           name: Ejecutar tests
           command: task test
