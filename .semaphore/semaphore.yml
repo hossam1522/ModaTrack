@@ -27,4 +27,4 @@ blocks:
             - echo 'export PATH=$HOME/go_new/go/bin:$PATH' >> $BASH_ENV
             - source $BASH_ENV
             - go version
-            - "task test"
+            - task test
