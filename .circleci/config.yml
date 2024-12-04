@@ -8,6 +8,7 @@ jobs:
     docker:
       - image: hossam1522/modatrack
     steps:
+      - checkout
       - run:
           name: Actualizar versión de Go en go.mod
           command: |
