@@ -2,10 +2,24 @@ version: 2.1
 
 jobs:
   test:
+    parameters:
+      go-version:
+        type: string
     docker:
       - image: hossam1522/modatrack
     steps:
       - checkout
+      - run:
+          name: Actualizar versión de Go en go.mod
+          command: |
+            sed -i 's/^go .*/go << parameters.go-version >>/' go.mod
+      - run:
+          name: Actualizar versión de Go
+          command: |
+            wget -q https://go.dev/dl/go<< parameters.go-version >>.linux-amd64.tar.gz
+            sudo rm -rf /usr/local/go
+            sudo tar -C /usr/local -xzf go<< parameters.go-version >>.linux-amd64.tar.gz
+            rm go<< parameters.go-version >>.linux-amd64.tar.gz
       - run:
           name: Ejecutar tests
           command: task test
@@ -14,4 +28,8 @@ workflows:
   version: 2
   test-workflow:
     jobs:
-      - test
+      - test:
+          matrix:
+            parameters:
+              go-version: ["1.11", "1.22", "1.23"]
+
