@@ -1,9 +1,7 @@
 steps:
   - label: "Actualizar y probar Go"
-    agents:
-      queue: "docker"  # Asegúrate de que este nombre coincida con tu configuración de cola de agentes.
     plugins:
-      - docker#v3.6.0:
+      - docker#v5.12.0:
           image: hossam1522/modatrack
           environment:
             - GO_VERSION
@@ -27,7 +25,6 @@ steps:
       # Ejecutar tests
       task test
 
-# Definición de la matriz para las versiones de Go
 matrix:
   build.go_version:
     - "1.11"
