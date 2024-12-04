@@ -1,59 +1,26 @@
 version: '1.0'
 
-stages:
-  - prepare
-  - build
-  - test
-
 steps:
-  variables:
-    description: "Variable de versión de Go"
-    title: "Versión de Go"
-    image: golang:latest
-    commands:
-      - cf_export GO_VERSION=1.11
-
   clone:
     title: "Clonando el repositorio"
     type: git-clone
     repo: '${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}'
     revision: '${{CF_REVISION}}'
-    stage: prepare
-
-  update_go_version:
-    title: "Actualizar versión de Go en go.mod"
-    type: freestyle
-    image: golang:latest
-    stage: build
-    commands:
-      - go mod edit -go ${GO_VERSION}
 
   install_go:
     title: "Instalar Go"
     type: freestyle
     image: golang:latest
-    stage: build
     commands:
-      - wget -q https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz
-      - mkdir -p $HOME/go_new
-      - tar -C $HOME/go_new -xzf go${GO_VERSION}.linux-amd64.tar.gz
-      - rm go${GO_VERSION}.linux-amd64.tar.gz
-      - echo 'export PATH=$HOME/go_new/go/bin:$PATH' >> $BASH_ENV
+      - wget -q https://go.dev/dl/go1.20.linux-amd64.tar.gz  # Cambia la versión según sea necesario
+      - tar -C /usr/local -xzf go1.20.linux-amd64.tar.gz
+      - echo 'export PATH=$PATH:/usr/local/go/bin' >> $BASH_ENV
       - source $BASH_ENV
 
-  verify_go_version:
-    title: "Verificar versión de Go"
-    type: freestyle
-    image: golang:latest
-    stage: test
-    commands:
-      - go version
-
   run_tests:
-    title: "Ejecutar tests"
+    title: "Ejecutar pruebas"
     type: freestyle
     image: golang:latest
-    stage: test
     commands:
-      - task test
+      - go test ./...  # Ejecuta todas las pruebas en el paquete actual
 
