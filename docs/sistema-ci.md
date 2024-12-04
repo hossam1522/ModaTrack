@@ -16,7 +16,7 @@ Siguiendo esos criterios, se nos presentan varias opciones interesantes:
 
 - **TravisCI**: Es una herramienta de integración continua que funciona como un SaaS. Aunque es interesante y ofrece un periodo de prueba gratuito, este solo dura 14 días, por lo que no nos vale para este proyecto.
 
-- **Buildkite**: 
+- **Buildkite**: Esta herramienta de integración y entrega continua se destaca por su capacidad de escalar y su flexibilidad. Tiene una interfaz intuitiva y permite configurar pipelines dinámicos, además de poder integrarse con Docker.
 
 - **CirrusCI**: 
 
