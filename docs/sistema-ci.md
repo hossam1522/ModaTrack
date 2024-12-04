@@ -20,6 +20,6 @@ Siguiendo esos criterios, se nos presentan varias opciones interesantes:
 
 - **CirrusCI**: Se integra de manera fluida con GitHub y, al igual que CircleCI y Semaphore, permite la configuración como código. Al igual que las demás, se pueden hacer ejecuciones en contenedores. Este no se probará, ya que el plan gratuito requiere un repositorio público, lo cual no es posible en este caso.
 
-- **Codefresh**: 
+- **Codefresh**: Es una plataforma de integración y entrega continua diseñada específicamente para equipos de desarrollo que construyen y despliegan aplicaciones nativas de la nube utilizando tecnologías como Docker, Kubernetes y Serverless. Los pipelines se definen en un archivo YAML y están basados en contenedores. 
 
 - **Buddy**
