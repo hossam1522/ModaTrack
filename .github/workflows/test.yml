@@ -14,13 +14,13 @@ jobs:
         name: Checkout code
         uses: actions/checkout@v4
       -
+        name: Change go.mod version
+        run: sed -i 's/^go .*/go ${{ matrix.go-version }}/' go.mod
+      -
         name: Set up Go
         uses: actions/setup-go@v5
         with:
           go-version: ${{ matrix.go-version }}
-      -
-        name: Change go.mod version
-        run: go mod edit -go ${{ matrix.go-version }}
       -
         name: Install task
         uses: arduino/setup-task@v2
