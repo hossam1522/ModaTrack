@@ -1,7 +1,6 @@
 # Elección del sistema de integración continua
 
 Los criterios a tener en cuenta para elegir un sistema de integración continua son los siguientes:
-- **Facilidad de implementación**: el sistema debe ser fácil de configurar e implementar para pasar los tests de integración.
 - **Gratuito**: Al ser un proyecto pequeño, no es necesario gastar dinero por un sistema de pago con las múltiples opciones gratuitas que existen.
 
 Siguiendo esos criterios, se nos presentan varias opciones interesantes. Después de probar muchas de las opciones, se analizará cada una de ellas:
