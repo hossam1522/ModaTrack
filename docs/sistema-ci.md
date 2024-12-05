@@ -2,7 +2,6 @@
 
 Los criterios a tener en cuenta para elegir un sistema de integración continua son los siguientes:
 - **Facilidad de implementación**: el sistema debe ser fácil de configurar e implementar para pasar los tests de integración.
-- **Fácil integración con GitHub**: el sistema debe ser fácil de integrar con GitHub para que se ejecute automáticamente al hacer un push.
 - **Gratuito**: Al ser un proyecto pequeño, no es necesario gastar dinero por un sistema de pago con las múltiples opciones gratuitas que existen.
 - **SaaS**: Se prefiere un sistema de integración continua como servicio (SaaS) para no tener que preocuparse de la infraestructura y tener que montarlo en local o en un servidor propio.
 
