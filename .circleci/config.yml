@@ -2,16 +2,14 @@ version: 2.1
 
 jobs:
   test:
-    docker:
+    machine:
       - image: cimg/go:1.23.3
     steps:
       - checkout
       - run:
           name: Pasar los tests con la imagen hossam1522/modatrack
           command: |
-            ls -la
-            pwd
-            docker run -u 1001 -t -v ".:/app/test" hossam1522/modatrack
+            docker run -u 1001 -t -v "$(pwd):/app/test" hossam1522/modatrack
 
 workflows:
   version: 2
