@@ -8,10 +8,9 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: Pull and run tests with hossam1522/modatrack image
+          name: Pasar los tests con la imagen hossam1522/modatrack
           command: |
-            docker pull hossam1522/modatrack
-            docker run --rm hossam1522/modatrack task test
+            docker run -u 1001 -t -v `pwd`:/app/test hossam1522/modatrack
 
 workflows:
   version: 2
