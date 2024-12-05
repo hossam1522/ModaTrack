@@ -23,3 +23,19 @@ Siguiendo esos criterios, se nos presentan varias opciones interesantes:
 - **Codefresh**: Es una plataforma de integración y entrega continua diseñada específicamente para equipos de desarrollo que construyen y despliegan aplicaciones nativas de la nube utilizando tecnologías como Docker, Kubernetes y Serverless. Los pipelines se definen en un archivo YAML y están basados en contenedores. 
 
 - **Buddy**: Es una plataforma de automatización de DevOps y CI/CD basada en la nube diseñada para desarrolladores web. Usa una interfaz visual para la configuración de los pipelines y permite la integración con múltiples servicios y herramientas de desarrollo. Es bastante sencilla y flexible.
+
+
+## Elección
+
+Después de probar muchas de las opciones, se analizará cada una de ellas:
+
+- **CircleCI**: Fácil de configurar y muy versátil, se ha podido configurar correctamente sin mayor problema.
+- **Jenkins**: Como se comenta, al no ser SaaS, no se ha probado ya que lo suyo es tener una infraestructura propia.
+- **Semaphore**: No da problemas para configurar sin hacer uso de la imagen de Docker, pero al intentar usarla, no se ha podido configurar correctamente.
+- **TravisCI**: Al descubrirse que es de pago, no se ha probado.
+- **Buildkite**: Es un poco confuso a la hora de configurar los pipelines, no he podido llegar a configurar uno correctamente.
+- **CirrusCI**: No se ha probado por no poder hacer uso de un repositorio público, ya que es necesario para el plan gratuito. De todas formas, parece ser que cumpliría con los requisitos.
+- **Codefresh**: Al intentar configurar un pipeline, solicitaba usar Kubernetes, lo cual no es necesario para este proyecto.
+- **Buddy**: Es bastante sencilla y flexible, pero al no ser el repositorio público, da muchos problemas para configurar el pipeline.
+
+En resumen, varias de las opciones podrían ser válidas. Por ejemplo, si no fuera porque el repositorio debe estar en privado, Buddy y CirrusCI sería muy buenas opciones a considerar. Semaphore, aunque haya dado algún problema que otro, también está bastante bien. Sin embargo, destacando sobre estos, CircleCI es la opción elegida por ser la que menos problemas ha dado y la que más fácil ha sido de configurar al no dar los problemas especificados con las demás opciones, así como por ser la que más se ajusta a los criterios establecidos.
