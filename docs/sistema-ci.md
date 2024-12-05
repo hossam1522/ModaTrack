@@ -6,13 +6,13 @@ Los criterios a tener en cuenta para elegir un sistema de integración continua 
 
 Siguiendo esos criterios, se nos presentan varias opciones interesantes. Después de probar muchas de las opciones, se analizará cada una de ellas:
 
-- **[CircleCI](https://circleci.com/)**: Fácil de configurar y muy versátil, se ha podido configurar correctamente sin mayor problema.
-- **[Semaphore](https://semaphoreci.com/)**: No da problemas para configurar sin hacer uso de la imagen de Docker, pero al intentar usarla, no se ha podido configurar correctamente.
-- **[TravisCI](https://www.travis-ci.com/)**: Al descubrirse que es de pago, no se ha probado.
-- **[Buildkite](https://buildkite.com/)**: Es un poco confuso a la hora de configurar los pipelines, no he podido llegar a configurar uno correctamente.
+- **[CircleCI](https://circleci.com/)**: Fácil de configurar y muy versátil, se ha podido configurar correctamente sin mayor problema. Permite fácil integración con Docker y la opción gratuita es más que suficiente para este proyecto.
+- **[Semaphore](https://semaphoreci.com/)**: No da problemas para configurar sin hacer uso de la imagen de Docker, pero al intentar usarla, no se ha podido configurar correctamente, dando algún fallo que otro.
+- **[TravisCI](https://www.travis-ci.com/)**: Ofrece una versión gratuita, pero solo hasta 14 días de duración, por lo que queda descartado.
+- **[Buildkite](https://buildkite.com/)**: Es un poco confuso a la hora de configurar los pipelines, no he podido llegar a configurar uno correctamente. Adenás, la versión gratuita solo dura 30 días.
 - **[CirrusCI](https://cirrus-ci.org/)**: No se ha probado por no poder hacer uso de un repositorio público, ya que es necesario para el plan gratuito. De todas formas, parece ser que cumpliría con los requisitos.
-- **[Codefresh](https://codefresh.io/)**: Al intentar configurar un pipeline, solicitaba usar Kubernetes, lo cual no es necesario para este proyecto.
-- **[Buddy](https://buddy.works/)**: Es bastante sencilla y flexible, pero al no ser el repositorio público, da muchos problemas para configurar el pipeline.
+- **[Codefresh](https://codefresh.io/)**: Tiene una versión gratuita y no parece difícil de configurar, pero al intentar configurar un pipeline, solicitaba usar Kubernetes, lo cual no es posible en este proyecto.
+- **[Buddy](https://buddy.works/)**: Gratuita, con muy buena integración de herramientas y fácil de configurar. Sin embargo, se ha intentado probar pero parece ser necesario que el repositorio sea público, por lo que la prueba no ha sido posible. De todas formas, parece ser que cumpliría con los requisitos.
 
 En resumen, varias de las opciones podrían ser válidas. Por ejemplo, si no fuera porque el repositorio debe estar en privado, Buddy y CirrusCI sería muy buenas opciones a considerar. Semaphore, aunque haya dado algún problema que otro, también está bastante bien. Sin embargo, destacando sobre estos, CircleCI es la opción elegida por ser la que menos problemas ha dado y la que más fácil ha sido de configurar al no dar los problemas especificados con las demás opciones, así como por ser la que más se ajusta a los criterios establecidos.
 
