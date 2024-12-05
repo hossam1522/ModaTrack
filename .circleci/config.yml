@@ -5,12 +5,12 @@ jobs:
     docker:
       - image: cimg/go:1.23.3
     steps:
-      - setup_remote_docker
       - checkout
       - run:
           name: Pasar los tests con la imagen hossam1522/modatrack
           command: |
             ls -la
+            pwd
             docker run -u 1001 -t -v ".:/app/test" hossam1522/modatrack
 
 workflows:
