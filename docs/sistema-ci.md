@@ -42,6 +42,7 @@ En resumen, varias de las opciones podrían ser válidas. Por ejemplo, si no fue
 
 ## Versiones probadas
 
-En GitHub Actions, se ha decidido probar la versión actual del proyecto (1.23.3) porque es la más importante a probar, ya que es sobre la que se está desarrollando, además de testear una de las versiones estables actuales, la 1.22.10. 
+En GitHub Actions, se ha decidido probar la versión más antigua de Go que soporta los módulos, la 1.11, ya que si
+funciona en esta versión, es casi seguro que funcionará en las versiones posteriores. También se ha decidido probar con una de las versiones oficiales estables, la 1.22.10, para asegurarse de que el proyecto funciona en las versiones estables más recientes.
 
-Por otro lado, en CircleCI, se ha decidido probar la última versión de Go que ha salido hasta el momento, la misma semana de la escritura de este documento, la 1.23.4, indicada manualmente ya que, por desgracia, no hay una forma de indicar que instale la última versión si no se lo indicas manualmente. También se ha decidido probar la primera versión que introdujo los módulos en Go, la 1.11, ya que si ejecuta bien, es casi seguro asumir que se ejecutará bien en las versiones antiguas posteriores.
+Por otro lado, en CircleCI, se ha decidido probar la versión de Go asociada a la imagen de Docker, que a su vez es la versión en la que se está desarrollando el proyecto, por lo que tiene sentido hacerlo.
