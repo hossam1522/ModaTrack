@@ -39,3 +39,9 @@ Después de probar muchas de las opciones, se analizará cada una de ellas:
 - **Buddy**: Es bastante sencilla y flexible, pero al no ser el repositorio público, da muchos problemas para configurar el pipeline.
 
 En resumen, varias de las opciones podrían ser válidas. Por ejemplo, si no fuera porque el repositorio debe estar en privado, Buddy y CirrusCI sería muy buenas opciones a considerar. Semaphore, aunque haya dado algún problema que otro, también está bastante bien. Sin embargo, destacando sobre estos, CircleCI es la opción elegida por ser la que menos problemas ha dado y la que más fácil ha sido de configurar al no dar los problemas especificados con las demás opciones, así como por ser la que más se ajusta a los criterios establecidos.
+
+## Versiones probadas
+
+En GitHub Actions, se ha decidido probar la versión actual del proyecto (1.23.3) porque es la más importante a probar, ya que es sobre la que se está desarrollando, además de testear una de las versiones estables actuales, la 1.22.10. 
+
+Por otro lado, en CircleCI, se ha decidido probar la última versión de Go que ha salido hasta el momento, la misma semana de la escritura de este documento, la 1.23.4, indicada manualmente ya que, por desgracia, no hay una forma de indicar que instale la última versión si no se lo indicas manualmente. También se ha decidido probar la primera versión que introdujo los módulos en Go, la 1.11, ya que si ejecuta bien, es casi seguro asumir que se ejecutará bien en las versiones antiguas posteriores.
