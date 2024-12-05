@@ -1,17 +1,28 @@
-version: '2.1'
-orbs:
-  go: circleci/go@2.2.0
+version: 2.1
+
 jobs:
   test:
-    executor:
-      name: go/default
-      tag: 1.23.3
+    machine:
+      - image: ubuntu-2004:current
     steps:
+      - run:
+          name: Install Golang
+          command: |
+            sudo apt-get update -y
+            cd /tmp
+            wget https://dl.google.com/go/go1.23.3.linux-amd64.tar.gz
+            sudo tar -xvf go1.11.linux-amd64.tar.gz
+            sudo rm -rf /usr/local/go
+            sudo mv go /usr/local
+            export GOPATH=/home/circleci/.go_workspace
+            export PATH=$PATH:$GOPATH/bin
+            go version
       - checkout
-      - run: 
+      - run:
           name: Pasar los tests con la imagen hossam1522/modatrack
           command: |
             docker run -u 1001 -t -v "$(pwd):/app/test" hossam1522/modatrack
+
 workflows:
   main:
     jobs:
