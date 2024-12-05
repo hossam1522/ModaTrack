@@ -22,4 +22,4 @@ Siguiendo esos criterios, se nos presentan varias opciones interesantes:
 
 - **Codefresh**: Es una plataforma de integración y entrega continua diseñada específicamente para equipos de desarrollo que construyen y despliegan aplicaciones nativas de la nube utilizando tecnologías como Docker, Kubernetes y Serverless. Los pipelines se definen en un archivo YAML y están basados en contenedores. 
 
-- **Buddy**
+- **Buddy**: Es una plataforma de automatización de DevOps y CI/CD basada en la nube diseñada para desarrolladores web. Usa una interfaz visual para la configuración de los pipelines y permite la integración con múltiples servicios y herramientas de desarrollo. Es bastante sencilla y flexible.
