@@ -5,12 +5,6 @@ jobs:
     machine:
       image: ubuntu-2204:current
     steps:
-      - run:
-          name: Install Golang
-          command: |
-            wget -q https://go.dev/dl/go1.23.3.linux-amd64.tar.gz && \
-            tar -C /usr/local -xzf go1.23.3.linux-amd64.tar.gz && \
-            rm go1.23.3.linux-amd64.tar.gz
       - checkout
       - run:
           name: Pasar los tests con la imagen hossam1522/modatrack
