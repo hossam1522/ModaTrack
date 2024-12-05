@@ -8,15 +8,9 @@ jobs:
       - run:
           name: Install Golang
           command: |
-            sudo apt-get update -y
-            cd /tmp
-            wget https://dl.google.com/go/go1.23.3.linux-amd64.tar.gz
-            sudo tar -xvf go1.23.3.linux-amd64.tar.gz
-            sudo rm -rf /usr/local/go
-            sudo mv go /usr/local
-            export GOPATH=/home/circleci/.go_workspace
-            export PATH=$PATH:$GOPATH/bin
-            go version
+            wget -q https://go.dev/dl/go1.23.3.linux-amd64.tar.gz && \
+            tar -C /usr/local -xzf go1.23.3.linux-amd64.tar.gz && \
+            rm go1.23.3.linux-amd64.tar.gz
       - checkout
       - run:
           name: Pasar los tests con la imagen hossam1522/modatrack
