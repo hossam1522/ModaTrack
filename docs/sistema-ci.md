@@ -1,7 +1,7 @@
 # Elección del sistema de integración continua
 
 Los criterios a tener en cuenta para elegir un sistema de integración continua son los siguientes:
-- **Gratuito**: Al ser un proyecto pequeño, no es necesario gastar dinero por un sistema de pago con las múltiples opciones gratuitas que existen.
+- **Gratuito**: La idea es que el sistema sea gratuito, por lo menos de forma parcial, para poder usarlo sin coste en nuestro proyecto. También es importante que la versión gratuita ofrecida, más o menos completa, no deje de funcionar pasado un tiempo de prueba.
 
 Siguiendo esos criterios, se nos presentan varias opciones interesantes. Después de probar muchas de las opciones, se analizará cada una de ellas:
 
