@@ -2,6 +2,7 @@
 
 Los criterios a tener en cuenta para elegir un sistema de integración continua son los siguientes:
 - **Gratuito**: La idea es que el sistema sea gratuito, por lo menos de forma parcial, para poder usarlo sin coste en nuestro proyecto. También es importante que la versión gratuita ofrecida, más o menos completa, no deje de funcionar pasado un tiempo de prueba.
+- **Integración con Docker**: Es importante que el sistema de integración continua sea compatible con Docker, ya que, aunque se puedan ejecutar los tests sin ello, clonando simplemente el repositorio, quiero la posibilidad de poder ejecutar los tests con la imagen de Docker que se está usando en el proyecto.
 
 Siguiendo esos criterios, se nos presentan varias opciones interesantes. Después de probar muchas de las opciones, se analizará cada una de ellas:
 
