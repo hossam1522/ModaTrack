@@ -11,7 +11,7 @@ jobs:
           name: Pasar los tests con la imagen hossam1522/modatrack
           command: |
             ls -la
-            docker run -u 1001 -t -v `pwd`:/app/test hossam1522/modatrack
+            docker run -u 1001 -t -v "$(pwd):/app/test" hossam1522/modatrack
 
 workflows:
   version: 2
