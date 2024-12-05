@@ -6,26 +6,7 @@ Los criterios a tener en cuenta para elegir un sistema de integración continua 
 - **Gratuito**: Al ser un proyecto pequeño, no es necesario gastar dinero por un sistema de pago con las múltiples opciones gratuitas que existen.
 - **SaaS**: Se prefiere un sistema de integración continua como servicio (SaaS) para no tener que preocuparse de la infraestructura y tener que montarlo en local o en un servidor propio.
 
-Siguiendo esos criterios, se nos presentan varias opciones interesantes:
-
-- **CircleCI**: Es una plataforma de integración y entrega continua basada en la nube que se enfoca en la velocidad y eficiencia. Su arquitectura está basada en contenedores y permite ejecutar builds y tests en paralelo. Además, cuenta con una interfaz visual para la configuración de los pipelines. Es una buena opción a considerar.
-
-- **Semaphore**: Es una plataforma de integración y entrega continua alojada en la nube que se utiliza para probar y desplegar proyectos de software alojados en GitHub. Cuenta con soporte nativo para Docker y, al igual que CircleCI, trae una interfaz visual para la configuración de los pipelines. 
-
-- **TravisCI**: Es una herramienta de integración continua que funciona como un SaaS. Aunque es interesante y ofrece un periodo de prueba gratuito, este solo dura 14 días, por lo que no nos vale para este proyecto.
-
-- **Buildkite**: Esta herramienta de integración y entrega continua se destaca por su capacidad de escalar y su flexibilidad. Tiene una interfaz intuitiva y permite configurar pipelines dinámicos, además de poder integrarse con Docker. Es un poco confusa a la hora de configurar los pipelines.
-
-- **CirrusCI**: Se integra de manera fluida con GitHub y, al igual que CircleCI y Semaphore, permite la configuración como código. Al igual que las demás, se pueden hacer ejecuciones en contenedores. Este no se probará, ya que el plan gratuito requiere un repositorio público, lo cual no es posible en este caso.
-
-- **Codefresh**: Es una plataforma de integración y entrega continua diseñada específicamente para equipos de desarrollo que construyen y despliegan aplicaciones nativas de la nube utilizando tecnologías como Docker, Kubernetes y Serverless. Los pipelines se definen en un archivo YAML y están basados en contenedores. 
-
-- **Buddy**: Es una plataforma de automatización de DevOps y CI/CD basada en la nube diseñada para desarrolladores web. Usa una interfaz visual para la configuración de los pipelines y permite la integración con múltiples servicios y herramientas de desarrollo. Es bastante sencilla y flexible.
-
-
-## Elección
-
-Después de probar muchas de las opciones, se analizará cada una de ellas:
+Siguiendo esos criterios, se nos presentan varias opciones interesantes. Después de probar muchas de las opciones, se analizará cada una de ellas:
 
 - **CircleCI**: Fácil de configurar y muy versátil, se ha podido configurar correctamente sin mayor problema.
 - **Jenkins**: Como se comenta, al no ser SaaS, no se ha probado ya que lo suyo es tener una infraestructura propia.
