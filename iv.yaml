@@ -6,3 +6,5 @@ automatizar:
   orden: task
 test:
   - internal/models/venta_test.go
+CI:
+  - .circleci/config.yml
