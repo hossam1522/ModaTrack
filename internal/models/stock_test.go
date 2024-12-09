@@ -59,7 +59,7 @@ func TestStockConPrendaDuplicada(t *testing.T) {
 		t.Errorf("Se esperaban 2 prendas, pero se obtuvieron %d", len(ropas))
 	}
 
-	if !(ropas[0].talla == M && ropas[1].talla == L) && !(ropas[0].talla == L && ropas[1].talla == M) {
+	if ropas[0].talla != M || ropas[1].talla != L {
 		t.Error("Las tallas no son las esperadas")
 	}
 
