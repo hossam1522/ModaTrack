@@ -9,7 +9,7 @@ Siguiendo esos criterios, se nos presentan varias opciones interesantes. Despué
 - **[CircleCI](https://circleci.com/)**: Fácil de configurar y muy versátil, se ha podido configurar correctamente sin mayor problema. Permite fácil integración con Docker y la opción gratuita es más que suficiente para este proyecto.
 - **[Semaphore](https://semaphoreci.com/)**: No da problemas para configurar sin hacer uso de la imagen de Docker, pero al intentar usarla, no se ha podido configurar correctamente, dando algún fallo que otro.
 - **[TravisCI](https://www.travis-ci.com/)**: Ofrece una versión gratuita, pero solo hasta 14 días de duración, por lo que queda descartado.
-- **[Buildkite](https://buildkite.com/)**: Es un poco confuso a la hora de configurar los pipelines, no he podido llegar a configurar uno correctamente. Adenás, la versión gratuita solo dura 30 días.
+- **[Buildkite](https://buildkite.com/)**: Ocurre lo mismo que con TravisCI, solo ofrece una versión gratuita de 30 días, así que queda también descartado.
 - **[CirrusCI](https://cirrus-ci.org/)**: No se ha probado por no poder hacer uso de un repositorio público, ya que es necesario para el plan gratuito. De todas formas, parece ser que cumpliría con los requisitos.
 - **[Codefresh](https://codefresh.io/)**: Tiene una versión gratuita y no parece difícil de configurar, pero al intentar configurar un pipeline, solicitaba usar Kubernetes, lo cual no es posible en este proyecto.
 - **[Buddy](https://buddy.works/)**: Gratuita, con muy buena integración de herramientas y fácil de configurar. Sin embargo, se ha intentado probar pero parece ser necesario que el repositorio sea público, por lo que la prueba no ha sido posible. De todas formas, parece ser que cumpliría con los requisitos.
