@@ -2,14 +2,14 @@ version: 2.1
 
 jobs:
   test:
-    machine:
-      image: ubuntu-2204:current
+    docker:
+      image: hossam1522/modatrack
     steps:
       - checkout
       - run:
-          name: Pasar los tests con la imagen hossam1522/modatrack
+          name: Pasar los tests
           command: |
-            docker run -u 1001 -t -v "$(pwd):/app/test" hossam1522/modatrack
+            task test
 
 workflows:
   main:
