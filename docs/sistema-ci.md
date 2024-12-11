@@ -3,7 +3,7 @@
 Los criterios a tener en cuenta para elegir un sistema de integración continua son los siguientes:
 - **Gratuito**: La idea es que el sistema sea gratuito, por lo menos de forma parcial, para poder usarlo sin coste en nuestro proyecto. También es importante que la versión gratuita ofrecida, más o menos completa, no deje de funcionar pasado un tiempo de prueba.
 - **Integración con GitHub Checks API**: Es importante que el sistema de integración continua se integre con la API de GitHub Checks, para poder ver los resultados de los pipelines directamente en la pull request en GitHub.
-- **Sin otras dependencias**: No se quiere depender de otras herramientas, como Kubernetes, para poder usar el sistema de integración continua.
+- **Sin otras dependencias**: A la hora de configurar el pipeline, no se deben requerir otras herramientas o servicios que no sean el propio sistema de integración continua y GitHub.
 
 Siguiendo esos criterios, se nos presentan varias opciones interesantes. Después de probar muchas de las opciones, se analizará cada una de ellas:
 
