@@ -1,0 +1,17 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: hossam1522/modatrack
+    steps:
+      - checkout
+      - run:
+          name: Pasar los tests
+          command: |
+            task test
+
+workflows:
+  main:
+    jobs:
+      - test

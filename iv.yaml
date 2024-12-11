@@ -1,8 +1,7 @@
 lenguaje: Go
-entidad: 
-  - internal/models/venta.go
+entidad: internal/models/venta.go
 automatizar:
   fichero: Taskfile.yml
   orden: task
-test:
-  - internal/models/venta_test.go
+test: internal/models/venta_test.go
+CI: .circleci/config.yml
