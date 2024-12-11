@@ -30,10 +30,6 @@ tmp/
 # Vendor directory generated with 'go mod vendor'
 /vendor/
 
-# Go modules
-/go.sum
-/go.mod
-
 # IDE/editor specific files
 .idea/
 *.vscode/
