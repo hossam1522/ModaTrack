@@ -23,3 +23,19 @@ func TestCargarConfiguracion(t *testing.T) {
 		t.Errorf("LoadConfig() LogFile = %v, debería ser ./logs/test.log", cfg.LogFile)
 	}
 }
+
+func TestCargarConfiguracionPorDefecto(t *testing.T) {
+	os.Clearenv()
+
+	cfg, err := LoadConfig()
+	if err != nil {
+		t.Errorf("LoadConfig() error = %v", err)
+		return
+	}
+	if cfg.LogLevel != "info" {
+		t.Errorf("LoadConfig() LogLevel = %v, deberia ser info", cfg.LogLevel)
+	}
+	if cfg.LogFile != "./logs/app.log" {
+		t.Errorf("LoadConfig() LogFile = %v, debería ser ./logs/app.log", cfg.LogFile)
+	}
+}
