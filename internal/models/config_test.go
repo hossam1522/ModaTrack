@@ -32,3 +32,7 @@ func TestCargarConfiguracionPorDefecto(t *testing.T) {
 		t.Errorf("LoadConfig() LogFile = %v, debería ser ./logs/app.log", cfg.LogFile)
 	}
 }
+
+func TestCargarConfiguracionFichero(t *testing.T) {
+	os.Clearenv()
+}
