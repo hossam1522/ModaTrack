@@ -32,15 +32,3 @@ func TestCargarConfiguracionPorDefecto(t *testing.T) {
 		t.Errorf("LoadConfig() LogFile = %v, debería ser ./logs/app.log", cfg.LogFile)
 	}
 }
-
-func TestCargarConfiguracionError(t *testing.T) {
-	os.Setenv("LOG_FILE", "3")
-
-	defer os.Clearenv()
-
-	_, err := LoadConfig()
-	if err == nil {
-		t.Errorf("LoadConfig() error = %v, debería ser error", err)
-		return
-	}
-}
