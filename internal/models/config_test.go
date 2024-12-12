@@ -9,9 +9,9 @@ func TestCargarConfiguracion(t *testing.T) {
 	os.Setenv("LOG_LEVEL", "debug")
 	os.Setenv("LOG_FILE", "./logs/test.log")
 
+	cfg, err := LoadConfig()
 	defer os.Clearenv()
 
-	cfg, err := LoadConfig()
 	if err != nil {
 		t.Errorf("LoadConfig() error = %v", err)
 		return
@@ -37,5 +37,18 @@ func TestCargarConfiguracionPorDefecto(t *testing.T) {
 	}
 	if cfg.LogFile != "./logs/app.log" {
 		t.Errorf("LoadConfig() LogFile = %v, debería ser ./logs/app.log", cfg.LogFile)
+	}
+}
+
+func TestCargarConfiguracionError(t *testing.T) {
+	os.Setenv("LOG_LEVEL", "debug")
+	os.Setenv("LOG_FILE", "3")
+
+	defer os.Clearenv()
+
+	_, err := LoadConfig()
+	if err == nil {
+		t.Errorf("LoadConfig() error = %v, debería ser error", err)
+		return
 	}
 }
