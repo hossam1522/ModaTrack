@@ -34,7 +34,7 @@ func TestCargarConfiguracionPorDefecto(t *testing.T) {
 }
 
 func TestCargarConfiguracionFichero(t *testing.T) {
-	cfg, err := LoadConfigFromFile("../.env.test")
+	cfg, err := LoadConfigFromFile("../../.env.test")
 
 	if err != nil {
 		t.Errorf("LoadConfigFromFile() error = %v", err)
