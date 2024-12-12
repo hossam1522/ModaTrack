@@ -40,3 +40,6 @@ tmp/
 # Go workspace file
 go.work
 go.work.sum
+
+# Environment variables file
+*.env.*
