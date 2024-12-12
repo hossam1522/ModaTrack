@@ -5,8 +5,7 @@ import (
 )
 
 type Config struct {
-	LogLevel string `env:"LOG_LEVEL" envDefault:"info"`
-	LogFile  string `env:"LOG_FILE" envDefault:"./logs/app.log"`
+	LogFile string `env:"LOG_FILE" envDefault:"./logs/app.log"`
 }
 
 func LoadConfig() (*Config, error) {
