@@ -1,6 +1,9 @@
 package models
 
-import "errors"
+import (
+	logger "ModaTrack/internal/logger"
+	"errors"
+)
 
 type Stock struct {
 	inventario map[Ropa]int
@@ -13,6 +16,7 @@ func NewStock() *Stock {
 }
 
 func (s *Stock) GetRopa(nombre string) ([]Ropa, error) {
+	logger.GetLogger().Info().Msg("Buscando ropa por nombre en el inventario")
 	var prendas []Ropa
 
 	for ropa := range s.inventario {
@@ -29,6 +33,7 @@ func (s *Stock) GetRopa(nombre string) ([]Ropa, error) {
 }
 
 func (s *Stock) GetRopaTalla(nombre string, talla Talla) (Ropa, error) {
+	logger.GetLogger().Info().Msg("Buscando ropa por nombre y talla en el inventario")
 	for ropa := range s.inventario {
 		if ropa.nombre == nombre && ropa.talla == talla {
 			return ropa, nil
@@ -38,6 +43,7 @@ func (s *Stock) GetRopaTalla(nombre string, talla Talla) (Ropa, error) {
 }
 
 func (s *Stock) GetStock(nombre string, tallas ...Talla) int {
+	logger.GetLogger().Info().Msg("Calculando stock de ropa en el inventario")
 	var stock int = 0
 	for ropa, cantidad := range s.inventario {
 		if ropa.nombre == nombre {

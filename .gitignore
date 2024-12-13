@@ -26,6 +26,7 @@ bin/
 build/
 temp/
 tmp/
+logs/
 
 # Vendor directory generated with 'go mod vendor'
 /vendor/

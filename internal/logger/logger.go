@@ -7,7 +7,7 @@ import (
 )
 
 func InitLogger() {
-	cfg, err := config.LoadConfigFromFile("../../env.test")
+	cfg, err := config.LoadConfigFromFile("../../.env.test")
 
 	if err != nil {
 		log.Fatal().Err(err).Msg("Error loading config")
@@ -16,8 +16,13 @@ func InitLogger() {
 	logFile := cfg.LogFile
 
 	log.DefaultLogger = log.Logger{
-		Level:      log.InfoLevel,
-		Writer:     &log.FileWriter{Filename: logFile},
+		Level: log.InfoLevel,
+		Writer: &log.FileWriter{Filename: logFile,
+			FileMode:     0600,
+			MaxSize:      100 * 1024 * 1024,
+			MaxBackups:   7,
+			EnsureFolder: true,
+			LocalTime:    true},
 		Caller:     1,
 		TimeField:  "date",
 		TimeFormat: "2006-01-02",
@@ -25,5 +30,6 @@ func InitLogger() {
 }
 
 func GetLogger() *log.Logger {
+	InitLogger()
 	return &log.DefaultLogger
 }
