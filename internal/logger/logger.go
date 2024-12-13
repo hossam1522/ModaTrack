@@ -6,8 +6,8 @@ import (
 	"github.com/phuslu/log"
 )
 
-func init() {
-	cfg, err := config.LoadConfigFromFile(".env.test")
+func InitLogger() {
+	cfg, err := config.LoadConfigFromFile("../../env.test")
 
 	if err != nil {
 		log.Fatal().Err(err).Msg("Error loading config")
@@ -22,4 +22,8 @@ func init() {
 		TimeField:  "date",
 		TimeFormat: "2006-01-02",
 	}
+}
+
+func GetLogger() *log.Logger {
+	return &log.DefaultLogger
 }
