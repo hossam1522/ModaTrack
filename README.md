@@ -22,6 +22,8 @@ Soy un vendedor de ropa y actualmente enfrento grandes dificultades para gestion
 - [Herramienta para testear](docs/herramienta_test.md)
 - [Metodología para creación de tests](docs/metodologia_tests.md)
 - [Elección de la imagen base del contenedor de pruebas](docs/eleccion_imagen_contenedor.md)
+- [Sistema de configuración](docs/eleccion_sistema_config.md)
+- [Sistema de logs](docs/eleccion_sistema_logs.md)
 
 ## Herramientas utilizadas
 
