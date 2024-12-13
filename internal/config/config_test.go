@@ -33,20 +33,14 @@ func TestCargarConfiguracionPorDefecto(t *testing.T) {
 }
 
 func TestCargarConfiguracionFichero(t *testing.T) {
-	envContent := "LOG_FILE=./logs/test.log\n"
-	tempFile := "./.env"
-	err := os.WriteFile(tempFile, []byte(envContent), 0644)
-	if err != nil {
-		t.Fatalf("No se pudo crear el archivo temporal .env.test: %v", err)
-	}
-	defer os.Remove(tempFile)
+	fichero := "../../.env.test"
 
-	cfg, err := LoadConfigFromFile(tempFile)
+	cfg, err := LoadConfigFromFile(fichero)
 	if err != nil {
 		t.Errorf("LoadConfigFromFile() error = %v", err)
 		return
 	}
-	if cfg.LogFile != "./logs/test.log" {
-		t.Errorf("LoadConfigFromFile() LogFile = %v, debería ser ./logs/test.log", cfg.LogFile)
+	if cfg.LogFile != "../../logs/test.log" {
+		t.Errorf("LoadConfigFromFile() LogFile = %v, debería ser ../../logs/test.log", cfg.LogFile)
 	}
 }
