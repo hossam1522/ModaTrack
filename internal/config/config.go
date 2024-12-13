@@ -10,10 +10,17 @@ import (
 )
 
 type Config struct {
-	LogFile string `env:"LOG_FILE" envDefault:"./logs/app.log"`
+	LogFile string `env:"LOG_FILE" envDefault:"../../logs/test.log"`
 }
 
 func LoadConfig() (*Config, error) {
+	if _, err := os.Stat(".env"); err == nil {
+		err := ReadConfigFromFile()
+		if err != nil {
+			return nil, err
+		}
+	}
+
 	cfg := &Config{}
 	if err := env.Parse(cfg); err != nil {
 		return nil, err
@@ -21,13 +28,12 @@ func LoadConfig() (*Config, error) {
 	return cfg, nil
 }
 
-func ReadConfigFromFile(filepath string) error {
-	file, err := os.Open(filepath)
+func ReadConfigFromFile() error {
+	file, err := os.Open(".env")
 	if err != nil {
 		return err
 	}
 	defer file.Close()
-	os.Clearenv()
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
@@ -53,19 +59,4 @@ func ReadConfigFromFile(filepath string) error {
 	}
 
 	return nil
-}
-
-func LoadConfigFromFile(file string) (*Config, error) {
-	err := ReadConfigFromFile(file)
-	if err != nil {
-		return nil, err
-	}
-
-	cfg, err := LoadConfig()
-
-	if err != nil {
-		return nil, err
-	}
-
-	return cfg, nil
 }

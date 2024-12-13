@@ -7,7 +7,7 @@ import (
 )
 
 func InitLogger() {
-	cfg, err := config.LoadConfigFromFile("../../.env.test")
+	cfg, err := config.LoadConfig()
 
 	if err != nil {
 		log.Fatal().Err(err).Msg("Error loading config")
