@@ -7,10 +7,9 @@ import (
 
 func TestCargarConfiguracion(t *testing.T) {
 	os.Setenv("LOG_FILE", "./logs/test.log")
-
-	cfg, err := LoadConfig()
 	defer os.Clearenv()
 
+	cfg, err := LoadConfig()
 	if err != nil {
 		t.Errorf("LoadConfig() error = %v", err)
 		return
