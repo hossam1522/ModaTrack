@@ -43,5 +43,4 @@ go.work
 go.work.sum
 
 # Environment variables file
-*.env.*
 *.env
