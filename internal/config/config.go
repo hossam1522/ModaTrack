@@ -27,8 +27,8 @@ func ReadConfigFromFile(filepath string) error {
 		return err
 	}
 	defer file.Close()
-
 	os.Clearenv()
+
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		line := strings.TrimSpace(scanner.Text())
