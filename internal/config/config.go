@@ -15,7 +15,7 @@ type Config struct {
 
 func LoadConfig() (*Config, error) {
 	if _, err := os.Stat(".env"); err == nil {
-		err := ReadConfigFromFile()
+		err := readConfigFromFile()
 		if err != nil {
 			return nil, err
 		}
@@ -28,7 +28,7 @@ func LoadConfig() (*Config, error) {
 	return cfg, nil
 }
 
-func ReadConfigFromFile() error {
+func readConfigFromFile() error {
 	file, err := os.Open(".env")
 	if err != nil {
 		return err
