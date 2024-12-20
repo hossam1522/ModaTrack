@@ -1,7 +1,7 @@
 package models
 
 import (
-	logger "ModaTrack/internal/logger"
+	"ModaTrack/internal/log"
 	"errors"
 	"time"
 )
@@ -17,7 +17,7 @@ type Venta struct {
 }
 
 func NuevaVenta(itemsVendidos map[Ropa]int, inventario *Stock, fecha ...time.Time) (Venta, error) {
-	logger.GetLogger().Info().Msg("Creando nueva venta")
+	log.GetLogger().Info().Msg("Creando nueva venta")
 	fechaActual := time.Now()
 	fechaLimite := fechaActual.AddDate(-2, 0, 0)
 
@@ -53,7 +53,7 @@ func NuevaVenta(itemsVendidos map[Ropa]int, inventario *Stock, fecha ...time.Tim
 }
 
 func MasVendido(ventas []Venta) (Ropa, int) {
-	logger.GetLogger().Info().Msg("Calculando prenda más vendida")
+	log.GetLogger().Info().Msg("Calculando prenda más vendida")
 	ventasPorPrenda := make(map[Ropa]int)
 
 	for _, venta := range ventas {
@@ -75,7 +75,7 @@ func MasVendido(ventas []Venta) (Ropa, int) {
 }
 
 func TotalVendido(ventas []Venta, nombre string, talla ...Talla) int {
-	logger.GetLogger().Info().Msg("Calculando total vendido de una prenda")
+	log.GetLogger().Info().Msg("Calculando total vendido de una prenda")
 	var cantidadVendida int
 	for _, venta := range ventas {
 		for prenda, cantidad := range venta.itemsVendidos {
@@ -91,7 +91,7 @@ func TotalVendido(ventas []Venta, nombre string, talla ...Talla) int {
 }
 
 func TallaMasVendida(ventas []Venta) Talla {
-	logger.GetLogger().Info().Msg("Calculando talla más vendida")
+	log.GetLogger().Info().Msg("Calculando talla más vendida")
 	tallasVendidas := make(map[Talla]int)
 	for _, venta := range ventas {
 		for prenda, cantidad := range venta.itemsVendidos {

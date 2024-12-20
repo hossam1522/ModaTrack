@@ -1,4 +1,4 @@
-package logger
+package log
 
 import (
 	config "ModaTrack/internal/config"
@@ -6,7 +6,9 @@ import (
 	"github.com/phuslu/log"
 )
 
-func InitLogger() {
+var logger *log.Logger
+
+func InitLogger() *log.Logger {
 	cfg, err := config.LoadConfig()
 
 	if err != nil {
@@ -30,9 +32,13 @@ func InitLogger() {
 		TimeField:  "date",
 		TimeFormat: "2006-01-02",
 	}
+
+	return &log.DefaultLogger
 }
 
 func GetLogger() *log.Logger {
-	InitLogger()
-	return &log.DefaultLogger
+	if logger == nil {
+		logger = InitLogger()
+	}
+	return logger
 }
