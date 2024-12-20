@@ -8,7 +8,7 @@ import (
 
 var logger *log.Logger
 
-func InitLogger() *log.Logger {
+func initLogger() *log.Logger {
 	cfg, err := config.LoadConfig()
 
 	if err != nil {
@@ -38,7 +38,7 @@ func InitLogger() *log.Logger {
 
 func GetLogger() *log.Logger {
 	if logger == nil {
-		logger = InitLogger()
+		logger = initLogger()
 	}
 	return logger
 }
