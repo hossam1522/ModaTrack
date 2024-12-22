@@ -9,34 +9,34 @@ import (
 var router = chi.NewRouter()
 
 func init() {
-	router.Get("/prenda/{nombre}", GetPrenda)
-	router.Put("/prenda/{nombre}", PutPrenda)
-	router.Delete("/prenda/{nombre}", DeletePrenda)
-	router.Get("/prenda/{nombre}/{talla}", GetPrendaTalla)
-	router.Put("/prenda/{nombre}/{talla}", PutPrendaTalla)
-	router.Delete("/prenda/{nombre}/{talla}", DeletePrendaTalla)
-	router.Post("/venta", PostVenta)
-	router.Get("/venta/{id}/fecha", GetFechaVenta)
-	router.Get("/venta/{id}/prendas", GetPrendasVenta)
-	router.Delete("/venta/{id}", DeleteVenta)
+	router.Get("/prenda/{nombre}", getPrenda)
+	router.Put("/prenda/{nombre}", putPrenda)
+	router.Delete("/prenda/{nombre}", deletePrenda)
+	router.Get("/prenda/{nombre}/{talla}", getPrendaTalla)
+	router.Put("/prenda/{nombre}/{talla}", putPrendaTalla)
+	router.Delete("/prenda/{nombre}/{talla}", deletePrendaTalla)
+	router.Post("/venta", postVenta)
+	router.Get("/venta/{id}/fecha", getFechaVenta)
+	router.Get("/venta/{id}/prendas", getPrendasVenta)
+	router.Delete("/venta/{id}", deleteVenta)
 }
 
-func GetPrenda(w http.ResponseWriter, r *http.Request) {}
+func getPrenda(w http.ResponseWriter, r *http.Request) {}
 
-func PutPrenda(w http.ResponseWriter, r *http.Request) {}
+func putPrenda(w http.ResponseWriter, r *http.Request) {}
 
-func DeletePrenda(w http.ResponseWriter, r *http.Request) {}
+func deletePrenda(w http.ResponseWriter, r *http.Request) {}
 
-func GetPrendaTalla(w http.ResponseWriter, r *http.Request) {}
+func getPrendaTalla(w http.ResponseWriter, r *http.Request) {}
 
-func PutPrendaTalla(w http.ResponseWriter, r *http.Request) {}
+func putPrendaTalla(w http.ResponseWriter, r *http.Request) {}
 
-func DeletePrendaTalla(w http.ResponseWriter, r *http.Request) {}
+func deletePrendaTalla(w http.ResponseWriter, r *http.Request) {}
 
-func PostVenta(w http.ResponseWriter, r *http.Request) {}
+func postVenta(w http.ResponseWriter, r *http.Request) {}
 
-func GetPrendasVenta(w http.ResponseWriter, r *http.Request) {}
+func getPrendasVenta(w http.ResponseWriter, r *http.Request) {}
 
-func GetFechaVenta(w http.ResponseWriter, r *http.Request) {}
+func getFechaVenta(w http.ResponseWriter, r *http.Request) {}
 
-func DeleteVenta(w http.ResponseWriter, r *http.Request) {}
+func deleteVenta(w http.ResponseWriter, r *http.Request) {}
