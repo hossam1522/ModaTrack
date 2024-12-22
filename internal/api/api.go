@@ -10,7 +10,6 @@ var router = chi.NewRouter()
 
 func init() {
 	router.Get("/prenda/{nombre}", getPrenda)
-	router.Put("/prenda/{nombre}", putPrenda)
 	router.Delete("/prenda/{nombre}", deletePrenda)
 	router.Get("/prenda/{nombre}/{talla}", getPrendaTalla)
 	router.Put("/prenda/{nombre}/{talla}", putPrendaTalla)
@@ -22,8 +21,6 @@ func init() {
 }
 
 func getPrenda(w http.ResponseWriter, r *http.Request) {}
-
-func putPrenda(w http.ResponseWriter, r *http.Request) {}
 
 func deletePrenda(w http.ResponseWriter, r *http.Request) {}
 
