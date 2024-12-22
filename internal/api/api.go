@@ -9,8 +9,8 @@ import (
 var router = chi.NewRouter()
 
 func init() {
-	router.Get("/prenda/{id}", GetPrenda)
-	router.Get("/prenda/{id}/{talla}", GetPrendaTalla)
+	router.Get("/prenda/{nombre}", GetPrenda)
+	router.Get("/prenda/{nombre}/{talla}", GetPrendaTalla)
 }
 
 func GetPrenda(w http.ResponseWriter, r *http.Request) {}
