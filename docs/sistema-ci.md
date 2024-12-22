@@ -19,7 +19,7 @@ En resumen, varias de las opciones podrían ser válidas. Por ejemplo, si no fue
 
 ## Versiones probadas
 
-En GitHub Actions, se ha decidido probar la versión más antigua de Go que soporta los módulos, la 1.11, ya que si
+En GitHub Actions, se ha decidido probar la versión más antigua de Go que soportan las dependencias actuales, la 1.18, ya que si
 funciona en esta versión, es casi seguro que funcionará en las versiones posteriores. También se ha decidido probar con una de las versiones oficiales estables, la 1.22.10, para asegurarse de que el proyecto funciona en las versiones estables más recientes.
 
 Por otro lado, en CircleCI, se ha decidido probar la versión de Go asociada a la imagen de Docker, que a su vez es la versión en la que se está desarrollando el proyecto, por lo que tiene sentido hacerlo.

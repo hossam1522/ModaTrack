@@ -26,13 +26,10 @@ bin/
 build/
 temp/
 tmp/
+logs/
 
 # Vendor directory generated with 'go mod vendor'
 /vendor/
-
-# Go modules
-/go.sum
-/go.mod
 
 # IDE/editor specific files
 .idea/
@@ -44,3 +41,6 @@ tmp/
 # Go workspace file
 go.work
 go.work.sum
+
+# Environment variables file
+*.env
