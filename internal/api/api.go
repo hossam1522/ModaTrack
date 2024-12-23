@@ -12,7 +12,7 @@ func init() {
 	router.Get("/prendas/{nombre}", getPrendas)
 	router.Delete("/prendas/{nombre}", deletePrendas)
 	router.Get("/prenda/{nombre}/{talla}", getPrendaTalla)
-	router.Put("/prenda/{nombre}/{talla}", putPrendaTalla)
+	router.Put("/prenda/{nombre}/{talla}/{cantidad}", putPrendaTalla)
 	router.Delete("/prenda/{nombre}/{talla}", deletePrendaTalla)
 	router.Post("/venta", postVenta)
 	router.Get("/venta/{id}/fecha", getFechaVenta)
