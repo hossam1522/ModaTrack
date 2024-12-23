@@ -14,10 +14,11 @@ func init() {
 	router.Get("/prenda/{nombre}/{talla}", getPrendaTalla)
 	router.Put("/prenda/{nombre}/{talla}/{cantidad}", putPrendaTalla)
 	router.Delete("/prenda/{nombre}/{talla}", deletePrendaTalla)
-	router.Post("/venta", postVenta)
-	router.Get("/venta/{id}/fecha", getFechaVenta)
-	router.Get("/venta/{id}/prendas", getPrendasVenta)
-	router.Delete("/venta/{id}", deleteVenta)
+	router.Put("/venta/{nombre}/{talla}", postVenta)
+	router.Get("/venta/{nombre}/{talla}/{fecha}", getVentaFecha)
+	router.Get("/ventas/{nombre}", getVentasNombre)
+	router.Get("/ventas/{nombre}/{talla}", getVentasNombreTalla)
+	router.Delete("/venta/{nombre}/{talla}/{fecha}", deleteVenta)
 }
 
 func getPrendas(w http.ResponseWriter, r *http.Request) {}
@@ -32,8 +33,10 @@ func deletePrendaTalla(w http.ResponseWriter, r *http.Request) {}
 
 func postVenta(w http.ResponseWriter, r *http.Request) {}
 
-func getPrendasVenta(w http.ResponseWriter, r *http.Request) {}
+func getVentaFecha(w http.ResponseWriter, r *http.Request) {}
 
-func getFechaVenta(w http.ResponseWriter, r *http.Request) {}
+func getVentasNombre(w http.ResponseWriter, r *http.Request) {}
+
+func getVentasNombreTalla(w http.ResponseWriter, r *http.Request) {}
 
 func deleteVenta(w http.ResponseWriter, r *http.Request) {}
