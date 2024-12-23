@@ -9,6 +9,8 @@ import (
 var router = chi.NewRouter()
 
 func init() {
+	router.Get("/prendas/{nombre}", getPrendas)
+	router.Delete("/prendas/{nombre}", deletePrendas)
 	router.Get("/prenda/{nombre}/{talla}", getPrendaTalla)
 	router.Put("/prenda/{nombre}/{talla}", putPrendaTalla)
 	router.Delete("/prenda/{nombre}/{talla}", deletePrendaTalla)
@@ -17,6 +19,10 @@ func init() {
 	router.Get("/venta/{id}/prendas", getPrendasVenta)
 	router.Delete("/venta/{id}", deleteVenta)
 }
+
+func getPrendas(w http.ResponseWriter, r *http.Request) {}
+
+func deletePrendas(w http.ResponseWriter, r *http.Request) {}
 
 func getPrendaTalla(w http.ResponseWriter, r *http.Request) {}
 
