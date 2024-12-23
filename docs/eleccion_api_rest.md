@@ -7,14 +7,17 @@ Nos basaremos en los siguientes criterios para elegir el framework para la API R
 
 Compararemos distintos frameworks para elegir el que mejor se adapte a nuestros criterios:
 
-- **[Gin](https://github.com/gin-gonic/gin)**: Este framework es bastante popular en la comunidad de Go, y destaca por su rapidez. Es activamente mantenido, pero tiene bastantes dependencias. La versión mínima de Go requerida es la 1.21, por lo que queda descartado.
-- **[Echo](https://github.com/labstack/echo)**: Con este framework pasa algo similar que con Gin, es bastante popular y rápido, pero tiene bastantes dependencias, aunque bastante menos que Gin. La versión mínima de Go requerida es la 1.20, por lo que tampoco es válido.
-- **[Mux](https://github.com/gorilla/mux)**: Esta opción es muy interesante ya que no tiene dependencias, pero no está activamente mantenido. Además, la versión mínima de Go requerida es la 1.20, así que lo mismo que con los anteriores, queda descartado.
-- **[Chi](https://github.com/go-chi/chi)**: Al igual que el anterior, no tiene dependencias, pero se diferencia en que sí está activamente mantenido. Además, cumple con la versión mínima de Go requerida, por lo que es una buena opción.
-- **[Fiber](https://github.com/gofiber/fiber)**: No tiene demasiadas dependencias pero sigue teniendo bastantes. La versión mínima de Go requerida es la 1.23, y está activamente mantenido.
-- **[Swag](https://github.com/swaggo/swag)**: Esta es otra opción muy interesante, ya que cumple con la versión mínima de Go requerida y está activamente mantenido. Su único problema es que tiene bastantes dependencias.
-- **[Go-swagger](https://github.com/go-swagger/go-swagger)**: Al igual que la mayoría, cumple el requisito de soporte, pero acaba quedando descartado por tener bastantes dependencias y requerir una versión superior a la 1.18.
-- **[Goyave](https://github.com/go-goyave/goyave)**: Finalmente, lo mismo que con el anterior.
+- **[Gin](https://github.com/gin-gonic/gin)**: Este framework es bastante popular en la comunidad de Go, y destaca por su rapidez. Es activamente mantenido, pero si miramos sus [dependencias](https://github.com/gin-gonic/gin/blob/master/go.mod), vemos que requiere de más de 38 módulos distintos.
+
+- **[Echo](https://github.com/labstack/echo)**: Con este framework pasa algo similar que con Gin, es bastante popular y rápido, además de destacar por su simplicidad. Es activamente mantenido, y requiere de bastantes menos [dependencias](https://github.com/labstack/echo/blob/master/go.mod) que Gin, siendo necesarios 14 módulos distintos.
+
+- **[Mux](https://github.com/gorilla/mux)**: Esta opción es muy interesante ya que no requiere de ninguna [dependencia](https://github.com/gorilla/mux/blob/main/go.mod), pero se puede ver que, en el momento de escribir esto, el último commit es de hace más de 6 meses, lo que podría ser un problema en cuanto a soporte se refiere.
+
+- **[Chi](https://github.com/go-chi/chi)**: Framework que se desteca por su ligereza y rapidez. Al igual que el anterior, no requiere de ninguna [dependencia](https://github.com/go-chi/chi/blob/master/go.mod), pero se diferencia en que sí está activamente mantenido. Es una buena opción a considerar.
+
+- **[Fiber](https://github.com/gofiber/fiber)**: Otro framework que destaca por su rendimiento. Activamente mantenido como la mayoría, pero requiere de más de 20 [dependencias](https://github.com/gofiber/fiber/blob/main/go.mod), lo cual lo hace menos atractivo.
+
+- **[Goyave](https://github.com/go-goyave/goyave)**: Este framework parece estar más enfocado a proyectos medianos o grandes, ya que incluye muchas funcionalidades y lo mencionan ellos mismos. Es activamente mantenido, pero requiere de más de 45 [dependencias](https://github.com/go-goyave/goyave/blob/master/go.mod). No es la mejor opción para nuestra aplicación.
 
 
-Basándonos en los criterios mencionados anteriormente, las opciones más adecuadas serían Chi y Swag, ya que ambos son sistemas activamente mantenidos y cumplen con el criterio de versión mínima. Sin embargo, dado que Chi no tiene dependencias, es la opción más adecuada para nuestra aplicación. Por lo tanto, elegiremos Chi como framework para nuestra API REST.
+Basándonos en los criterios mencionados anteriormente, las opciones más interesantes sin Chi, Mux y Echo. En cuanto a Mux, aunque no requiere de dependencias, el hecho de que no esté activamente mantenido nos hace descartarlo. Por otro lado, Echo es activamente mantenido y no requiere de tantas dependencias en comparación con los demás frameworks, pero estando Chi que directamente ni requiere, Chi se convierte en la mejor opción para nuestra aplicación.
