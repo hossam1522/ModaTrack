@@ -10,14 +10,14 @@ var router = chi.NewRouter()
 
 func init() {
 	router.Get("/prendas/{nombre}", getPrendas)
-	router.Get("/prenda/{nombre}/{talla}", getPrendaTalla)
-	router.Post("/prenda/{nombre}/{talla}/{cantidad}", putPrendaTalla)
-	router.Delete("/prenda/{nombre}/{talla}", deletePrendaTalla)
-	router.Put("/venta/{nombre}/{talla}", postVenta)
-	router.Get("/venta/{nombre}/{talla}/{fecha}", getVentaFecha)
+	router.Get("/prendas/{nombre}/{talla}", getPrendaTalla)
+	router.Post("/prendas/{nombre}/{talla}/{cantidad}", putPrendaTalla)
+	router.Delete("/prendas/{nombre}/{talla}", deletePrendaTalla)
+	router.Put("/ventas/{nombre}/{talla}", postVenta)
+	router.Get("/ventas/{nombre}/{talla}/{fecha}", getVentaFecha)
 	router.Get("/ventas/{nombre}", getVentasNombre)
 	router.Get("/ventas/{nombre}/{talla}", getVentasNombreTalla)
-	router.Delete("/venta/{nombre}/{talla}/{fecha}", deleteVenta)
+	router.Delete("/ventas/{nombre}/{talla}/{fecha}", deleteVenta)
 }
 
 func getPrendas(w http.ResponseWriter, r *http.Request) {}
