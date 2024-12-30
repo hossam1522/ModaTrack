@@ -6,3 +6,4 @@ automatizar:
 test: internal/models/venta_test.go
 CI: .circleci/config.yml
 configuracion: internal/config/config.go
+framework: chi
