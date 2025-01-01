@@ -20,7 +20,7 @@ func (s *Stock) GetRopa(nombre string) ([]Ropa, error) {
 	var prendas []Ropa
 
 	for ropa := range s.inventario {
-		if ropa.nombre == nombre {
+		if ropa.nombre == nombre && s.inventario[ropa] > 0 {
 			prendas = append(prendas, ropa)
 		}
 	}

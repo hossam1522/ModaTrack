@@ -29,3 +29,15 @@ func (bd *BD) InsertarRopa(nombre string, talla Talla, cantidad int) error {
 
 	return nil
 }
+
+func (bd *BD) EliminarRopa(nombre string, talla Talla) error {
+	log.GetLogger().Info().Msg("Eliminando ropa de la base de datos")
+
+	if bd.stock.inventario[Ropa{nombre: nombre, talla: talla}] == 0 {
+		return errors.New("no se ha podido eliminar la ropa")
+	}
+
+	bd.stock.inventario[Ropa{nombre: nombre, talla: talla}]--
+
+	return nil
+}
