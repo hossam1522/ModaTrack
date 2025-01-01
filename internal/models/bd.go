@@ -55,3 +55,16 @@ func (bd *BD) InsertarVenta(nombre string, talla Talla, fecha ...time.Time) erro
 
 	return nil
 }
+
+func (bd *BD) ObtenerVentas(nombre string, talla Talla) []Venta {
+	log.GetLogger().Info().Msg("Obteniendo ventas de la base de datos")
+
+	var ventas []Venta
+	for _, venta := range bd.ventas {
+		if _, ok := venta.itemsVendidos[Ropa{nombre, talla}]; ok {
+			ventas = append(ventas, venta)
+		}
+	}
+
+	return ventas
+}

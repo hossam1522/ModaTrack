@@ -139,7 +139,7 @@ func TestObtenerVentas(t *testing.T) {
 	bd.InsertarVenta("camisa", M)
 	bd.InsertarVenta("camisa", M)
 	bd.InsertarVenta("pantalon", L)
-	ventas := bd.ObtenerVentas("camisa")
+	ventas := bd.ObtenerVentas("camisa", M)
 	if len(ventas) != 2 {
 		t.Errorf("Se esperaban dos ventas, pero se obtuvieron %d", len(ventas))
 	}
