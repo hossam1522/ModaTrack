@@ -131,3 +131,16 @@ func TestVentaFecha(t *testing.T) {
 		t.Errorf("La fecha no es la esperada: %v", venta.fecha)
 	}
 }
+
+func TestObtenerVentas(t *testing.T) {
+	bd := NewBD()
+	bd.InsertarRopa("camisa", M, 5)
+	bd.InsertarRopa("pantalon", L, 4)
+	bd.InsertarVenta("camisa", M)
+	bd.InsertarVenta("camisa", M)
+	bd.InsertarVenta("pantalon", L)
+	ventas := bd.ObtenerVentas("camisa")
+	if len(ventas) != 2 {
+		t.Errorf("Se esperaban dos ventas, pero se obtuvieron %d", len(ventas))
+	}
+}
