@@ -165,8 +165,9 @@ func TestEliminarVenta(t *testing.T) {
 	fecha := time.Now().AddDate(-1, 0, 0)
 	bd.InsertarVenta("camisa", M, fecha)
 	bd.InsertarVenta("camisa", M)
+	bd.InsertarVenta("camisa", M)
 	bd.EliminarVenta("camisa", M, fecha)
-	if len(bd.ventas) != 1 {
-		t.Errorf("Se esperaba una venta, pero se obtuvieron %d", len(bd.ventas))
+	if len(bd.ventas) != 2 {
+		t.Errorf("Se esperaban dos ventas, pero se obtuvieron %d", len(bd.ventas))
 	}
 }

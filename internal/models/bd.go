@@ -70,3 +70,23 @@ func (bd *BD) ObtenerVentas(nombre string, talla Talla, fecha ...time.Time) []Ve
 
 	return ventas
 }
+
+func (bd *BD) EliminarVenta(nombre string, talla Talla, fecha time.Time) error {
+	log.GetLogger().Info().Msg("Eliminando venta de la base de datos")
+
+	var index int = -1
+	for i, venta := range bd.ventas {
+		if _, ok := venta.itemsVendidos[Ropa{nombre, talla}]; ok && venta.fecha == fecha {
+			index = i
+			break
+		}
+	}
+
+	if index < 0 {
+		return errors.New("no se ha podido eliminar la venta")
+	}
+
+	bd.ventas = append(bd.ventas[:index], bd.ventas[index+1:]...)
+
+	return nil
+}
