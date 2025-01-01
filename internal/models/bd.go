@@ -41,3 +41,16 @@ func (bd *BD) EliminarRopa(nombre string, talla Talla) error {
 
 	return nil
 }
+
+func (bd *BD) InsertarVenta(nombre string, talla Talla) error {
+	log.GetLogger().Info().Msg("Insertando venta en la base de datos")
+
+	venta, err := NuevaVenta(map[Ropa]int{{nombre, talla}: 1}, bd.stock)
+	if err != nil {
+		return err
+	}
+
+	bd.ventas = append(bd.ventas, venta)
+
+	return nil
+}
