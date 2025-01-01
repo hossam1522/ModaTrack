@@ -56,3 +56,27 @@ func TestEliminarPrenda(t *testing.T) {
 		t.Errorf("Se esperaba una prenda, pero se obtuvieron %d", len(prendas))
 	}
 }
+
+func TestEliminarPrendaNumerosas(t *testing.T) {
+	bd := NewBD()
+	bd.InsertarRopa("camisa", M, 2)
+	bd.InsertarRopa("camisa", L, 1)
+
+	err := bd.EliminarRopa("camisa", M)
+	if err != nil {
+		t.Error("Se esperaba un error")
+	}
+
+	prendas, _ := bd.stock.GetRopa("camisa")
+	if len(prendas) != 2 {
+		t.Errorf("Se esperaban dos prendas, pero se obtuvieron %d", len(prendas))
+	}
+}
+
+func TestEliminarPrendaInexistente(t *testing.T) {
+	bd := NewBD()
+	err := bd.EliminarRopa("camisa", M)
+	if err == nil {
+		t.Error("Se esperaba un error")
+	}
+}
