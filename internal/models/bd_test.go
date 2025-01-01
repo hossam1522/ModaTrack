@@ -1,6 +1,9 @@
 package models
 
-import "testing"
+import (
+	"testing"
+	"time"
+)
 
 func TestInsertarRopaBD(t *testing.T) {
 	bd := NewBD()
@@ -94,5 +97,37 @@ func TestVenta(t *testing.T) {
 	prendas, _ := bd.stock.GetRopa("camisa")
 	if len(prendas) != 1 {
 		t.Errorf("Se esperaba una prenda, pero se obtuvieron %d", len(prendas))
+	}
+}
+
+func TestVentaInexistente(t *testing.T) {
+	bd := NewBD()
+	err := bd.InsertarVenta("camisa", M)
+	if err == nil {
+		t.Error("Se esperaba un error")
+	}
+}
+
+func TestVentaStockInsuficienteBD(t *testing.T) {
+	bd := NewBD()
+	bd.InsertarRopa("camisa", M, 0)
+
+	err := bd.InsertarVenta("camisa", M)
+	if err == nil {
+		t.Error("Se esperaba un error")
+	}
+}
+
+func TestVentaFecha(t *testing.T) {
+	bd := NewBD()
+	bd.InsertarRopa("camisa", M, 1)
+	fecha := time.Now().AddDate(-1, 0, 0)
+	err := bd.InsertarVenta("camisa", M, fecha)
+	if err != nil {
+		t.Error("Se esperaba una venta")
+	}
+	venta := bd.ventas[0]
+	if venta.fecha != fecha {
+		t.Errorf("La fecha no es la esperada: %v", venta.fecha)
 	}
 }
