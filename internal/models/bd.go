@@ -3,6 +3,7 @@ package models
 import (
 	"ModaTrack/internal/log"
 	"errors"
+	"time"
 )
 
 type BD struct {
@@ -42,10 +43,10 @@ func (bd *BD) EliminarRopa(nombre string, talla Talla) error {
 	return nil
 }
 
-func (bd *BD) InsertarVenta(nombre string, talla Talla) error {
+func (bd *BD) InsertarVenta(nombre string, talla Talla, fecha ...time.Time) error {
 	log.GetLogger().Info().Msg("Insertando venta en la base de datos")
 
-	venta, err := NuevaVenta(map[Ropa]int{{nombre, talla}: 1}, bd.stock)
+	venta, err := NuevaVenta(map[Ropa]int{{nombre, talla}: 1}, bd.stock, fecha...)
 	if err != nil {
 		return err
 	}
