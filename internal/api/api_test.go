@@ -3,6 +3,7 @@ package api
 import (
 	"ModaTrack/internal/models"
 	"encoding/json"
+	"net/http"
 	"net/http/httptest"
 	"testing"
 )
@@ -105,5 +106,38 @@ func TestPostPrenda(t *testing.T) {
 	}
 	if prenda.GetTalla() != models.XL || prenda.GetNombre() != "chaqueta" {
 		t.Errorf("Se esperaba una talla XL, se obtuvo %s", prenda.GetTalla())
+	}
+}
+
+func TestDeletePrenda(t *testing.T) {
+	router := getRouter()
+	server := httptest.NewServer(router)
+	defer server.Close()
+
+	url := server.URL + "/prendas/camisa/M"
+	req, err := http.NewRequest(http.MethodDelete, url, nil)
+
+	if err != nil {
+		t.Error(err)
+	}
+
+	resp, err := server.Client().Do(req)
+
+	if err != nil {
+		t.Error(err)
+	}
+
+	if resp.StatusCode != 202 {
+		t.Errorf("Se esperaba un status 202, se obtuvo %d", resp.StatusCode)
+	}
+
+	url = server.URL + "/prendas/camisa/M"
+	resp, err = server.Client().Get(url)
+
+	if err != nil {
+		t.Error(err)
+	}
+	if resp.StatusCode != 404 {
+		t.Errorf("Se esperaba un status 404, se obtuvo %d", resp.StatusCode)
 	}
 }
