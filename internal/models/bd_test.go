@@ -18,7 +18,7 @@ func TestObtenerPrenda(t *testing.T) {
 	bd.InsertarRopa("camisa", M, 1)
 	bd.InsertarRopa("camisa", L, 1)
 
-	prendas, err := bd.stock.GetRopa("camisa")
+	prendas, err := bd.ObtenerPrenda("camisa")
 	if err != nil {
 		t.Error("Se esperaban prendas")
 	}
@@ -32,7 +32,7 @@ func TestObtenerPrendaTalla(t *testing.T) {
 	bd.InsertarRopa("camisa", M, 1)
 	bd.InsertarRopa("camisa", L, 1)
 
-	prenda, err := bd.stock.GetRopaTalla("camisa", M)
+	prenda, err := bd.ObtenerPrendaTalla("camisa", M)
 	if err != nil {
 		t.Error("Se esperaba una prenda")
 	}
@@ -54,7 +54,7 @@ func TestEliminarPrenda(t *testing.T) {
 		t.Error("Se esperaba un error")
 	}
 
-	prendas, _ := bd.stock.GetRopa("camisa")
+	prendas, _ := bd.ObtenerPrenda("camisa")
 	if len(prendas) != 1 {
 		t.Errorf("Se esperaba una prenda, pero se obtuvieron %d", len(prendas))
 	}
@@ -70,7 +70,7 @@ func TestEliminarPrendaNumerosas(t *testing.T) {
 		t.Error("Se esperaba un error")
 	}
 
-	prendas, _ := bd.stock.GetRopa("camisa")
+	prendas, _ := bd.ObtenerPrenda("camisa")
 	if len(prendas) != 2 {
 		t.Errorf("Se esperaban dos prendas, pero se obtuvieron %d", len(prendas))
 	}
@@ -94,7 +94,7 @@ func TestVenta(t *testing.T) {
 		t.Error("Se esperaba un error")
 	}
 
-	prendas, _ := bd.stock.GetRopa("camisa")
+	prendas, _ := bd.ObtenerPrenda("camisa")
 	if len(prendas) != 1 {
 		t.Errorf("Se esperaba una prenda, pero se obtuvieron %d", len(prendas))
 	}

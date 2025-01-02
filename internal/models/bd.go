@@ -31,6 +31,35 @@ func (bd *BD) InsertarRopa(nombre string, talla Talla, cantidad int) error {
 	return nil
 }
 
+func (bd *BD) ObtenerPrenda(nombre string) ([]Ropa, error) {
+	log.GetLogger().Info().Msg("Obteniendo prenda de la base de datos")
+
+	var prendas []Ropa
+	for ropa := range bd.stock.inventario {
+		if ropa.nombre == nombre && bd.stock.inventario[ropa] > 0 {
+			prendas = append(prendas, ropa)
+		}
+	}
+
+	if len(prendas) == 0 {
+		return nil, errors.New("no se ha podido obtener la prenda")
+	}
+
+	return prendas, nil
+}
+
+func (bd *BD) ObtenerPrendaTalla(nombre string, talla Talla) (Ropa, error) {
+	log.GetLogger().Info().Msg("Obteniendo prenda de la base de datos")
+
+	for ropa := range bd.stock.inventario {
+		if ropa.nombre == nombre && ropa.talla == talla && bd.stock.inventario[ropa] > 0 {
+			return ropa, nil
+		}
+	}
+
+	return Ropa{}, errors.New("no se ha podido obtener la prenda")
+}
+
 func (bd *BD) EliminarRopa(nombre string, talla Talla) error {
 	log.GetLogger().Info().Msg("Eliminando ropa de la base de datos")
 
