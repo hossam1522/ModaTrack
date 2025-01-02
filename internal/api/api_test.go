@@ -5,17 +5,16 @@ import (
 	"encoding/json"
 	"net/http/httptest"
 	"testing"
-
-	"github.com/go-chi/chi/v5"
 )
 
 func TestGetPrendas(t *testing.T) {
-	router := chi.NewRouter()
+	router := getRouter()
 	server := httptest.NewServer(router)
 	defer server.Close()
 
 	url := server.URL + "/prendas/camisa"
 	resp, err := server.Client().Get(url)
+
 	if err != nil {
 		t.Error(err)
 	}
