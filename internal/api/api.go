@@ -38,7 +38,21 @@ func getPrendas(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func getPrendaTalla(w http.ResponseWriter, r *http.Request) {}
+func getPrendaTalla(w http.ResponseWriter, r *http.Request) {
+	nombre := chi.URLParam(r, "nombre")
+	talla := chi.URLParam(r, "talla")
+	bd := models.BDPrueba()
+	prenda, err := bd.ObtenerPrendaTalla(nombre, models.Talla(talla))
+	if err != nil {
+		w.WriteHeader(http.StatusNotFound)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+	if err := json.NewEncoder(w).Encode(prenda); err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+	}
+}
 
 func putPrendaTalla(w http.ResponseWriter, r *http.Request) {}
 
