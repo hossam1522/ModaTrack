@@ -85,7 +85,7 @@ func (bd *BD) InsertarVenta(nombre string, talla Talla, fecha ...time.Time) erro
 	return nil
 }
 
-func (bd *BD) ObtenerVentas(nombre string, talla Talla, fecha ...time.Time) []Venta {
+func (bd *BD) ObtenerVentas(nombre string, talla Talla, fecha ...time.Time) ([]Venta, error) {
 	log.GetLogger().Info().Msg("Obteniendo Ventas de la base de datos")
 
 	var Ventas []Venta
@@ -97,7 +97,11 @@ func (bd *BD) ObtenerVentas(nombre string, talla Talla, fecha ...time.Time) []Ve
 		}
 	}
 
-	return Ventas
+	if len(Ventas) == 0 {
+		return nil, errors.New("no se ha podido obtener la venta")
+	}
+
+	return Ventas, nil
 }
 
 func (bd *BD) EliminarVenta(nombre string, talla Talla, fecha time.Time) error {

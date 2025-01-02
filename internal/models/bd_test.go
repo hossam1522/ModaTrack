@@ -139,7 +139,10 @@ func TestObtenerVentas(t *testing.T) {
 	bd.InsertarVenta("camisa", M)
 	bd.InsertarVenta("camisa", M)
 	bd.InsertarVenta("pantalon", L)
-	ventas := bd.ObtenerVentas("camisa", M)
+	ventas, err := bd.ObtenerVentas("camisa", M)
+	if err != nil {
+		t.Error("Se esperaban ventas")
+	}
 	if len(ventas) != 2 {
 		t.Errorf("Se esperaban dos ventas, pero se obtuvieron %d", len(ventas))
 	}
@@ -153,7 +156,10 @@ func TestObtenerVentasFecha(t *testing.T) {
 	bd.InsertarVenta("camisa", M, fecha)
 	bd.InsertarVenta("camisa", M)
 	bd.InsertarVenta("pantalon", L)
-	ventas := bd.ObtenerVentas("camisa", M, fecha)
+	ventas, err := bd.ObtenerVentas("camisa", M, fecha)
+	if err != nil {
+		t.Error("Se esperaban ventas")
+	}
 	if len(ventas) != 1 {
 		t.Errorf("Se esperaba una venta, pero se obtuvieron %d", len(ventas))
 	}

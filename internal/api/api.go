@@ -16,7 +16,7 @@ func getRouter() *chi.Mux {
 	router.Get("/prendas/{nombre}/{talla}", getPrendaTalla)
 	router.Post("/prendas/{nombre}/{talla}/{cantidad}", postPrendaTalla)
 	router.Delete("/prendas/{nombre}/{talla}", deletePrendaTalla)
-	router.Get("/prendas/{nombre}/{talla}/ventas", getVentasNombreTalla)
+	router.Get("/prendas/{nombre}/{talla}/ventas", getVentasPrenda)
 	router.Get("/prendas/{nombre}/{talla}/ventas/{fecha}", getVentaFecha)
 	router.Put("/prendas/{nombre}/{talla}/ventas/{fecha}", postVenta)
 	router.Delete("/prendas/{nombre}/{talla}/ventas/{fecha}", deleteVenta)
@@ -85,10 +85,24 @@ func deletePrendaTalla(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusAccepted)
 }
 
-func postVenta(w http.ResponseWriter, r *http.Request) {}
+func getVentasPrenda(w http.ResponseWriter, r *http.Request) {
+	nombre := chi.URLParam(r, "nombre")
+	talla := chi.URLParam(r, "talla")
+	bd := models.GetBDPrueba()
+	ventas, err := bd.ObtenerVentas(nombre, models.Talla(talla))
+	if err != nil {
+		w.WriteHeader(http.StatusNotFound)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+	if err := json.NewEncoder(w).Encode(ventas); err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+	}
+}
 
 func getVentaFecha(w http.ResponseWriter, r *http.Request) {}
 
-func getVentasNombreTalla(w http.ResponseWriter, r *http.Request) {}
+func postVenta(w http.ResponseWriter, r *http.Request) {}
 
 func deleteVenta(w http.ResponseWriter, r *http.Request) {}
