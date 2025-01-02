@@ -73,7 +73,17 @@ func postPrendaTalla(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 }
 
-func deletePrendaTalla(w http.ResponseWriter, r *http.Request) {}
+func deletePrendaTalla(w http.ResponseWriter, r *http.Request) {
+	nombre := chi.URLParam(r, "nombre")
+	talla := chi.URLParam(r, "talla")
+	bd := models.GetBDPrueba()
+	err := bd.EliminarRopa(nombre, models.Talla(talla))
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	w.WriteHeader(http.StatusAccepted)
+}
 
 func postVenta(w http.ResponseWriter, r *http.Request) {}
 
