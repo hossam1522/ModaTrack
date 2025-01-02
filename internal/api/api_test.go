@@ -30,3 +30,43 @@ func TestGetPrendas(t *testing.T) {
 		t.Errorf("Se esperaban 2 prendas, se obtuvieron %d", len(prendas))
 	}
 }
+
+func TestGetPrendasNoExistentes(t *testing.T) {
+	router := getRouter()
+	server := httptest.NewServer(router)
+	defer server.Close()
+
+	url := server.URL + "/prendas/chaqueta"
+	resp, err := server.Client().Get(url)
+
+	if err != nil {
+		t.Error(err)
+	}
+	if resp.StatusCode != 404 {
+		t.Errorf("Se esperaba un status 404, se obtuvo %d", resp.StatusCode)
+	}
+}
+
+func TestGetPrendasTalla(t *testing.T) {
+	router := getRouter()
+	server := httptest.NewServer(router)
+	defer server.Close()
+
+	url := server.URL + "/prendas/camisa/M"
+	resp, err := server.Client().Get(url)
+
+	if err != nil {
+		t.Error(err)
+	}
+	if resp.StatusCode != 200 {
+		t.Errorf("Se esperaba un status 200, se obtuvo %d", resp.StatusCode)
+	}
+	var prenda models.Ropa
+	err = json.NewDecoder(resp.Body).Decode(&prenda)
+	if err != nil {
+		t.Error(err)
+	}
+	if prenda.Talla != models.M {
+		t.Errorf("Se esperaba una talla M, se obtuvo %s", prenda.Talla)
+	}
+}
