@@ -141,3 +141,27 @@ func TestDeletePrenda(t *testing.T) {
 		t.Errorf("Se esperaba un status 404, se obtuvo %d", resp.StatusCode)
 	}
 }
+
+func TestGetVentasPrenda(t *testing.T) {
+	router := getRouter()
+	server := httptest.NewServer(router)
+	defer server.Close()
+
+	url := server.URL + "/camisa/L/ventas"
+	resp, err := server.Client().Get(url)
+
+	if err != nil {
+		t.Error(err)
+	}
+	if resp.StatusCode != 200 {
+		t.Errorf("Se esperaba un status 200, se obtuvo %d", resp.StatusCode)
+	}
+	var ventas []models.Venta
+	err = json.NewDecoder(resp.Body).Decode(&ventas)
+	if err != nil {
+		t.Error(err)
+	}
+	if len(ventas) != 2 {
+		t.Errorf("Se esperaban 2 ventas, se obtuvieron %d", len(ventas))
+	}
+}
