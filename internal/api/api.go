@@ -1,6 +1,7 @@
 package api
 
 import (
+	"ModaTrack/internal/models"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
@@ -19,7 +20,11 @@ func init() {
 	router.Delete("/prendas/{nombre}/{talla}/ventas/{fecha}", deleteVenta)
 }
 
-func getPrendas(w http.ResponseWriter, r *http.Request) {}
+func getPrendas(w http.ResponseWriter, r *http.Request) {
+	nombre := chi.URLParam(r, "nombre")
+	bd := models.BDPrueba()
+	prendas, err := bd
+}
 
 func getPrendaTalla(w http.ResponseWriter, r *http.Request) {}
 

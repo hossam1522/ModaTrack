@@ -9,17 +9,6 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-func BD_prueba() *models.BD {
-	bd := models.NewBD()
-
-	bd.InsertarRopa("camisa", models.M, 1)
-	bd.InsertarRopa("camisa", models.L, 1)
-	bd.InsertarRopa("pantalon", models.M, 1)
-	bd.InsertarRopa("pantalon", models.L, 1)
-
-	return bd
-}
-
 func TestGetPrendas(t *testing.T) {
 	router := chi.NewRouter()
 	server := httptest.NewServer(router)
