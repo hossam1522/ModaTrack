@@ -31,7 +31,6 @@ func TestGetPrendas(t *testing.T) {
 	}
 	if prendas[0].GetNombre() != "camisa" || prendas[1].GetNombre() != "camisa" {
 		t.Error("Las prendas no son las esperadas")
-		t.Error(prendas)
 	}
 }
 

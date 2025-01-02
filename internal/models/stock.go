@@ -6,7 +6,7 @@ import (
 )
 
 type Stock struct {
-	inventario map[Ropa]int `json:"inventario"`
+	inventario map[Ropa]int
 }
 
 var ErrPrendaNoEncontrada = errors.New("no existe ninguna prenda en el inventario con esas características")
