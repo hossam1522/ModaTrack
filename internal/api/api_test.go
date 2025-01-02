@@ -29,6 +29,10 @@ func TestGetPrendas(t *testing.T) {
 	if len(prendas) != 2 {
 		t.Errorf("Se esperaban 2 prendas, se obtuvieron %d", len(prendas))
 	}
+	if prendas[0].GetNombre() != "camisa" || prendas[1].GetNombre() != "camisa" {
+		t.Error("Las prendas no son las esperadas")
+		t.Error(prendas)
+	}
 }
 
 func TestGetPrendasNoExistentes(t *testing.T) {
@@ -66,7 +70,7 @@ func TestGetPrendasTalla(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if prenda.Talla != models.M {
-		t.Errorf("Se esperaba una talla M, se obtuvo %s", prenda.Talla)
+	if prenda.GetTalla() != models.M {
+		t.Errorf("Se esperaba una talla M, se obtuvo %s", prenda.GetTalla())
 	}
 }
