@@ -9,3 +9,9 @@ func BDPrueba() *BD {
 
 	return bd_prueba
 }
+
+var bd_prueba = BDPrueba()
+
+func GetBDPrueba() *BD {
+	return bd_prueba
+}

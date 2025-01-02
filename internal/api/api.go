@@ -4,6 +4,7 @@ import (
 	"ModaTrack/internal/models"
 	"encoding/json"
 	"net/http"
+	"strconv"
 
 	"github.com/go-chi/chi/v5"
 )
@@ -13,7 +14,7 @@ var router = chi.NewRouter()
 func getRouter() *chi.Mux {
 	router.Get("/prendas/{nombre}", getPrendas)
 	router.Get("/prendas/{nombre}/{talla}", getPrendaTalla)
-	router.Post("/prendas/{nombre}/{talla}/{cantidad}", putPrendaTalla)
+	router.Post("/prendas/{nombre}/{talla}/{cantidad}", postPrendaTalla)
 	router.Delete("/prendas/{nombre}/{talla}", deletePrendaTalla)
 	router.Get("/prendas/{nombre}/{talla}/ventas", getVentasNombreTalla)
 	router.Get("/prendas/{nombre}/{talla}/ventas/{fecha}", getVentaFecha)
@@ -25,7 +26,7 @@ func getRouter() *chi.Mux {
 
 func getPrendas(w http.ResponseWriter, r *http.Request) {
 	nombre := chi.URLParam(r, "nombre")
-	bd := models.BDPrueba()
+	bd := models.GetBDPrueba()
 	prendas, err := bd.ObtenerPrenda(nombre)
 	if err != nil {
 		w.WriteHeader(http.StatusNotFound)
@@ -41,7 +42,7 @@ func getPrendas(w http.ResponseWriter, r *http.Request) {
 func getPrendaTalla(w http.ResponseWriter, r *http.Request) {
 	nombre := chi.URLParam(r, "nombre")
 	talla := chi.URLParam(r, "talla")
-	bd := models.BDPrueba()
+	bd := models.GetBDPrueba()
 	prenda, err := bd.ObtenerPrendaTalla(nombre, models.Talla(talla))
 	if err != nil {
 		w.WriteHeader(http.StatusNotFound)
@@ -54,7 +55,23 @@ func getPrendaTalla(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func putPrendaTalla(w http.ResponseWriter, r *http.Request) {}
+func postPrendaTalla(w http.ResponseWriter, r *http.Request) {
+	nombre := chi.URLParam(r, "nombre")
+	talla := chi.URLParam(r, "talla")
+	cantidad := chi.URLParam(r, "cantidad")
+	cantidadInt, errNum := strconv.Atoi(cantidad)
+	if errNum != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	bd := models.GetBDPrueba()
+	err := bd.InsertarRopa(nombre, models.Talla(talla), cantidadInt)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	w.WriteHeader(http.StatusCreated)
+}
 
 func deletePrendaTalla(w http.ResponseWriter, r *http.Request) {}
 
