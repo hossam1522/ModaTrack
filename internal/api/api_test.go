@@ -69,7 +69,41 @@ func TestGetPrendasTalla(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if prenda.GetTalla() != models.M {
+	if prenda.GetTalla() != models.M || prenda.GetNombre() != "camisa" {
 		t.Errorf("Se esperaba una talla M, se obtuvo %s", prenda.GetTalla())
+	}
+}
+
+func TestPostPrenda(t *testing.T) {
+	router := getRouter()
+	server := httptest.NewServer(router)
+	defer server.Close()
+
+	url := server.URL + "/prendas/chaqueta/XL/1"
+	resp, err := server.Client().Post(url, "application/json", nil)
+
+	if err != nil {
+		t.Error(err)
+	}
+	if resp.StatusCode != 201 {
+		t.Errorf("Se esperaba un status 201, se obtuvo %d", resp.StatusCode)
+	}
+
+	url = server.URL + "/prendas/chaqueta/XL"
+	resp, err = server.Client().Get(url)
+
+	if err != nil {
+		t.Error(err)
+	}
+	if resp.StatusCode != 200 {
+		t.Errorf("Se esperaba un status 200, se obtuvo %d", resp.StatusCode)
+	}
+	var prenda models.Ropa
+	err = json.NewDecoder(resp.Body).Decode(&prenda)
+	if err != nil {
+		t.Error(err)
+	}
+	if prenda.GetTalla() != models.XL || prenda.GetNombre() != "chaqueta" {
+		t.Errorf("Se esperaba una talla XL, se obtuvo %s", prenda.GetTalla())
 	}
 }
