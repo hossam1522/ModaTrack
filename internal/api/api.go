@@ -26,13 +26,21 @@ func getRouter() *chi.Mux {
 func getPrendas(w http.ResponseWriter, r *http.Request) {
 	nombre := chi.URLParam(r, "nombre")
 	bd := models.BDPrueba()
+
 	prendas, err := bd.ObtenerPrenda(nombre)
 	if err != nil {
 		w.WriteHeader(http.StatusNotFound)
 		return
 	}
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(prendas)
+
+	jsonResponse, err := json.Marshal(prendas)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(jsonResponse)
 }
 
 func getPrendaTalla(w http.ResponseWriter, r *http.Request) {}
