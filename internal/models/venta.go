@@ -16,6 +16,14 @@ type Venta struct {
 	itemsVendidos map[Ropa]int
 }
 
+func (v Venta) GetFecha() time.Time {
+	return v.fecha
+}
+
+func (v Venta) GetItemsVendidos() map[Ropa]int {
+	return v.itemsVendidos
+}
+
 func NuevaVenta(itemsVendidos map[Ropa]int, inventario *Stock, fecha ...time.Time) (Venta, error) {
 	log.GetLogger().Info().Msg("Creando nueva venta")
 	fechaActual := time.Now()

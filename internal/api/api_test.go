@@ -164,4 +164,14 @@ func TestGetVentasPrenda(t *testing.T) {
 	if len(ventas) != 2 {
 		t.Errorf("Se esperaban 2 ventas, se obtuvieron %d", len(ventas))
 	}
+
+	url = server.URL + "/prendas/camisa/L"
+	resp, _ = server.Client().Get(url)
+	prenda := models.Ropa{}
+	json.NewDecoder(resp.Body).Decode(&prenda)
+
+	if ventas[0].GetItemsVendidos()[prenda] != 1 || ventas[1].GetItemsVendidos()[prenda] != 1 {
+		t.Errorf("Las ventas no son las esperadas")
+		t.Error(ventas)
+	}
 }
