@@ -180,7 +180,7 @@ func TestGetVentasPrendaFecha(t *testing.T) {
 	server := httptest.NewServer(router)
 	defer server.Close()
 
-	url := server.URL + "/prendas/camisa/M/ventas/2024-06-12T15:30:45Z"
+	url := server.URL + "/prendas/pantalon/M/ventas/2024-06-12T15:30:45Z"
 	resp, err := server.Client().Get(url)
 
 	if err != nil {
@@ -195,15 +195,16 @@ func TestGetVentasPrendaFecha(t *testing.T) {
 		t.Error(err)
 	}
 	if len(ventas) != 1 {
-		t.Errorf("Se esperaban 2 ventas, se obtuvieron %d", len(ventas))
+		t.Errorf("Se esperaban 1 venta, se obtuvieron %d", len(ventas))
 	}
 
-	url = server.URL + "/prendas/camisa/M"
+	url = server.URL + "/prendas/pantalon/M"
 	resp, _ = server.Client().Get(url)
 	prenda := models.Ropa{}
 	json.NewDecoder(resp.Body).Decode(&prenda)
 
 	if ventas[0].GetItemsVendidos()[prenda] != 1 {
 		t.Errorf("Las ventas no son las esperadas")
+		t.Error(ventas)
 	}
 }

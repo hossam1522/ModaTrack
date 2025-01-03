@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/go-chi/chi/v5"
 )
@@ -101,7 +102,27 @@ func getVentasPrenda(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func getVentaFecha(w http.ResponseWriter, r *http.Request) {}
+func getVentaFecha(w http.ResponseWriter, r *http.Request) {
+	nombre := chi.URLParam(r, "nombre")
+	talla := chi.URLParam(r, "talla")
+	fecha := chi.URLParam(r, "fecha")
+	bd := models.GetBDPrueba()
+	fechaVenta, err := time.Parse(time.RFC3339, fecha)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	venta, err := bd.ObtenerVentas(nombre, models.Talla(talla), fechaVenta)
+	if err != nil {
+		w.WriteHeader(http.StatusNotFound)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+	if err := json.NewEncoder(w).Encode(venta); err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+	}
+}
 
 func postVenta(w http.ResponseWriter, r *http.Request) {}
 
