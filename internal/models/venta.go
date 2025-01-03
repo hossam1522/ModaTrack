@@ -2,6 +2,7 @@ package models
 
 import (
 	"ModaTrack/internal/log"
+	"encoding/json"
 	"errors"
 	"time"
 )
@@ -22,6 +23,55 @@ func (v Venta) GetFecha() time.Time {
 
 func (v Venta) GetItemsVendidos() map[Ropa]int {
 	return v.itemsVendidos
+}
+
+func (v Venta) MarshalJSON() ([]byte, error) {
+
+	type ItemVendido struct {
+		Ropa     Ropa `json:"ropa"`
+		Cantidad int  `json:"cantidad"`
+	}
+
+	var items []ItemVendido
+	for ropa, cantidad := range v.itemsVendidos {
+		items = append(items, ItemVendido{
+			Ropa:     ropa,
+			Cantidad: cantidad,
+		})
+	}
+
+	return json.Marshal(&struct {
+		Fecha         time.Time     `json:"fecha"`
+		ItemsVendidos []ItemVendido `json:"items_vendidos"`
+	}{
+		Fecha:         v.fecha,
+		ItemsVendidos: items,
+	})
+}
+
+func (v *Venta) UnmarshalJSON(data []byte) error {
+
+	type ItemVendido struct {
+		Ropa     Ropa `json:"ropa"`
+		Cantidad int  `json:"cantidad"`
+	}
+
+	aux := struct {
+		Fecha         time.Time     `json:"fecha"`
+		ItemsVendidos []ItemVendido `json:"items_vendidos"`
+	}{}
+
+	if err := json.Unmarshal(data, &aux); err != nil {
+		return err
+	}
+
+	v.fecha = aux.Fecha
+	v.itemsVendidos = make(map[Ropa]int)
+	for _, item := range aux.ItemsVendidos {
+		v.itemsVendidos[item.Ropa] = item.Cantidad
+	}
+
+	return nil
 }
 
 func NuevaVenta(itemsVendidos map[Ropa]int, inventario *Stock, fecha ...time.Time) (Venta, error) {

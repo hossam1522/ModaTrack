@@ -172,6 +172,5 @@ func TestGetVentasPrenda(t *testing.T) {
 
 	if ventas[0].GetItemsVendidos()[prenda] != 1 || ventas[1].GetItemsVendidos()[prenda] != 1 {
 		t.Errorf("Las ventas no son las esperadas")
-		t.Error(ventas)
 	}
 }
