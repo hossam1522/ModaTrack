@@ -174,3 +174,36 @@ func TestGetVentasPrenda(t *testing.T) {
 		t.Errorf("Las ventas no son las esperadas")
 	}
 }
+
+func TestGetVentasPrendaFecha(t *testing.T) {
+	router := getRouter()
+	server := httptest.NewServer(router)
+	defer server.Close()
+
+	url := server.URL + "/prendas/camisa/M/ventas/2024-06-12T15:30:45Z"
+	resp, err := server.Client().Get(url)
+
+	if err != nil {
+		t.Error(err)
+	}
+	if resp.StatusCode != 200 {
+		t.Errorf("Se esperaba un status 200, se obtuvo %d", resp.StatusCode)
+	}
+	var ventas []models.Venta
+	err = json.NewDecoder(resp.Body).Decode(&ventas)
+	if err != nil {
+		t.Error(err)
+	}
+	if len(ventas) != 1 {
+		t.Errorf("Se esperaban 2 ventas, se obtuvieron %d", len(ventas))
+	}
+
+	url = server.URL + "/prendas/camisa/M"
+	resp, _ = server.Client().Get(url)
+	prenda := models.Ropa{}
+	json.NewDecoder(resp.Body).Decode(&prenda)
+
+	if ventas[0].GetItemsVendidos()[prenda] != 1 {
+		t.Errorf("Las ventas no son las esperadas")
+	}
+}
