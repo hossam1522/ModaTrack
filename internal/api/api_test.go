@@ -208,3 +208,54 @@ func TestGetVentasPrendaFecha(t *testing.T) {
 		t.Error(ventas)
 	}
 }
+
+func TestPutVenta(t *testing.T) {
+	router := getRouter()
+	server := httptest.NewServer(router)
+	defer server.Close()
+
+	url := server.URL + "/prendas/pantalon/L/ventas/2024-06-12T15:30:45Z"
+	req, err := http.NewRequest(http.MethodPut, url, nil)
+
+	if err != nil {
+		t.Error(err)
+	}
+
+	resp, err := server.Client().Do(req)
+
+	if err != nil {
+		t.Error(err)
+	}
+
+	if resp.StatusCode != 201 {
+		t.Errorf("Se esperaba un status 201, se obtuvo %d", resp.StatusCode)
+	}
+
+	url = server.URL + "/prendas/pantalon/L/ventas/2024-06-12T15:30:45Z"
+	resp, err = server.Client().Get(url)
+
+	if err != nil {
+		t.Error(err)
+	}
+	if resp.StatusCode != 200 {
+		t.Errorf("Se esperaba un status 200, se obtuvo %d", resp.StatusCode)
+	}
+	var venta models.Venta
+	err = json.NewDecoder(resp.Body).Decode(&venta)
+	if err != nil {
+		t.Error(err)
+	}
+	if venta.GetItemsVendidos()[models.Ropa{}] != 0 {
+		t.Errorf("La venta no es la esperada")
+	}
+
+	url = server.URL + "/prendas/pantalon/L"
+	resp, err = server.Client().Get(url)
+
+	if err != nil {
+		t.Error(err)
+	}
+	if resp.StatusCode != 404 {
+		t.Errorf("Se esperaba un status 404, se obtuvo %d", resp.StatusCode)
+	}
+}
