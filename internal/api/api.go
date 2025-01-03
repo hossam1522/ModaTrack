@@ -19,7 +19,7 @@ func getRouter() *chi.Mux {
 	router.Delete("/prendas/{nombre}/{talla}", deletePrendaTalla)
 	router.Get("/prendas/{nombre}/{talla}/ventas", getVentasPrenda)
 	router.Get("/prendas/{nombre}/{talla}/ventas/{fecha}", getVentaFecha)
-	router.Put("/prendas/{nombre}/{talla}/ventas/{fecha}", postVenta)
+	router.Put("/prendas/{nombre}/{talla}/ventas/{fecha}", putVenta)
 	router.Delete("/prendas/{nombre}/{talla}/ventas/{fecha}", deleteVenta)
 
 	return router
@@ -124,6 +124,22 @@ func getVentaFecha(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func postVenta(w http.ResponseWriter, r *http.Request) {}
+func putVenta(w http.ResponseWriter, r *http.Request) {
+	nombre := chi.URLParam(r, "nombre")
+	talla := chi.URLParam(r, "talla")
+	fecha := chi.URLParam(r, "fecha")
+	fechaVenta, err := time.Parse(time.RFC3339, fecha)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	bd := models.GetBDPrueba()
+	err = bd.InsertarVenta(nombre, models.Talla(talla), fechaVenta)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	w.WriteHeader(http.StatusCreated)
+}
 
 func deleteVenta(w http.ResponseWriter, r *http.Request) {}

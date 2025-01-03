@@ -240,12 +240,12 @@ func TestPutVenta(t *testing.T) {
 	if resp.StatusCode != 200 {
 		t.Errorf("Se esperaba un status 200, se obtuvo %d", resp.StatusCode)
 	}
-	var venta models.Venta
-	err = json.NewDecoder(resp.Body).Decode(&venta)
+	var ventas []models.Venta
+	err = json.NewDecoder(resp.Body).Decode(&ventas)
 	if err != nil {
 		t.Error(err)
 	}
-	if venta.GetItemsVendidos()[models.Ropa{}] != 0 {
+	if ventas[0].GetItemsVendidos()[models.Ropa{}] != 0 {
 		t.Errorf("La venta no es la esperada")
 	}
 
