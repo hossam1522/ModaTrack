@@ -147,7 +147,7 @@ func TestGetVentasPrenda(t *testing.T) {
 	server := httptest.NewServer(router)
 	defer server.Close()
 
-	url := server.URL + "/camisa/L/ventas"
+	url := server.URL + "/prendas/camisa/L/ventas"
 	resp, err := server.Client().Get(url)
 
 	if err != nil {
