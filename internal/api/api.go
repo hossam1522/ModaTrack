@@ -142,4 +142,20 @@ func putVenta(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 }
 
-func deleteVenta(w http.ResponseWriter, r *http.Request) {}
+func deleteVenta(w http.ResponseWriter, r *http.Request) {
+	nombre := chi.URLParam(r, "nombre")
+	talla := chi.URLParam(r, "talla")
+	fecha := chi.URLParam(r, "fecha")
+	fechaVenta, err := time.Parse(time.RFC3339, fecha)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	bd := models.GetBDPrueba()
+	err = bd.EliminarVenta(nombre, models.Talla(talla), fechaVenta)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	w.WriteHeader(http.StatusAccepted)
+}
