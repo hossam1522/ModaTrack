@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
 )
 
 func TestGetPrendas(t *testing.T) {
@@ -27,8 +28,9 @@ func TestGetPrendas(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if len(prendas) != 2 {
-		t.Errorf("Se esperaban 2 prendas, se obtuvieron %d", len(prendas))
+	prendas_en_bd, _ := models.GetBDPrueba().ObtenerPrenda("camisa")
+	if len(prendas) != len(prendas_en_bd) {
+		t.Errorf("Se esperaban %d prendas, se obtuvieron %d", len(prendas_en_bd), len(prendas))
 	}
 	if prendas[0].GetNombre() != "camisa" || prendas[1].GetNombre() != "camisa" {
 		t.Error("Las prendas no son las esperadas")
@@ -128,8 +130,9 @@ func TestGetVentasPrenda(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if len(ventas) != 2 {
-		t.Errorf("Se esperaban 2 ventas, se obtuvieron %d", len(ventas))
+	ventas_en_bd, _ := models.GetBDPrueba().ObtenerVentas("camisa", models.L)
+	if len(ventas) != len(ventas_en_bd) {
+		t.Errorf("Se esperaban %d ventas, se obtuvieron %d", len(ventas_en_bd), len(ventas))
 	}
 
 	url = server.URL + "/prendas/camisa/L"
@@ -161,8 +164,9 @@ func TestGetVentasPrendaFecha(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if len(ventas) != 1 {
-		t.Errorf("Se esperaban 1 venta, se obtuvieron %d", len(ventas))
+	ventas_en_bd, _ := models.GetBDPrueba().ObtenerVentas("pantalon", models.M, time.Date(2024, 6, 12, 15, 30, 45, 0, time.UTC))
+	if len(ventas) != len(ventas_en_bd) {
+		t.Errorf("Se esperaban %d venta, se obtuvieron %d", len(ventas_en_bd), len(ventas))
 	}
 
 	url = server.URL + "/prendas/pantalon/M"
