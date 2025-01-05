@@ -16,7 +16,6 @@ func getRouter() *chi.Mux {
 	router.Get("/prendas/{nombre}", getPrendas)
 	router.Get("/prendas/{nombre}/{talla}", getPrendaTalla)
 	router.Post("/prendas/{nombre}/{talla}/{cantidad}", postPrendaTalla)
-	router.Delete("/prendas/{nombre}/{talla}", deletePrendaTalla)
 	router.Get("/prendas/{nombre}/{talla}/ventas", getVentasPrenda)
 	router.Get("/prendas/{nombre}/{talla}/ventas/{fecha}", getVentaFecha)
 	router.Put("/prendas/{nombre}/{talla}/ventas/{fecha}", putVenta)
@@ -72,18 +71,6 @@ func postPrendaTalla(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusCreated)
-}
-
-func deletePrendaTalla(w http.ResponseWriter, r *http.Request) {
-	nombre := chi.URLParam(r, "nombre")
-	talla := chi.URLParam(r, "talla")
-	bd := models.GetBDPrueba()
-	err := bd.EliminarRopa(nombre, models.Talla(talla))
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		return
-	}
-	w.WriteHeader(http.StatusAccepted)
 }
 
 func getVentasPrenda(w http.ResponseWriter, r *http.Request) {
