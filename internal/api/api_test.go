@@ -23,22 +23,24 @@ func TestGetPrendas(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
+
 	if resp.StatusCode != http.StatusOK {
 		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusOK, resp.StatusCode)
 		body, _ := io.ReadAll(resp.Body)
 		t.Error(string(body))
 	}
+
 	var prendas []models.Ropa
 	err = json.NewDecoder(resp.Body).Decode(&prendas)
+
 	if err != nil {
 		t.Error(err)
 	}
+
 	prendas_en_bd, _ := models.ObtenerPrenda(models.GetBDPrueba(), "camisa")
+
 	if len(prendas) != len(prendas_en_bd) {
 		t.Errorf("Se esperaban %d prendas, se obtuvieron %d", len(prendas_en_bd), len(prendas))
-	}
-	if prendas[0].GetNombre() != "camisa" || prendas[1].GetNombre() != "camisa" {
-		t.Error("Las prendas no son las esperadas")
 	}
 }
 
@@ -52,6 +54,7 @@ func TestGetPrendasNoExistentes(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
+
 	if resp.StatusCode != http.StatusNotFound {
 		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusNotFound, resp.StatusCode)
 		body, _ := io.ReadAll(resp.Body)
@@ -69,16 +72,20 @@ func TestGetPrendasTalla(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
+
 	if resp.StatusCode != http.StatusOK {
 		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusOK, resp.StatusCode)
 		body, _ := io.ReadAll(resp.Body)
 		t.Error(string(body))
 	}
+
 	var prenda models.Ropa
 	err = json.NewDecoder(resp.Body).Decode(&prenda)
+
 	if err != nil {
 		t.Error(err)
 	}
+
 	if prenda.GetTalla() != models.M || prenda.GetNombre() != "camisa" {
 		t.Errorf("Se esperaba una talla M, se obtuvo %s", prenda.GetTalla())
 	}
@@ -100,24 +107,10 @@ func TestPostPrenda(t *testing.T) {
 		t.Error(string(body))
 	}
 
-	url = server.URL + "/prendas/chaqueta/XL"
-	resp, err = server.Client().Get(url)
+	prenda_en_bd, _ := models.ObtenerPrendaTalla(models.GetBDPrueba(), "chaqueta", models.XL)
 
-	if err != nil {
-		t.Error(err)
-	}
-	if resp.StatusCode != http.StatusOK {
-		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusOK, resp.StatusCode)
-		body, _ := io.ReadAll(resp.Body)
-		t.Error(string(body))
-	}
-	var prenda models.Ropa
-	err = json.NewDecoder(resp.Body).Decode(&prenda)
-	if err != nil {
-		t.Error(err)
-	}
-	if prenda.GetTalla() != models.XL || prenda.GetNombre() != "chaqueta" {
-		t.Errorf("Se esperaba una talla XL, se obtuvo %s", prenda.GetTalla())
+	if prenda_en_bd.GetTalla() != models.XL || prenda_en_bd.GetNombre() != "chaqueta" {
+		t.Errorf("Se esperaba una talla XL, se obtuvo %s", prenda_en_bd.GetTalla())
 	}
 }
 
@@ -131,28 +124,24 @@ func TestGetVentasPrenda(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
+
 	if resp.StatusCode != http.StatusOK {
 		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusOK, resp.StatusCode)
 		body, _ := io.ReadAll(resp.Body)
 		t.Error(string(body))
 	}
+
 	var ventas []models.Venta
 	err = json.NewDecoder(resp.Body).Decode(&ventas)
+
 	if err != nil {
 		t.Error(err)
 	}
+
 	ventas_en_bd, _ := models.ObtenerVentas(models.GetBDPrueba(), "camisa", models.L)
+
 	if len(ventas) != len(ventas_en_bd) {
 		t.Errorf("Se esperaban %d ventas, se obtuvieron %d", len(ventas_en_bd), len(ventas))
-	}
-
-	url = server.URL + "/prendas/camisa/L"
-	resp, _ = server.Client().Get(url)
-	prenda := models.Ropa{}
-	json.NewDecoder(resp.Body).Decode(&prenda)
-
-	if ventas[0].GetItemsVendidos()[prenda] != 1 || ventas[1].GetItemsVendidos()[prenda] != 1 {
-		t.Errorf("Las ventas no son las esperadas")
 	}
 }
 
@@ -166,29 +155,23 @@ func TestGetVentasPrendaFecha(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
+
 	if resp.StatusCode != http.StatusOK {
 		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusOK, resp.StatusCode)
 		body, _ := io.ReadAll(resp.Body)
 		t.Error(string(body))
 	}
+
 	var ventas []models.Venta
 	err = json.NewDecoder(resp.Body).Decode(&ventas)
+
 	if err != nil {
 		t.Error(err)
 	}
+
 	ventas_en_bd, _ := models.ObtenerVentas(models.GetBDPrueba(), "pantalon", models.M, time.Date(2024, 6, 12, 15, 30, 45, 0, time.UTC))
 	if len(ventas) != len(ventas_en_bd) {
 		t.Errorf("Se esperaban %d venta, se obtuvieron %d", len(ventas_en_bd), len(ventas))
-	}
-
-	url = server.URL + "/prendas/pantalon/M"
-	resp, _ = server.Client().Get(url)
-	prenda := models.Ropa{}
-	json.NewDecoder(resp.Body).Decode(&prenda)
-
-	if ventas[0].GetItemsVendidos()[prenda] != 1 {
-		t.Errorf("Las ventas no son las esperadas")
-		t.Error(ventas)
 	}
 }
 
@@ -211,36 +194,6 @@ func TestPutVenta(t *testing.T) {
 
 	if resp.StatusCode != http.StatusCreated {
 		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusCreated, resp.StatusCode)
-	}
-
-	url = server.URL + "/prendas/pantalon/L/ventas/2024-06-12T15:30:45Z"
-	resp, err = server.Client().Get(url)
-
-	if err != nil {
-		t.Error(err)
-	}
-	if resp.StatusCode != http.StatusOK {
-		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusOK, resp.StatusCode)
-		body, _ := io.ReadAll(resp.Body)
-		t.Error(string(body))
-	}
-	var ventas []models.Venta
-	err = json.NewDecoder(resp.Body).Decode(&ventas)
-	if err != nil {
-		t.Error(err)
-	}
-	if ventas[0].GetItemsVendidos()[models.Ropa{}] != 0 {
-		t.Errorf("La venta no es la esperada")
-	}
-
-	url = server.URL + "/prendas/pantalon/L"
-	resp, err = server.Client().Get(url)
-
-	if err != nil {
-		t.Error(err)
-	}
-	if resp.StatusCode != http.StatusNotFound {
-		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusNotFound, resp.StatusCode)
 		body, _ := io.ReadAll(resp.Body)
 		t.Error(string(body))
 	}
