@@ -2,19 +2,45 @@ package models
 
 import "time"
 
-func BDPrueba() *BD {
-	bd_prueba := NewBD()
-	bd_prueba.InsertarRopa("camisa", M, 1)
-	bd_prueba.InsertarRopa("camisa", L, 5)
-	bd_prueba.InsertarRopa("pantalon", M, 5)
-	bd_prueba.InsertarRopa("pantalon", L, 1)
-	bd_prueba.InsertarVenta("camisa", L)
-	bd_prueba.InsertarVenta("camisa", L)
+var fecha_prueba, _ = time.Parse(time.RFC3339, "2024-06-12T15:30:45Z")
 
-	// "2024-06-12 15:30:45"
-	fecha, _ := time.Parse(time.RFC3339, "2024-06-12T15:30:45Z")
-	bd_prueba.InsertarVenta("pantalon", M, fecha)
-	bd_prueba.InsertarVenta("pantalon", M, fecha.AddDate(-1, 0, 0))
+func BDPrueba() BD {
+	bd_prueba := BD{
+		Stock: &Stock{
+			inventario: map[Ropa]int{
+				{nombre: "camisa", talla: M}:   1,
+				{nombre: "camisa", talla: L}:   5,
+				{nombre: "pantalon", talla: M}: 5,
+				{nombre: "pantalon", talla: L}: 1,
+			},
+		},
+		Ventas: []Venta{
+			{
+				itemsVendidos: map[Ropa]int{
+					{nombre: "camisa", talla: L}: 1,
+				},
+				fecha: time.Now(),
+			},
+			{
+				itemsVendidos: map[Ropa]int{
+					{nombre: "camisa", talla: L}: 1,
+				},
+				fecha: time.Now(),
+			},
+			{
+				itemsVendidos: map[Ropa]int{
+					{nombre: "pantalon", talla: M}: 1,
+				},
+				fecha: time.Now(),
+			},
+			{
+				itemsVendidos: map[Ropa]int{
+					{nombre: "pantalon", talla: M}: 1,
+				},
+				fecha: fecha_prueba,
+			},
+		},
+	}
 
 	return bd_prueba
 }
@@ -22,5 +48,5 @@ func BDPrueba() *BD {
 var bd_prueba = BDPrueba()
 
 func GetBDPrueba() *BD {
-	return bd_prueba
+	return &bd_prueba
 }

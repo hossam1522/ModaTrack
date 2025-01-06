@@ -11,6 +11,7 @@ import (
 )
 
 var router = chi.NewRouter()
+var bd = models.GetBDPrueba()
 
 func getRouter() *chi.Mux {
 	router.Get("/prendas/{nombre}", getPrendas)
@@ -26,8 +27,7 @@ func getRouter() *chi.Mux {
 
 func getPrendas(w http.ResponseWriter, r *http.Request) {
 	nombre := chi.URLParam(r, "nombre")
-	bd := models.GetBDPrueba()
-	prendas, err := bd.ObtenerPrenda(nombre)
+	prendas, err := models.ObtenerPrenda(bd, nombre)
 	if err != nil {
 		http.Error(w, "No se ha podido obtener la prenda de la base de datos", http.StatusNotFound)
 		return
@@ -42,8 +42,7 @@ func getPrendas(w http.ResponseWriter, r *http.Request) {
 func getPrendaTalla(w http.ResponseWriter, r *http.Request) {
 	nombre := chi.URLParam(r, "nombre")
 	talla := chi.URLParam(r, "talla")
-	bd := models.GetBDPrueba()
-	prenda, err := bd.ObtenerPrendaTalla(nombre, models.Talla(talla))
+	prenda, err := models.ObtenerPrendaTalla(bd, nombre, models.Talla(talla))
 	if err != nil {
 		http.Error(w, "No se ha podido obtener la prenda de la base de datos", http.StatusNotFound)
 		return
@@ -64,8 +63,7 @@ func postPrendaTalla(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "La cantidad debe ser un número entero", http.StatusBadRequest)
 		return
 	}
-	bd := models.GetBDPrueba()
-	err := bd.InsertarRopa(nombre, models.Talla(talla), cantidadInt)
+	err := models.InsertarRopa(bd, nombre, models.Talla(talla), cantidadInt)
 	if err != nil {
 		http.Error(w, "No se ha podido insertar la prenda en la base de datos", http.StatusBadRequest)
 		return
@@ -76,8 +74,7 @@ func postPrendaTalla(w http.ResponseWriter, r *http.Request) {
 func getVentasPrenda(w http.ResponseWriter, r *http.Request) {
 	nombre := chi.URLParam(r, "nombre")
 	talla := chi.URLParam(r, "talla")
-	bd := models.GetBDPrueba()
-	ventas, err := bd.ObtenerVentas(nombre, models.Talla(talla))
+	ventas, err := models.ObtenerVentas(bd, nombre, models.Talla(talla))
 	if err != nil {
 		http.Error(w, "No se han podido obtener las ventas de la prenda", http.StatusNotFound)
 		return
@@ -93,13 +90,12 @@ func getVentaFecha(w http.ResponseWriter, r *http.Request) {
 	nombre := chi.URLParam(r, "nombre")
 	talla := chi.URLParam(r, "talla")
 	fecha := chi.URLParam(r, "fecha")
-	bd := models.GetBDPrueba()
 	fechaVenta, err := time.Parse(time.RFC3339, fecha)
 	if err != nil {
 		http.Error(w, "La fecha no tiene el formato correcto, debe ser RFC3339", http.StatusUnprocessableEntity)
 		return
 	}
-	venta, err := bd.ObtenerVentas(nombre, models.Talla(talla), fechaVenta)
+	venta, err := models.ObtenerVentas(bd, nombre, models.Talla(talla), fechaVenta)
 	if err != nil {
 		http.Error(w, "No se ha podido obtener la venta de la prenda de la base de datos", http.StatusNotFound)
 		return
@@ -120,8 +116,7 @@ func putVenta(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "La fecha no tiene el formato correcto, debe ser RFC3339", http.StatusUnprocessableEntity)
 		return
 	}
-	bd := models.GetBDPrueba()
-	err = bd.InsertarVenta(nombre, models.Talla(talla), fechaVenta)
+	err = models.InsertarVenta(bd, nombre, models.Talla(talla), fechaVenta)
 	if err != nil {
 		http.Error(w, "No se ha podido insertar la venta en la base de datos", http.StatusBadRequest)
 		return
@@ -138,8 +133,7 @@ func deleteVenta(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "La fecha no tiene el formato correcto, debe ser RFC3339", http.StatusUnprocessableEntity)
 		return
 	}
-	bd := models.GetBDPrueba()
-	err = bd.EliminarVenta(nombre, models.Talla(talla), fechaVenta)
+	err = models.EliminarVenta(bd, nombre, models.Talla(talla), fechaVenta)
 	if err != nil {
 		http.Error(w, "No se ha podido eliminar la venta de la base de datos", http.StatusBadRequest)
 		return

@@ -18,7 +18,7 @@ func NewBD() *BD {
 	}
 }
 
-func (bd *BD) InsertarRopa(nombre string, talla Talla, cantidad int) error {
+func InsertarRopa(bd *BD, nombre string, talla Talla, cantidad int) error {
 	log.GetLogger().Info().Msg("Insertando ropa en la base de datos")
 
 	cantidadActual := bd.Stock.inventario[Ropa{nombre: nombre, talla: talla}]
@@ -31,7 +31,7 @@ func (bd *BD) InsertarRopa(nombre string, talla Talla, cantidad int) error {
 	return nil
 }
 
-func (bd *BD) ObtenerPrenda(nombre string) ([]Ropa, error) {
+func ObtenerPrenda(bd *BD, nombre string) ([]Ropa, error) {
 	log.GetLogger().Info().Msg("Obteniendo prenda de la base de datos")
 
 	var prendas []Ropa
@@ -48,7 +48,7 @@ func (bd *BD) ObtenerPrenda(nombre string) ([]Ropa, error) {
 	return prendas, nil
 }
 
-func (bd *BD) ObtenerPrendaTalla(nombre string, talla Talla) (Ropa, error) {
+func ObtenerPrendaTalla(bd *BD, nombre string, talla Talla) (Ropa, error) {
 	log.GetLogger().Info().Msg("Obteniendo prenda de la base de datos")
 
 	for ropa := range bd.Stock.inventario {
@@ -60,7 +60,7 @@ func (bd *BD) ObtenerPrendaTalla(nombre string, talla Talla) (Ropa, error) {
 	return Ropa{}, errors.New("no se ha podido obtener la prenda")
 }
 
-func (bd *BD) EliminarRopa(nombre string, talla Talla) error {
+func EliminarRopa(bd *BD, nombre string, talla Talla) error {
 	log.GetLogger().Info().Msg("Eliminando ropa de la base de datos")
 
 	if bd.Stock.inventario[Ropa{nombre: nombre, talla: talla}] == 0 {
@@ -72,7 +72,7 @@ func (bd *BD) EliminarRopa(nombre string, talla Talla) error {
 	return nil
 }
 
-func (bd *BD) InsertarVenta(nombre string, talla Talla, fecha ...time.Time) error {
+func InsertarVenta(bd *BD, nombre string, talla Talla, fecha ...time.Time) error {
 	log.GetLogger().Info().Msg("Insertando venta en la base de datos")
 
 	venta, err := NuevaVenta(map[Ropa]int{{nombre, talla}: 1}, bd.Stock, fecha...)
@@ -85,7 +85,7 @@ func (bd *BD) InsertarVenta(nombre string, talla Talla, fecha ...time.Time) erro
 	return nil
 }
 
-func (bd *BD) ObtenerVentas(nombre string, talla Talla, fecha ...time.Time) ([]Venta, error) {
+func ObtenerVentas(bd *BD, nombre string, talla Talla, fecha ...time.Time) ([]Venta, error) {
 	log.GetLogger().Info().Msg("Obteniendo Ventas de la base de datos")
 
 	var Ventas []Venta
@@ -104,7 +104,7 @@ func (bd *BD) ObtenerVentas(nombre string, talla Talla, fecha ...time.Time) ([]V
 	return Ventas, nil
 }
 
-func (bd *BD) EliminarVenta(nombre string, talla Talla, fecha time.Time) error {
+func EliminarVenta(bd *BD, nombre string, talla Talla, fecha time.Time) error {
 	log.GetLogger().Info().Msg("Eliminando venta de la base de datos")
 
 	var index int = -1

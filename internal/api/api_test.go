@@ -28,7 +28,7 @@ func TestGetPrendas(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	prendas_en_bd, _ := models.GetBDPrueba().ObtenerPrenda("camisa")
+	prendas_en_bd, _ := models.ObtenerPrenda(models.GetBDPrueba(), "camisa")
 	if len(prendas) != len(prendas_en_bd) {
 		t.Errorf("Se esperaban %d prendas, se obtuvieron %d", len(prendas_en_bd), len(prendas))
 	}
@@ -130,7 +130,7 @@ func TestGetVentasPrenda(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	ventas_en_bd, _ := models.GetBDPrueba().ObtenerVentas("camisa", models.L)
+	ventas_en_bd, _ := models.ObtenerVentas(models.GetBDPrueba(), "camisa", models.L)
 	if len(ventas) != len(ventas_en_bd) {
 		t.Errorf("Se esperaban %d ventas, se obtuvieron %d", len(ventas_en_bd), len(ventas))
 	}
@@ -164,7 +164,7 @@ func TestGetVentasPrendaFecha(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	ventas_en_bd, _ := models.GetBDPrueba().ObtenerVentas("pantalon", models.M, time.Date(2024, 6, 12, 15, 30, 45, 0, time.UTC))
+	ventas_en_bd, _ := models.ObtenerVentas(models.GetBDPrueba(), "pantalon", models.M, time.Date(2024, 6, 12, 15, 30, 45, 0, time.UTC))
 	if len(ventas) != len(ventas_en_bd) {
 		t.Errorf("Se esperaban %d venta, se obtuvieron %d", len(ventas_en_bd), len(ventas))
 	}
