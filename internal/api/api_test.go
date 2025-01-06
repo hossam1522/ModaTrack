@@ -245,39 +245,3 @@ func TestPutVenta(t *testing.T) {
 		t.Error(string(body))
 	}
 }
-
-func TestDeleteVenta(t *testing.T) {
-	server := httptest.NewServer(router_test)
-	defer server.Close()
-
-	url := server.URL + "/prendas/pantalon/L/ventas/2024-06-12T15:30:45Z"
-	req, err := http.NewRequest(http.MethodDelete, url, nil)
-
-	if err != nil {
-		t.Error(err)
-	}
-
-	resp, err := server.Client().Do(req)
-
-	if err != nil {
-		t.Error(err)
-	}
-
-	if resp.StatusCode != http.StatusAccepted {
-		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusAccepted, resp.StatusCode)
-		body, _ := io.ReadAll(resp.Body)
-		t.Error(string(body))
-	}
-
-	url = server.URL + "/prendas/pantalon/L/ventas/2024-06-12T15:30:45Z"
-	resp, err = server.Client().Get(url)
-
-	if err != nil {
-		t.Error(err)
-	}
-	if resp.StatusCode != http.StatusNotFound {
-		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusNotFound, resp.StatusCode)
-		body, _ := io.ReadAll(resp.Body)
-		t.Error(string(body))
-	}
-}

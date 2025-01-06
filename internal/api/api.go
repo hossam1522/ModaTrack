@@ -33,7 +33,6 @@ func getRouter(bd *models.BD) *chi.Mux {
 	router.With(capturarParametrosRuta).Get("/prendas/{nombre}/{talla}/ventas", getVentasPrenda(bd))
 	router.With(capturarParametrosRuta).Get("/prendas/{nombre}/{talla}/ventas/{fecha}", getVentaFecha(bd))
 	router.With(capturarParametrosRuta).Put("/prendas/{nombre}/{talla}/ventas/{fecha}", putVenta(bd))
-	router.With(capturarParametrosRuta).Delete("/prendas/{nombre}/{talla}/ventas/{fecha}", deleteVenta(bd))
 
 	return router
 }
@@ -138,22 +137,5 @@ func putVenta(bd *models.BD) http.HandlerFunc {
 			return
 		}
 		w.WriteHeader(http.StatusCreated)
-	}
-}
-
-func deleteVenta(bd *models.BD) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		params := r.Context().Value("parametrosMap").(map[string]string)
-		fechaVenta, err := time.Parse(time.RFC3339, params["fecha"])
-		if err != nil {
-			http.Error(w, fmt.Sprintf("La fecha '%s' no tiene el formato correcto, debe ser RFC3339", params["fecha"]), http.StatusUnprocessableEntity)
-			return
-		}
-		err = models.EliminarVenta(bd, params["nombre"], models.Talla(params["talla"]), fechaVenta)
-		if err != nil {
-			http.Error(w, fmt.Sprintf("No se ha podido eliminar la venta de la prenda '%s' con talla '%s' y fecha '%s' en la base de datos", params["nombre"], params["talla"], params["fecha"]), http.StatusBadRequest)
-			return
-		}
-		w.WriteHeader(http.StatusAccepted)
 	}
 }
