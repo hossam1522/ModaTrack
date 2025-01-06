@@ -23,8 +23,8 @@ func TestGetPrendas(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if resp.StatusCode != 200 {
-		t.Errorf("Se esperaba un status 200, se obtuvo %d", resp.StatusCode)
+	if resp.StatusCode != http.StatusOK {
+		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusOK, resp.StatusCode)
 		body, _ := io.ReadAll(resp.Body)
 		t.Error(string(body))
 	}
@@ -52,8 +52,8 @@ func TestGetPrendasNoExistentes(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if resp.StatusCode != 404 {
-		t.Errorf("Se esperaba un status 404, se obtuvo %d", resp.StatusCode)
+	if resp.StatusCode != http.StatusNotFound {
+		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusNotFound, resp.StatusCode)
 		body, _ := io.ReadAll(resp.Body)
 		t.Error(string(body))
 	}
@@ -69,8 +69,8 @@ func TestGetPrendasTalla(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if resp.StatusCode != 200 {
-		t.Errorf("Se esperaba un status 200, se obtuvo %d", resp.StatusCode)
+	if resp.StatusCode != http.StatusOK {
+		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusOK, resp.StatusCode)
 		body, _ := io.ReadAll(resp.Body)
 		t.Error(string(body))
 	}
@@ -94,8 +94,8 @@ func TestPostPrenda(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if resp.StatusCode != 201 {
-		t.Errorf("Se esperaba un status 201, se obtuvo %d", resp.StatusCode)
+	if resp.StatusCode != http.StatusCreated {
+		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusCreated, resp.StatusCode)
 		body, _ := io.ReadAll(resp.Body)
 		t.Error(string(body))
 	}
@@ -106,8 +106,8 @@ func TestPostPrenda(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if resp.StatusCode != 200 {
-		t.Errorf("Se esperaba un status 200, se obtuvo %d", resp.StatusCode)
+	if resp.StatusCode != http.StatusOK {
+		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusOK, resp.StatusCode)
 		body, _ := io.ReadAll(resp.Body)
 		t.Error(string(body))
 	}
@@ -131,8 +131,8 @@ func TestGetVentasPrenda(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if resp.StatusCode != 200 {
-		t.Errorf("Se esperaba un status 200, se obtuvo %d", resp.StatusCode)
+	if resp.StatusCode != http.StatusOK {
+		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusOK, resp.StatusCode)
 		body, _ := io.ReadAll(resp.Body)
 		t.Error(string(body))
 	}
@@ -166,8 +166,8 @@ func TestGetVentasPrendaFecha(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if resp.StatusCode != 200 {
-		t.Errorf("Se esperaba un status 200, se obtuvo %d", resp.StatusCode)
+	if resp.StatusCode != http.StatusOK {
+		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusOK, resp.StatusCode)
 		body, _ := io.ReadAll(resp.Body)
 		t.Error(string(body))
 	}
@@ -209,8 +209,8 @@ func TestPutVenta(t *testing.T) {
 		t.Error(err)
 	}
 
-	if resp.StatusCode != 201 {
-		t.Errorf("Se esperaba un status 201, se obtuvo %d", resp.StatusCode)
+	if resp.StatusCode != http.StatusCreated {
+		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusCreated, resp.StatusCode)
 	}
 
 	url = server.URL + "/prendas/pantalon/L/ventas/2024-06-12T15:30:45Z"
@@ -219,8 +219,8 @@ func TestPutVenta(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if resp.StatusCode != 200 {
-		t.Errorf("Se esperaba un status 200, se obtuvo %d", resp.StatusCode)
+	if resp.StatusCode != http.StatusOK {
+		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusOK, resp.StatusCode)
 		body, _ := io.ReadAll(resp.Body)
 		t.Error(string(body))
 	}
@@ -239,8 +239,8 @@ func TestPutVenta(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if resp.StatusCode != 404 {
-		t.Errorf("Se esperaba un status 404, se obtuvo %d", resp.StatusCode)
+	if resp.StatusCode != http.StatusNotFound {
+		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusNotFound, resp.StatusCode)
 		body, _ := io.ReadAll(resp.Body)
 		t.Error(string(body))
 	}
@@ -263,8 +263,8 @@ func TestDeleteVenta(t *testing.T) {
 		t.Error(err)
 	}
 
-	if resp.StatusCode != 202 {
-		t.Errorf("Se esperaba un status 202, se obtuvo %d", resp.StatusCode)
+	if resp.StatusCode != http.StatusAccepted {
+		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusAccepted, resp.StatusCode)
 		body, _ := io.ReadAll(resp.Body)
 		t.Error(string(body))
 	}
@@ -275,8 +275,8 @@ func TestDeleteVenta(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if resp.StatusCode != 404 {
-		t.Errorf("Se esperaba un status 404, se obtuvo %d", resp.StatusCode)
+	if resp.StatusCode != http.StatusNotFound {
+		t.Errorf("Se esperaba un status %d, se obtuvo %d", http.StatusNotFound, resp.StatusCode)
 		body, _ := io.ReadAll(resp.Body)
 		t.Error(string(body))
 	}
