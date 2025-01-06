@@ -177,3 +177,17 @@ func TestEliminarVenta(t *testing.T) {
 		t.Errorf("Se esperaban dos ventas, pero se obtuvieron %d", len(bd.Ventas))
 	}
 }
+
+func TestCargarBDFichero(t *testing.T) {
+	bd := NewBD(WithJSON("bd_test.json"))
+	if bd == nil {
+		t.Error("Se esperaba una base de datos")
+	}
+}
+
+func TestCargarBDFicheroInexistente(t *testing.T) {
+	bd := NewBD(WithJSON("bd_inexistente.json"))
+	if bd != nil {
+		t.Error("No se esperaba una base de datos")
+	}
+}

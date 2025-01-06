@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-var bd_test = models.GetBDPrueba()
+var bd_test = models.NewBD(models.WithJSON("../models/bd_test.json"))
 var router_test = getRouter(bd_test)
 
 func TestGetPrendas(t *testing.T) {
@@ -37,7 +37,7 @@ func TestGetPrendas(t *testing.T) {
 		t.Error(err)
 	}
 
-	prendas_en_bd, _ := models.ObtenerPrenda(models.GetBDPrueba(), "camisa")
+	prendas_en_bd, _ := models.ObtenerPrenda(bd_test, "camisa")
 
 	if len(prendas) != len(prendas_en_bd) {
 		t.Errorf("Se esperaban %d prendas, se obtuvieron %d", len(prendas_en_bd), len(prendas))
@@ -107,7 +107,7 @@ func TestPostPrenda(t *testing.T) {
 		t.Error(string(body))
 	}
 
-	prenda_en_bd, _ := models.ObtenerPrendaTalla(models.GetBDPrueba(), "chaqueta", models.XL)
+	prenda_en_bd, _ := models.ObtenerPrendaTalla(bd_test, "chaqueta", models.XL)
 
 	if prenda_en_bd.GetTalla() != models.XL || prenda_en_bd.GetNombre() != "chaqueta" {
 		t.Errorf("Se esperaba una talla XL, se obtuvo %s", prenda_en_bd.GetTalla())
@@ -138,7 +138,7 @@ func TestGetVentasPrenda(t *testing.T) {
 		t.Error(err)
 	}
 
-	ventas_en_bd, _ := models.ObtenerVentas(models.GetBDPrueba(), "camisa", models.L)
+	ventas_en_bd, _ := models.ObtenerVentas(bd_test, "camisa", models.L)
 
 	if len(ventas) != len(ventas_en_bd) {
 		t.Errorf("Se esperaban %d ventas, se obtuvieron %d", len(ventas_en_bd), len(ventas))
@@ -169,7 +169,7 @@ func TestGetVentasPrendaFecha(t *testing.T) {
 		t.Error(err)
 	}
 
-	ventas_en_bd, _ := models.ObtenerVentas(models.GetBDPrueba(), "pantalon", models.M, time.Date(2024, 6, 12, 15, 30, 45, 0, time.UTC))
+	ventas_en_bd, _ := models.ObtenerVentas(bd_test, "pantalon", models.M, time.Date(2024, 6, 12, 15, 30, 45, 0, time.UTC))
 	if len(ventas) != len(ventas_en_bd) {
 		t.Errorf("Se esperaban %d venta, se obtuvieron %d", len(ventas_en_bd), len(ventas))
 	}
