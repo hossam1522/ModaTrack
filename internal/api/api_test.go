@@ -10,9 +10,11 @@ import (
 	"time"
 )
 
+var bd_test = models.GetBDPrueba()
+var router_test = getRouter(bd_test)
+
 func TestGetPrendas(t *testing.T) {
-	router := getRouter()
-	server := httptest.NewServer(router)
+	server := httptest.NewServer(router_test)
 	defer server.Close()
 
 	url := server.URL + "/prendas/camisa"
@@ -41,8 +43,7 @@ func TestGetPrendas(t *testing.T) {
 }
 
 func TestGetPrendasNoExistentes(t *testing.T) {
-	router := getRouter()
-	server := httptest.NewServer(router)
+	server := httptest.NewServer(router_test)
 	defer server.Close()
 
 	url := server.URL + "/prendas/chaqueta"
@@ -59,8 +60,7 @@ func TestGetPrendasNoExistentes(t *testing.T) {
 }
 
 func TestGetPrendasTalla(t *testing.T) {
-	router := getRouter()
-	server := httptest.NewServer(router)
+	server := httptest.NewServer(router_test)
 	defer server.Close()
 
 	url := server.URL + "/prendas/camisa/M"
@@ -85,8 +85,7 @@ func TestGetPrendasTalla(t *testing.T) {
 }
 
 func TestPostPrenda(t *testing.T) {
-	router := getRouter()
-	server := httptest.NewServer(router)
+	server := httptest.NewServer(router_test)
 	defer server.Close()
 
 	url := server.URL + "/prendas/chaqueta/XL/1"
@@ -123,8 +122,7 @@ func TestPostPrenda(t *testing.T) {
 }
 
 func TestGetVentasPrenda(t *testing.T) {
-	router := getRouter()
-	server := httptest.NewServer(router)
+	server := httptest.NewServer(router_test)
 	defer server.Close()
 
 	url := server.URL + "/prendas/camisa/L/ventas"
@@ -159,8 +157,7 @@ func TestGetVentasPrenda(t *testing.T) {
 }
 
 func TestGetVentasPrendaFecha(t *testing.T) {
-	router := getRouter()
-	server := httptest.NewServer(router)
+	server := httptest.NewServer(router_test)
 	defer server.Close()
 
 	url := server.URL + "/prendas/pantalon/M/ventas/2024-06-12T15:30:45Z"
@@ -196,8 +193,7 @@ func TestGetVentasPrendaFecha(t *testing.T) {
 }
 
 func TestPutVenta(t *testing.T) {
-	router := getRouter()
-	server := httptest.NewServer(router)
+	server := httptest.NewServer(router_test)
 	defer server.Close()
 
 	url := server.URL + "/prendas/pantalon/L/ventas/2024-06-12T15:30:45Z"
@@ -251,8 +247,7 @@ func TestPutVenta(t *testing.T) {
 }
 
 func TestDeleteVenta(t *testing.T) {
-	router := getRouter()
-	server := httptest.NewServer(router)
+	server := httptest.NewServer(router_test)
 	defer server.Close()
 
 	url := server.URL + "/prendas/pantalon/L/ventas/2024-06-12T15:30:45Z"
