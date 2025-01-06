@@ -4,6 +4,7 @@ import (
 	"ModaTrack/internal/models"
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -42,13 +43,13 @@ func getPrendas(w http.ResponseWriter, r *http.Request) {
 	params := r.Context().Value("parametrosMap").(map[string]string)
 	prendas, err := models.ObtenerPrenda(bd, params["nombre"])
 	if err != nil {
-		http.Error(w, "No se ha podido obtener la prenda de la base de datos", http.StatusNotFound)
+		http.Error(w, fmt.Sprintf("No se ha podido obtener la prenda '%s' de la base de datos", params["nombre"]), http.StatusNotFound)
 		return
 	}
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(prendas); err != nil {
-		http.Error(w, "No se ha podido codificar la prenda a formato JSON", http.StatusBadRequest)
+		http.Error(w, fmt.Sprintf("No se ha podido codificar la prenda '%s' a formato JSON", params["nombre"]), http.StatusBadRequest)
 	}
 }
 
@@ -56,13 +57,13 @@ func getPrendaTalla(w http.ResponseWriter, r *http.Request) {
 	params := r.Context().Value("parametrosMap").(map[string]string)
 	prenda, err := models.ObtenerPrendaTalla(bd, params["nombre"], models.Talla(params["talla"]))
 	if err != nil {
-		http.Error(w, "No se ha podido obtener la prenda de la base de datos", http.StatusNotFound)
+		http.Error(w, fmt.Sprintf("No se ha podido obtener la prenda '%s' con talla '%s' de la base de datos", params["nombre"], params["talla"]), http.StatusNotFound)
 		return
 	}
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(prenda); err != nil {
-		http.Error(w, "No se ha podido codificar la prenda a formato JSON", http.StatusBadRequest)
+		http.Error(w, fmt.Sprintf("No se ha podido codificar la prenda '%s' con talla '%s' a formato JSON", params["nombre"], params["talla"]), http.StatusBadRequest)
 	}
 }
 
@@ -70,12 +71,12 @@ func postPrendaTalla(w http.ResponseWriter, r *http.Request) {
 	params := r.Context().Value("parametrosMap").(map[string]string)
 	cantidadInt, errNum := strconv.Atoi(params["cantidad"])
 	if errNum != nil {
-		http.Error(w, "La cantidad debe ser un número entero", http.StatusBadRequest)
+		http.Error(w, fmt.Sprintf("La cantidad '%s' no es un número válido", params["cantidad"]), http.StatusBadRequest)
 		return
 	}
 	err := models.InsertarRopa(bd, params["nombre"], models.Talla(params["talla"]), cantidadInt)
 	if err != nil {
-		http.Error(w, "No se ha podido insertar la prenda en la base de datos", http.StatusBadRequest)
+		http.Error(w, fmt.Sprintf("No se ha podido insertar la prenda '%s' con talla '%s' en la base de datos", params["nombre"], params["talla"]), http.StatusBadRequest)
 		return
 	}
 	w.WriteHeader(http.StatusCreated)
@@ -85,13 +86,13 @@ func getVentasPrenda(w http.ResponseWriter, r *http.Request) {
 	params := r.Context().Value("parametrosMap").(map[string]string)
 	ventas, err := models.ObtenerVentas(bd, params["nombre"], models.Talla(params["talla"]))
 	if err != nil {
-		http.Error(w, "No se han podido obtener las ventas de la prenda", http.StatusNotFound)
+		http.Error(w, fmt.Sprintf("No se han podido obtener las ventas de la prenda '%s' con talla '%s' de la base de datos", params["nombre"], params["talla"]), http.StatusNotFound)
 		return
 	}
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(ventas); err != nil {
-		http.Error(w, "No se han podido codificar las ventas a formato JSON", http.StatusBadRequest)
+		http.Error(w, fmt.Sprintf("No se han podido codificar las ventas de la prenda '%s' con talla '%s' a formato JSON", params["nombre"], params["talla"]), http.StatusBadRequest)
 	}
 }
 
@@ -99,18 +100,18 @@ func getVentaFecha(w http.ResponseWriter, r *http.Request) {
 	params := r.Context().Value("parametrosMap").(map[string]string)
 	fechaVenta, err := time.Parse(time.RFC3339, params["fecha"])
 	if err != nil {
-		http.Error(w, "La fecha no tiene el formato correcto, debe ser RFC3339", http.StatusUnprocessableEntity)
+		http.Error(w, fmt.Sprintf("La fecha '%s' no tiene el formato correcto, debe ser RFC3339", params["fecha"]), http.StatusUnprocessableEntity)
 		return
 	}
 	venta, err := models.ObtenerVentas(bd, params["nombre"], models.Talla(params["talla"]), fechaVenta)
 	if err != nil {
-		http.Error(w, "No se ha podido obtener la venta de la prenda de la base de datos", http.StatusNotFound)
+		http.Error(w, fmt.Sprintf("No se han podido obtener las ventas de la prenda '%s' con talla '%s' y fecha '%s' de la base de datos", params["nombre"], params["talla"], params["fecha"]), http.StatusNotFound)
 		return
 	}
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(venta); err != nil {
-		http.Error(w, "No se ha podido codificar la venta a formato JSON", http.StatusBadRequest)
+		http.Error(w, fmt.Sprintf("No se han podido codificar las ventas de la prenda '%s' con talla '%s' y fecha '%s' a formato JSON", params["nombre"], params["talla"], params["fecha"]), http.StatusBadRequest)
 	}
 }
 
@@ -118,12 +119,12 @@ func putVenta(w http.ResponseWriter, r *http.Request) {
 	params := r.Context().Value("parametrosMap").(map[string]string)
 	fechaVenta, err := time.Parse(time.RFC3339, params["fecha"])
 	if err != nil {
-		http.Error(w, "La fecha no tiene el formato correcto, debe ser RFC3339", http.StatusUnprocessableEntity)
+		http.Error(w, fmt.Sprintf("La fecha '%s' no tiene el formato correcto, debe ser RFC3339", params["fecha"]), http.StatusUnprocessableEntity)
 		return
 	}
 	err = models.InsertarVenta(bd, params["nombre"], models.Talla(params["talla"]), fechaVenta)
 	if err != nil {
-		http.Error(w, "No se ha podido insertar la venta en la base de datos", http.StatusBadRequest)
+		http.Error(w, fmt.Sprintf("No se ha podido insertar la venta de la prenda '%s' con talla '%s' y fecha '%s' en la base de datos", params["nombre"], params["talla"], params["fecha"]), http.StatusBadRequest)
 		return
 	}
 	w.WriteHeader(http.StatusCreated)
@@ -133,12 +134,12 @@ func deleteVenta(w http.ResponseWriter, r *http.Request) {
 	params := r.Context().Value("parametrosMap").(map[string]string)
 	fechaVenta, err := time.Parse(time.RFC3339, params["fecha"])
 	if err != nil {
-		http.Error(w, "La fecha no tiene el formato correcto, debe ser RFC3339", http.StatusUnprocessableEntity)
+		http.Error(w, fmt.Sprintf("La fecha '%s' no tiene el formato correcto, debe ser RFC3339", params["fecha"]), http.StatusUnprocessableEntity)
 		return
 	}
 	err = models.EliminarVenta(bd, params["nombre"], models.Talla(params["talla"]), fechaVenta)
 	if err != nil {
-		http.Error(w, "No se ha podido eliminar la venta de la base de datos", http.StatusBadRequest)
+		http.Error(w, fmt.Sprintf("No se ha podido eliminar la venta de la prenda '%s' con talla '%s' y fecha '%s' en la base de datos", params["nombre"], params["talla"], params["fecha"]), http.StatusBadRequest)
 		return
 	}
 	w.WriteHeader(http.StatusAccepted)

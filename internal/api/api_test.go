@@ -3,6 +3,7 @@ package api
 import (
 	"ModaTrack/internal/models"
 	"encoding/json"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -22,6 +23,8 @@ func TestGetPrendas(t *testing.T) {
 	}
 	if resp.StatusCode != 200 {
 		t.Errorf("Se esperaba un status 200, se obtuvo %d", resp.StatusCode)
+		body, _ := io.ReadAll(resp.Body)
+		t.Error(string(body))
 	}
 	var prendas []models.Ropa
 	err = json.NewDecoder(resp.Body).Decode(&prendas)
@@ -50,6 +53,8 @@ func TestGetPrendasNoExistentes(t *testing.T) {
 	}
 	if resp.StatusCode != 404 {
 		t.Errorf("Se esperaba un status 404, se obtuvo %d", resp.StatusCode)
+		body, _ := io.ReadAll(resp.Body)
+		t.Error(string(body))
 	}
 }
 
@@ -66,6 +71,8 @@ func TestGetPrendasTalla(t *testing.T) {
 	}
 	if resp.StatusCode != 200 {
 		t.Errorf("Se esperaba un status 200, se obtuvo %d", resp.StatusCode)
+		body, _ := io.ReadAll(resp.Body)
+		t.Error(string(body))
 	}
 	var prenda models.Ropa
 	err = json.NewDecoder(resp.Body).Decode(&prenda)
@@ -90,6 +97,8 @@ func TestPostPrenda(t *testing.T) {
 	}
 	if resp.StatusCode != 201 {
 		t.Errorf("Se esperaba un status 201, se obtuvo %d", resp.StatusCode)
+		body, _ := io.ReadAll(resp.Body)
+		t.Error(string(body))
 	}
 
 	url = server.URL + "/prendas/chaqueta/XL"
@@ -100,6 +109,8 @@ func TestPostPrenda(t *testing.T) {
 	}
 	if resp.StatusCode != 200 {
 		t.Errorf("Se esperaba un status 200, se obtuvo %d", resp.StatusCode)
+		body, _ := io.ReadAll(resp.Body)
+		t.Error(string(body))
 	}
 	var prenda models.Ropa
 	err = json.NewDecoder(resp.Body).Decode(&prenda)
@@ -124,6 +135,8 @@ func TestGetVentasPrenda(t *testing.T) {
 	}
 	if resp.StatusCode != 200 {
 		t.Errorf("Se esperaba un status 200, se obtuvo %d", resp.StatusCode)
+		body, _ := io.ReadAll(resp.Body)
+		t.Error(string(body))
 	}
 	var ventas []models.Venta
 	err = json.NewDecoder(resp.Body).Decode(&ventas)
@@ -158,6 +171,8 @@ func TestGetVentasPrendaFecha(t *testing.T) {
 	}
 	if resp.StatusCode != 200 {
 		t.Errorf("Se esperaba un status 200, se obtuvo %d", resp.StatusCode)
+		body, _ := io.ReadAll(resp.Body)
+		t.Error(string(body))
 	}
 	var ventas []models.Venta
 	err = json.NewDecoder(resp.Body).Decode(&ventas)
@@ -210,6 +225,8 @@ func TestPutVenta(t *testing.T) {
 	}
 	if resp.StatusCode != 200 {
 		t.Errorf("Se esperaba un status 200, se obtuvo %d", resp.StatusCode)
+		body, _ := io.ReadAll(resp.Body)
+		t.Error(string(body))
 	}
 	var ventas []models.Venta
 	err = json.NewDecoder(resp.Body).Decode(&ventas)
@@ -228,6 +245,8 @@ func TestPutVenta(t *testing.T) {
 	}
 	if resp.StatusCode != 404 {
 		t.Errorf("Se esperaba un status 404, se obtuvo %d", resp.StatusCode)
+		body, _ := io.ReadAll(resp.Body)
+		t.Error(string(body))
 	}
 }
 
@@ -251,6 +270,8 @@ func TestDeleteVenta(t *testing.T) {
 
 	if resp.StatusCode != 202 {
 		t.Errorf("Se esperaba un status 202, se obtuvo %d", resp.StatusCode)
+		body, _ := io.ReadAll(resp.Body)
+		t.Error(string(body))
 	}
 
 	url = server.URL + "/prendas/pantalon/L/ventas/2024-06-12T15:30:45Z"
@@ -261,5 +282,7 @@ func TestDeleteVenta(t *testing.T) {
 	}
 	if resp.StatusCode != 404 {
 		t.Errorf("Se esperaba un status 404, se obtuvo %d", resp.StatusCode)
+		body, _ := io.ReadAll(resp.Body)
+		t.Error(string(body))
 	}
 }
