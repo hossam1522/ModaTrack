@@ -12,7 +12,10 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-var router = chi.NewRouter()
+type Server struct {
+	router *chi.Mux
+	bd     *models.BD
+}
 
 func capturarParametrosRuta(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -26,21 +29,23 @@ func capturarParametrosRuta(next http.Handler) http.Handler {
 	})
 }
 
-func getRouter(bd *models.BD) *chi.Mux {
-	router.With(capturarParametrosRuta).Get("/prendas/{nombre}", getPrendas(bd))
-	router.With(capturarParametrosRuta).Get("/prendas/{nombre}/{talla}", getPrendaTalla(bd))
-	router.With(capturarParametrosRuta).Post("/prendas/{nombre}/{talla}/{cantidad}", postPrendaTalla(bd))
-	router.With(capturarParametrosRuta).Get("/prendas/{nombre}/{talla}/ventas", getVentasPrenda(bd))
-	router.With(capturarParametrosRuta).Get("/prendas/{nombre}/{talla}/ventas/{fecha}", getVentaFecha(bd))
-	router.With(capturarParametrosRuta).Put("/prendas/{nombre}/{talla}/ventas/{fecha}", putVenta(bd))
+func (server *Server) GetRouter() *chi.Mux {
+	router := server.router
+
+	router.With(capturarParametrosRuta).Get("/prendas/{nombre}", getPrendas(server))
+	router.With(capturarParametrosRuta).Get("/prendas/{nombre}/{talla}", getPrendaTalla(server))
+	router.With(capturarParametrosRuta).Post("/prendas/{nombre}/{talla}/{cantidad}", postPrendaTalla(server))
+	router.With(capturarParametrosRuta).Get("/prendas/{nombre}/{talla}/ventas", getVentasPrenda(server))
+	router.With(capturarParametrosRuta).Get("/prendas/{nombre}/{talla}/ventas/{fecha}", getVentaFecha(server))
+	router.With(capturarParametrosRuta).Put("/prendas/{nombre}/{talla}/ventas/{fecha}", putVenta(server))
 
 	return router
 }
 
-func getPrendas(bd *models.BD) http.HandlerFunc {
+func getPrendas(server *Server) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		params := r.Context().Value("parametrosMap").(map[string]string)
-		prendas, err := models.ObtenerPrenda(bd, params["nombre"])
+		prendas, err := models.ObtenerPrenda(server.bd, params["nombre"])
 		if err != nil {
 			http.Error(w, fmt.Sprintf("No se ha podido obtener la prenda '%s' de la base de datos", params["nombre"]), http.StatusNotFound)
 			return
@@ -53,10 +58,10 @@ func getPrendas(bd *models.BD) http.HandlerFunc {
 	}
 }
 
-func getPrendaTalla(bd *models.BD) http.HandlerFunc {
+func getPrendaTalla(server *Server) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		params := r.Context().Value("parametrosMap").(map[string]string)
-		prenda, err := models.ObtenerPrendaTalla(bd, params["nombre"], models.Talla(params["talla"]))
+		prenda, err := models.ObtenerPrendaTalla(server.bd, params["nombre"], models.Talla(params["talla"]))
 		if err != nil {
 			http.Error(w, fmt.Sprintf("No se ha podido obtener la prenda '%s' con talla '%s' de la base de datos", params["nombre"], params["talla"]), http.StatusNotFound)
 			return
@@ -69,7 +74,7 @@ func getPrendaTalla(bd *models.BD) http.HandlerFunc {
 	}
 }
 
-func postPrendaTalla(bd *models.BD) http.HandlerFunc {
+func postPrendaTalla(server *Server) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		params := r.Context().Value("parametrosMap").(map[string]string)
 		cantidadInt, errNum := strconv.Atoi(params["cantidad"])
@@ -77,7 +82,7 @@ func postPrendaTalla(bd *models.BD) http.HandlerFunc {
 			http.Error(w, fmt.Sprintf("La cantidad '%s' no es un número válido", params["cantidad"]), http.StatusBadRequest)
 			return
 		}
-		err := models.InsertarRopa(bd, params["nombre"], models.Talla(params["talla"]), cantidadInt)
+		err := models.InsertarRopa(server.bd, params["nombre"], models.Talla(params["talla"]), cantidadInt)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("No se ha podido insertar la prenda '%s' con talla '%s' en la base de datos", params["nombre"], params["talla"]), http.StatusBadRequest)
 			return
@@ -86,10 +91,10 @@ func postPrendaTalla(bd *models.BD) http.HandlerFunc {
 	}
 }
 
-func getVentasPrenda(bd *models.BD) http.HandlerFunc {
+func getVentasPrenda(server *Server) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		params := r.Context().Value("parametrosMap").(map[string]string)
-		ventas, err := models.ObtenerVentas(bd, params["nombre"], models.Talla(params["talla"]))
+		ventas, err := models.ObtenerVentas(server.bd, params["nombre"], models.Talla(params["talla"]))
 		if err != nil {
 			http.Error(w, fmt.Sprintf("No se han podido obtener las ventas de la prenda '%s' con talla '%s' de la base de datos", params["nombre"], params["talla"]), http.StatusNotFound)
 			return
@@ -102,7 +107,7 @@ func getVentasPrenda(bd *models.BD) http.HandlerFunc {
 	}
 }
 
-func getVentaFecha(bd *models.BD) http.HandlerFunc {
+func getVentaFecha(server *Server) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		params := r.Context().Value("parametrosMap").(map[string]string)
 		fechaVenta, err := time.Parse(time.RFC3339, params["fecha"])
@@ -110,7 +115,7 @@ func getVentaFecha(bd *models.BD) http.HandlerFunc {
 			http.Error(w, fmt.Sprintf("La fecha '%s' no tiene el formato correcto, debe ser RFC3339", params["fecha"]), http.StatusUnprocessableEntity)
 			return
 		}
-		venta, err := models.ObtenerVentas(bd, params["nombre"], models.Talla(params["talla"]), fechaVenta)
+		venta, err := models.ObtenerVentas(server.bd, params["nombre"], models.Talla(params["talla"]), fechaVenta)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("No se han podido obtener las ventas de la prenda '%s' con talla '%s' y fecha '%s' de la base de datos", params["nombre"], params["talla"], params["fecha"]), http.StatusNotFound)
 			return
@@ -123,7 +128,7 @@ func getVentaFecha(bd *models.BD) http.HandlerFunc {
 	}
 }
 
-func putVenta(bd *models.BD) http.HandlerFunc {
+func putVenta(server *Server) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		params := r.Context().Value("parametrosMap").(map[string]string)
 		fechaVenta, err := time.Parse(time.RFC3339, params["fecha"])
@@ -131,7 +136,7 @@ func putVenta(bd *models.BD) http.HandlerFunc {
 			http.Error(w, fmt.Sprintf("La fecha '%s' no tiene el formato correcto, debe ser RFC3339", params["fecha"]), http.StatusUnprocessableEntity)
 			return
 		}
-		err = models.InsertarVenta(bd, params["nombre"], models.Talla(params["talla"]), fechaVenta)
+		err = models.InsertarVenta(server.bd, params["nombre"], models.Talla(params["talla"]), fechaVenta)
 		if err != nil {
 			http.Error(w, fmt.Sprintf("No se ha podido insertar la venta de la prenda '%s' con talla '%s' y fecha '%s' en la base de datos", params["nombre"], params["talla"], params["fecha"]), http.StatusBadRequest)
 			return

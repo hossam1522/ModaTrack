@@ -8,13 +8,17 @@ import (
 	"net/http/httptest"
 	"testing"
 	"time"
+
+	"github.com/go-chi/chi/v5"
 )
 
-var bd_test = models.NewBD(models.WithJSON("../models/bd_test.json"))
-var router_test = getRouter(bd_test)
+var dependencias = Server{
+	router: chi.NewRouter(),
+	bd:     models.NewBD(models.WithJSON("../models/bd_test.json")),
+}
 
 func TestGetPrendas(t *testing.T) {
-	server := httptest.NewServer(router_test)
+	server := httptest.NewServer(dependencias.GetRouter())
 	defer server.Close()
 
 	url := server.URL + "/prendas/camisa"
@@ -37,7 +41,7 @@ func TestGetPrendas(t *testing.T) {
 		t.Error(err)
 	}
 
-	prendas_en_bd, _ := models.ObtenerPrenda(bd_test, "camisa")
+	prendas_en_bd, _ := models.ObtenerPrenda(dependencias.bd, "camisa")
 
 	if len(prendas) != len(prendas_en_bd) {
 		t.Errorf("Se esperaban %d prendas, se obtuvieron %d", len(prendas_en_bd), len(prendas))
@@ -45,7 +49,7 @@ func TestGetPrendas(t *testing.T) {
 }
 
 func TestGetPrendasNoExistentes(t *testing.T) {
-	server := httptest.NewServer(router_test)
+	server := httptest.NewServer(dependencias.GetRouter())
 	defer server.Close()
 
 	url := server.URL + "/prendas/chaqueta"
@@ -63,7 +67,7 @@ func TestGetPrendasNoExistentes(t *testing.T) {
 }
 
 func TestGetPrendasTalla(t *testing.T) {
-	server := httptest.NewServer(router_test)
+	server := httptest.NewServer(dependencias.GetRouter())
 	defer server.Close()
 
 	url := server.URL + "/prendas/camisa/M"
@@ -92,7 +96,7 @@ func TestGetPrendasTalla(t *testing.T) {
 }
 
 func TestPostPrenda(t *testing.T) {
-	server := httptest.NewServer(router_test)
+	server := httptest.NewServer(dependencias.GetRouter())
 	defer server.Close()
 
 	url := server.URL + "/prendas/chaqueta/XL/1"
@@ -107,7 +111,7 @@ func TestPostPrenda(t *testing.T) {
 		t.Error(string(body))
 	}
 
-	prenda_en_bd, _ := models.ObtenerPrendaTalla(bd_test, "chaqueta", models.XL)
+	prenda_en_bd, _ := models.ObtenerPrendaTalla(dependencias.bd, "chaqueta", models.XL)
 
 	if prenda_en_bd.GetTalla() != models.XL || prenda_en_bd.GetNombre() != "chaqueta" {
 		t.Errorf("Se esperaba una talla XL, se obtuvo %s", prenda_en_bd.GetTalla())
@@ -115,7 +119,7 @@ func TestPostPrenda(t *testing.T) {
 }
 
 func TestGetVentasPrenda(t *testing.T) {
-	server := httptest.NewServer(router_test)
+	server := httptest.NewServer(dependencias.GetRouter())
 	defer server.Close()
 
 	url := server.URL + "/prendas/camisa/L/ventas"
@@ -138,7 +142,7 @@ func TestGetVentasPrenda(t *testing.T) {
 		t.Error(err)
 	}
 
-	ventas_en_bd, _ := models.ObtenerVentas(bd_test, "camisa", models.L)
+	ventas_en_bd, _ := models.ObtenerVentas(dependencias.bd, "camisa", models.L)
 
 	if len(ventas) != len(ventas_en_bd) {
 		t.Errorf("Se esperaban %d ventas, se obtuvieron %d", len(ventas_en_bd), len(ventas))
@@ -146,7 +150,7 @@ func TestGetVentasPrenda(t *testing.T) {
 }
 
 func TestGetVentasPrendaFecha(t *testing.T) {
-	server := httptest.NewServer(router_test)
+	server := httptest.NewServer(dependencias.GetRouter())
 	defer server.Close()
 
 	url := server.URL + "/prendas/pantalon/M/ventas/2024-06-12T15:30:45Z"
@@ -169,14 +173,14 @@ func TestGetVentasPrendaFecha(t *testing.T) {
 		t.Error(err)
 	}
 
-	ventas_en_bd, _ := models.ObtenerVentas(bd_test, "pantalon", models.M, time.Date(2024, 6, 12, 15, 30, 45, 0, time.UTC))
+	ventas_en_bd, _ := models.ObtenerVentas(dependencias.bd, "pantalon", models.M, time.Date(2024, 6, 12, 15, 30, 45, 0, time.UTC))
 	if len(ventas) != len(ventas_en_bd) {
 		t.Errorf("Se esperaban %d venta, se obtuvieron %d", len(ventas_en_bd), len(ventas))
 	}
 }
 
 func TestPutVenta(t *testing.T) {
-	server := httptest.NewServer(router_test)
+	server := httptest.NewServer(dependencias.GetRouter())
 	defer server.Close()
 
 	url := server.URL + "/prendas/pantalon/L/ventas/2024-06-12T15:30:45Z"
