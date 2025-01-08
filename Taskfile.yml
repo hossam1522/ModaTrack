@@ -4,6 +4,12 @@ vars:
   SOURCE_DIR: ./internal
 
 tasks:
+  build:
+    desc: Compilación del proyecto
+    cmds:
+      - echo "Compilando el proyecto..."
+      - go build {{.SOURCE_DIR}}/...
+
   install:
     desc: Instalación de las dependencias
     cmds:

@@ -1,0 +1,36 @@
+{
+  "Stock": {
+    "inventario": {
+      "camisa_M": 1,
+      "camisa_L": 5,
+      "pantalon_M": 5,
+      "pantalon_L": 1
+    }
+  },
+  "Ventas": [
+    {
+      "itemsVendidos": {
+        "camisa_L": 1
+      },
+      "fecha": "2025-01-06T12:00:00Z"
+    },
+    {
+      "itemsVendidos": {
+        "camisa_L": 1
+      },
+      "fecha": "2025-01-06T12:00:00Z"
+    },
+    {
+      "itemsVendidos": {
+        "pantalon_M": 1
+      },
+      "fecha": "2025-01-06T12:00:00Z"
+    },
+    {
+      "itemsVendidos": {
+        "pantalon_M": 1
+      },
+      "fecha": "2024-06-12T15:30:45Z"
+    }
+  ]
+}
